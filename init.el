@@ -52,6 +52,10 @@
 (setq scroll-conservatively 3)
 (setq scroll-margin 3)
 
+(use-package scroll-on-jump
+  :config
+  (setq scroll-on-jump-duration 0.6))
+
 ;; auto close parenthesis
 (electric-pair-mode 1)
 
