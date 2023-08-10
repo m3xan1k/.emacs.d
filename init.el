@@ -23,6 +23,12 @@
 (setq cursor-in-non-selected-windows nil)
 (set-cursor-color "red")
 
+(setq inhibit-splash-screen t ;; no thanks
+      use-file-dialog nil ;; don't use system file dialog
+      tab-bar-new-button-show nil ;; don't show new tab button
+      tab-bar-close-button-show nil ;; don't show tab close button
+      tab-line-close-button-show nil) ;; don't show tab close button
+
 ;; line highlight
 (global-hl-line-mode 1)
 
@@ -60,29 +66,123 @@
 ;; supress warnings
 (setq warning-minimum-level :error)
 
+(setq make-backup-files nil) ;; keep everything under vc
+(setq auto-save-default nil)
+
+;; keep backup and save files in a dedicated directory
+(setq backup-directory-alist
+      `((".*" . ,(concat user-emacs-directory "backups")))
+      auto-save-file-name-transforms
+      `((".*" ,(concat user-emacs-directory "backups") t)))
+
+(setq create-lockfiles nil) ;; no need to create lockfiles
+
 ;; themes
 (use-package almost-mono-themes
   :ensure t
   :config
-  ;; (load-theme 'almost-mono-black t)
   ;; (load-theme 'almost-mono-gray t)
   (load-theme 'almost-mono-cream t)
-  ;; (load-theme 'almost-mono-white t)
 )
 
-;; (use-package tao-theme
-;;   :init
-;;   (setq tao-theme-use-sepia t)
-;;   (setq tao-theme-sepia-depth 5)
-;;   (setq tao-theme-sepia-saturation 1)
-;;   (setq tao-theme-use-boxes nil)
-;;   :config
-;;   (load-theme 'tao-yang t))
+;;;;;;;;;;;;;;;;;;;;
+;; general        ;;
+;;;;;;;;;;;;;;;;;;;;
+
+(use-package general
+  :config
+  (general-evil-setup)
+  ;; integrate general with evil
+  (general-def :states '(normal motion emacs) "SPC" nil)
+  ;; set up 'SPC' as the global leader key
+  (general-create-definer patrl/leader-keys
+    :states '(normal insert visual emacs)
+    :keymaps 'override
+    :prefix "SPC" ;; set leader
+    :global-prefix "M-SPC") ;; access leader in insert mode
+
+  (general-define-key
+   :prefix "SPC l"
+   :states '(normal visual emacs)
+   :keymaps 'override
+     "=" '(:ignore t :which-key "format")
+     "=b" '(lsp-format-buffer :which-key "format-buffer")
+     "=r" '(lsp-format-region :which-key "format-region")
+     "g" '(:ignore t :which-key "goto")
+     "gt" '(lsp-goto-type-definition :which-key "goto-type-definition")
+     "T" '(:ignore t :which-key "Toggle")
+     "r" '(:ignore t :which-key "refactor")
+     "rr" '(lsp-rename :which-key "rename"))
+
+  ;; set up ',' as the local leader key
+  (general-create-definer patrl/local-leader-keys
+    :states '(normal insert visual emacs)
+    :keymaps 'override
+    :prefix "," ;; set local leader
+    :global-prefix "M-,") ;; access local leader in insert mode
+
+  (general-imap "j"
+              (general-key-dispatch 'self-insert-command
+                :timeout 0.25
+                "k" 'evil-normal-state))
+
+  ;; unbind some annoying default bindings
+  (general-unbind
+    "C-x C-r"   ;; unbind find file read only
+    "C-x C-z"   ;; unbind suspend frame
+    "C-x C-d"   ;; unbind list directory
+    "<mouse-2>") ;; pasting with mouse wheel click
+
+
+  (patrl/leader-keys
+    "SPC" '(execute-extended-command :wk "execute command") ;; an alternative to 'M-x'
+    "TAB" '(:keymap tab-prefix-map :wk "tab")) ;; remap tab bindings
+
+  (patrl/leader-keys
+    "c" '(:ignore t :wk "code"))
+
+  ;; help
+  ;; namespace mostly used by 'helpful'
+  (patrl/leader-keys
+    "h" '(:ignore t :wk "help"))
+
+  ;; file
+  (patrl/leader-keys
+    "f" '(:ignore t :wk "file")
+    "ff" '(find-file :wk "find file") ;; gets overridden by consult
+    "fs" '(save-buffer :wk "save file"))
+
+  ;; buffer
+  ;; see 'bufler' and 'popper'
+  (patrl/leader-keys
+    "b" '(:ignore t :wk "buffer")
+    "bb" '(switch-to-buffer :wk "switch buffer") ;; gets overridden by consult
+    "bk" '(kill-this-buffer :wk "kill this buffer")
+    "br" '(revert-buffer :wk "reload buffer"))
+
+  ;; code
+  ;; see 'flymake'
+  (patrl/leader-keys
+    "c" '(:ignore t :wk "code"))
+
+  ;; open
+  (patrl/leader-keys
+    "o" '(:ignore t :wk "open")
+    "os" '(speedbar t :wk "speedbar")) ;; TODO this needs some love
+
+  ;; search
+  ;; see 'consult'
+  (patrl/leader-keys
+    "s" '(:ignore t :wk "search"))
+
+  ;; templating
+  ;; see 'tempel'
+  (patrl/leader-keys
+    "t" '(:ignore t :wk "template")))
 
 (use-package evil
   :config
-  (evil-mode 1)
-  (evil-define-key 'normal lsp-mode-map (kbd "SPC l") lsp-command-map))
+  (evil-mode 1))
 
 
 (use-package good-scroll
