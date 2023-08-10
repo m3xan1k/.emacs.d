@@ -10,12 +10,13 @@
 (setq use-package-always-ensure t)
 (setq use-package-always-pin "melpa-stable")
 
-;; disable tool-bar
+;; disable bars
 (tool-bar-mode -1)
 
-;; disable scroll-bar
 (setq default-scroll-bar-width 6)
 (scroll-bar-mode -1)
+
+(menu-bar-mode -1)
 
 ;; cursor
 (blink-cursor-mode 0)
@@ -57,15 +58,13 @@
 ;; use clipboard for cut
 (setq select-enable-clipboard t)
 
-;; remove this keybinding
-(define-key global-map (kbd "C-z") 'nil)
-
 ;; dont close emacs
 (setq confirm-kill-emacs 'yes-or-no-p)
 
 ;; supress warnings
 (setq warning-minimum-level :error)
 
+;; no backup files
 (setq make-backup-files nil) ;; keep everything under vc
 (setq auto-save-default nil)
 
@@ -75,7 +74,8 @@
       auto-save-file-name-transforms
       `((".*" ,(concat user-emacs-directory "backups") t)))
 
-(setq create-lockfiles nil) ;; no need to create lockfiles
+ ;; no need to create lockfiles
+(setq create-lockfiles nil)
 
 ;; themes
 (use-package almost-mono-themes
@@ -98,21 +98,27 @@
   (general-create-definer patrl/leader-keys
     :states '(normal insert visual emacs)
     :keymaps 'override
-    :prefix "SPC" ;; set leader
-    :global-prefix "M-SPC") ;; access leader in insert mode
+    :prefix "SPC") ;; set leader
 
   (general-define-key
-   :prefix "SPC l"
-   :states '(normal visual emacs)
+   :prefix "g"
+   :states '(normal)
    :keymaps 'override
-     "=" '(:ignore t :which-key "format")
-     "=b" '(lsp-format-buffer :which-key "format-buffer")
-     "=r" '(lsp-format-region :which-key "format-region")
-     "g" '(:ignore t :which-key "goto")
-     "gt" '(lsp-goto-type-definition :which-key "goto-type-definition")
-     "T" '(:ignore t :which-key "Toggle")
-     "r" '(:ignore t :which-key "refactor")
-     "rr" '(lsp-rename :which-key "rename"))
+   "d" '(lsp-find-definition :which-key "lsp-find-definition")
+   "r" '(lsp-find-references :which-key "lsp-find-references")
+   "l" '(flymake-goto-next-error :whick-key "goto-next-error"))
+
+  (general-define-key
+   :prefix "]"
+   :states '(normal)
+   :keymaps 'override
+   "d" '(flymake-goto-next-error :whick-key "goto-next-error"))
+
+  (general-define-key
+   :prefix "["
+   :states '(normal)
+   :keymaps 'override
+   "d" '(flymake-goto-prev-error :whick-key "goto-prev-error"))
 
   ;; set up ',' as the local leader key
   (general-create-definer patrl/local-leader-keys
@@ -197,6 +203,11 @@
   :ensure t
   :config (which-key-mode))
 
+(use-package flymake-diagnostic-at-point
+  :after flymake
+  :config
+  (add-hook 'flymake-mode-hook #'flymake-diagnostic-at-point-mode))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;       lsp stuff        ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -211,18 +222,18 @@
           ("C-p" . company-select-previous)))
 
 ;; Lsp mode
-(use-package lsp-mode
-  :hook
-  (lsp-mode . lsp-enable-which-key-integration)
-  :config
-  (setenv "PATH" (concat
-                   "/usr/local/bin" path-separator
-                   (getenv "PATH")))
-  (dolist (m '(clojure-mode
-               clojurec-mode
-               clojurescript-mode
-               clojurex-mode))
-     (add-to-list 'lsp-language-id-configuration `(,m . "clojure"))))
+;; (use-package lsp-mode
+;;   :hook
+;;   (lsp-mode . lsp-enable-which-key-integration)
+;;   :config
+;;   (setenv "PATH" (concat
+;;                    "/usr/local/bin" path-separator
+;;                    (getenv "PATH")))
+;;   (dolist (m '(clojure-mode
+;;                clojurec-mode
+;;                clojurescript-mode
+;;                clojurex-mode))
+;;      (add-to-list 'lsp-language-id-configuration `(,m . "clojure"))))
 
 ;; lsp-ui
 (use-package lsp-ui
@@ -247,5 +258,5 @@
 
 ;; Clojure
 ;; M-x lsp-install-server RET clojure-lsp RET
-(use-package clojure-mode)
-(use-package cider)
+;; (use-package clojure-mode)
+;; (use-package cider)
