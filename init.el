@@ -54,7 +54,32 @@
 
 (use-package scroll-on-jump
   :config
-  (setq scroll-on-jump-duration 0.6))
+  (setq scroll-on-jump-duration 0.8)
+  (setq scroll-on-jump-smooth t))
+
+(with-eval-after-load 'evil
+  (scroll-on-jump-advice-add evil-undo)
+  (scroll-on-jump-advice-add evil-redo)
+  (scroll-on-jump-advice-add evil-jump-item)
+  (scroll-on-jump-advice-add evil-jump-forward)
+  (scroll-on-jump-advice-add evil-jump-backward)
+  (scroll-on-jump-advice-add evil-ex-search-next)
+  (scroll-on-jump-advice-add evil-ex-search-previous)
+  (scroll-on-jump-advice-add evil-forward-paragraph)
+  (scroll-on-jump-advice-add evil-backward-paragraph)
+  (scroll-on-jump-advice-add evil-goto-mark)
+
+  ;; Actions that themselves scroll.
+  (scroll-on-jump-with-scroll-advice-add evil-goto-line)
+  (scroll-on-jump-with-scroll-advice-add evil-scroll-down)
+  (scroll-on-jump-with-scroll-advice-add evil-scroll-up)
+  (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-center)
+  (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-top)
+  (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-bottom))
+
+(with-eval-after-load 'goto-chg
+  (scroll-on-jump-advice-add goto-last-change)
+  (scroll-on-jump-advice-add goto-last-change-reverse))
 
 ;; auto close parenthesis
 (electric-pair-mode 1)
@@ -100,17 +125,9 @@
   (general-def :states '(normal motion emacs) "SPC" nil)
   ;; set up 'SPC' as the global leader key
   (general-create-definer patrl/leader-keys
-    :states '(normal insert visual emacs)
+    :states '(normal visual emacs)
     :keymaps 'override
     :prefix "SPC") ;; set leader
-
-  (general-define-key
-   :prefix "g"
-   :states '(normal)
-   :keymaps 'override
-   "d" '(lsp-find-definition :which-key "lsp-find-definition")
-   "r" '(lsp-find-references :which-key "lsp-find-references")
-   "l" '(flymake-goto-next-error :whick-key "goto-next-error"))
 
   (general-define-key
    :prefix "]"
@@ -128,8 +145,7 @@
   (general-create-definer patrl/local-leader-keys
     :states '(normal insert visual emacs)
     :keymaps 'override
-    :prefix "," ;; set local leader
-    :global-prefix "M-,") ;; access local leader in insert mode
+    :prefix ",");; set local leader
 
   (general-imap "j"
               (general-key-dispatch 'self-insert-command
@@ -141,12 +157,24 @@
     "C-x C-r"   ;; unbind find file read only
     "C-x C-z"   ;; unbind suspend frame
     "C-x C-d"   ;; unbind list directory
-    "<mouse-2>") ;; pasting with mouse wheel click
+   "<mouse-2>") ;; pasting with mouse wheel click
 
 
   (patrl/leader-keys
     "SPC" '(execute-extended-command :wk "execute command") ;; an alternative to 'M-x'
     "TAB" '(:keymap tab-prefix-map :wk "tab")) ;; remap tab bindings
+
+  (general-create-definer lsp-leader-def
+    :states 'normal
+    :keymap 'lsp-command-map
+    :prefix "SPC l"
+    :wk "lsp")
+
+  (lsp-leader-def
+   "gd" '(lsp-find-definition :wk "definition")
+   "gr" '(lsp-find-references :wk "references")
+   "hg" '(lsp-ui-doc-glance :wk "lsp-ui-doc-glance")
+   )
 
   (patrl/leader-keys
     "c" '(:ignore t :wk "code"))
@@ -190,14 +218,17 @@
   (patrl/leader-keys
     "t" '(:ignore t :wk "template")))
 
+;;;;;;;;;;;;;;;;;
+;;     evil    ;;
+;;;;;;;;;;;;;;;;;
+
+(setq evil-want-C-u-scroll t)
+(setq evil-want-Y-yank-to-eol t)
+
 (use-package evil
   :config
   (evil-mode 1))
 
-
-(use-package good-scroll
-  :config
-  (good-scroll-mode 1))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;      tools             ;;
@@ -226,22 +257,27 @@
           ("C-p" . company-select-previous)))
 
 ;; Lsp mode
-;; (use-package lsp-mode
-;;   :hook
-;;   (lsp-mode . lsp-enable-which-key-integration)
-;;   :config
-;;   (setenv "PATH" (concat
-;;                    "/usr/local/bin" path-separator
-;;                    (getenv "PATH")))
-;;   (dolist (m '(clojure-mode
-;;                clojurec-mode
-;;                clojurescript-mode
-;;                clojurex-mode))
-;;      (add-to-list 'lsp-language-id-configuration `(,m . "clojure"))))
+(use-package lsp-mode
+  :hook
+  (lsp-mode . lsp-enable-which-key-integration)
+  :config
+  (setenv "PATH" (concat
+                   "/usr/local/bin" path-separator
+                   (getenv "PATH")))
+  ;; (dolist (m '(clojure-mode
+  ;;              clojurec-mode
+  ;;              clojurescript-mode
+  ;;              clojurex-mode))
+  ;;   (add-to-list 'lsp-language-id-configuration `(,m . "clojure")))
+  )
 
 ;; lsp-ui
 (use-package lsp-ui
   :commands lsp-ui-mode)
+
+;; which key for lsp
+(with-eval-after-load 'lsp-mode
+  (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration))
 
 ;; Python
 (use-package lsp-pyright
@@ -259,6 +295,8 @@
   :hook ((python-mode . (lambda ()
                           (require 'lsp-pyright)
                           (lsp-deferred)))))
+
+(use-package pyvenv)
 
 ;; Clojure
 ;; M-x lsp-install-server RET clojure-lsp RET
