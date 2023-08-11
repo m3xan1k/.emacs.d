@@ -1,0 +1,31 @@
+;; -*- mode: emacs-lisp; lexical-binding:t; coding: utf-8-emacs; -*-
+;; --------------------------------------------------------------------------
+;; Desktop File for Emacs
+;; --------------------------------------------------------------------------
+;; Created Fri Aug 11 18:09:36 2023
+;; Desktop file format version 208
+;; Emacs version 28.2
+
+;; Global section:
+(setq desktop-saved-frameset [frameset 1 (25814 20272 12566 845000) (desktop . "208") "m3xan1k@pn50" nil nil ((((minibuffer . t) (undecorated) (override-redirect) (font . "-PfEd-Ricty Diminished-normal-normal-normal-*-24-*-*-*-*-0-iso10646-1") (font-parameter . "Ricty Diminished-18") (border-width . 0) (internal-border-width . 0) (child-frame-border-width) (right-divider-width . 0) (bottom-divider-width . 0) (vertical-scroll-bars) (horizontal-scroll-bars) (foreground-color . "#000000") (background-color . "#f0e5da") (mouse-color . "#000000") (border-color . "black") (screen-gamma) (line-spacing) (left-fringe . 8) (right-fringe . 8) (no-special-glyphs) (scroll-bar-foreground . "#000000") (scroll-bar-background . "#f2f2f2") (menu-bar-lines . 0) (tab-bar-lines . 0) (tool-bar-lines . 0) (title) (wait-for-wm . t) (tool-bar-position . top) (inhibit-double-buffering) (icon-type . t) (auto-raise) (auto-lower) (cursor-type . box) (scroll-bar-width . 16) (scroll-bar-height . 16) (alpha) (no-focus-on-map) (no-accept-focus) (fullscreen) (visibility . t) (skip-taskbar) (z-group) (cursor-color . "red") (display-type . color) (background-mode . light) (sticky) (environment) (powerline-cache) (nil . "Unprintable entity") (Emacs . "Unprintable entity") (last-focus-update . t) (Emacs . "Unprintable entity") (Elisp . "Unprintable entity") (centaur-tabs-tabsets-tabset . "Unprintable entity") (tabs (current-tab (name . "init.el") (explicit-name))) (frameset--id . "8728-272D-A2D6-C1DB") (frameset--mini t . t) (modeline . t) (unsplittable) (icon-name) (display . ":0.0") (explicit-name) (Elisp . "Unprintable entity") (height . 38) (width . 77) (left . 960) (top . 38)) ((min-height . 4) (min-width . 10) (min-height-ignore . 4) (min-width-ignore . 4) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 108) (min-pixel-width . 120) (min-pixel-height-ignore . 108) (min-pixel-width-ignore . 48) (min-pixel-height-safe . 27) (min-pixel-width-safe . 24)) leaf (pixel-width . 948) (pixel-height . 1003) (total-width . 79) (total-height . 37) (normal-height . 1.0) (normal-width . 1.0) (buffer "init.el" (selected . t) (hscroll . 0) (fringes 8 8 nil nil) (margins nil) (scroll-bars nil 0 t nil 0 t nil) (vscroll . 0) (dedicated) (point . 7454) (start . 6936)) (prev-buffers ("init.el" 5212 6019) ("*scratch*" 1 146))))])
+(setq desktop-missing-file-warning nil)
+(setq tags-file-name nil)
+(setq tags-table-list nil)
+(setq search-ring nil)
+(setq regexp-search-ring '(#("tools" 0 5 (isearch-case-fold-search t))))
+(setq register-alist '((48 . #("    \"ff\" '(find-file :wk \"find file\") ;; gets overridden by consult\n" 0 4 (fontified t yank-handler (evil-yank-line-handler nil t)) 4 8 (fontified t face font-lock-string-face yank-handler (evil-yank-line-handler nil t)) 8 21 (fontified t yank-handler (evil-yank-line-handler nil t)) 21 24 (fontified t face font-lock-builtin-face yank-handler (evil-yank-line-handler nil t)) 24 25 (fontified t yank-handler (evil-yank-line-handler nil t)) 25 36 (fontified t face font-lock-string-face yank-handler (evil-yank-line-handler nil t)) 36 38 (fontified t yank-handler (evil-yank-line-handler nil t)) 38 41 (fontified t face font-lock-comment-delimiter-face yank-handler (evil-yank-line-handler nil t)) 41 68 (fontified t face font-lock-comment-face yank-handler (evil-yank-line-handler nil t))))))
+(setq file-name-history '("~/.emacs.d/custom.el" "~/.emacs.d/init.el"))
+
+;; Buffer section -- buffers listed in same order as in buffer list:
+(desktop-create-buffer 208
+  "/home/m3xan1k/.emacs.d/init.el"
+  "init.el"
+  'emacs-lisp-mode
+  '(eldoc-mode general-override-mode which-key-mode diff-hl-mode diff-hl-flydiff-mode override-global-mode)
+  7454
+  '(7456 nil)
+  nil
+  nil
+  '((buffer-display-time 25814 20271 380397 368000) (buffer-file-coding-system . prefer-utf-8-unix) (overwrite-mode))
+  '((mark-ring (5801 5801 5800 5795 6077 6868 5907 6526 6451 3178 3176 6019 6019 8580 8580 8586))))
+

@@ -43,18 +43,18 @@
 (column-number-mode 1)
 
 ;; kill line with \n if killing from beginning
-(setq kill-whole-line t)
+;; (setq kill-whole-line t)
 
 ;; highlight trailing whitespaces
 (setq-default show-trailing-whitespace t)
 
 ;; scroll
-(setq scroll-conservatively 3)
+(setq scroll-conservatively 1)
 (setq scroll-margin 3)
 
 (use-package scroll-on-jump
   :config
-  (setq scroll-on-jump-duration 0.8)
+  (setq scroll-on-jump-duration 1.0)
   (setq scroll-on-jump-smooth t))
 
 (with-eval-after-load 'evil
@@ -70,6 +70,8 @@
   (scroll-on-jump-advice-add evil-goto-mark)
 
   ;; Actions that themselves scroll.
+  (scroll-on-jump-advice-add diff-hl-next-hunk)
+  (scroll-on-jump-advice-add diff-hl-previous-hunk)
   (scroll-on-jump-with-scroll-advice-add evil-goto-line)
   (scroll-on-jump-with-scroll-advice-add evil-scroll-down)
   (scroll-on-jump-with-scroll-advice-add evil-scroll-up)
@@ -94,7 +96,7 @@
 (setq warning-minimum-level :error)
 
 ;; no backup files
-(setq make-backup-files nil) ;; keep everything under vc
+(setq make-backup-files nil)
 (setq auto-save-default nil)
 
 ;; keep backup and save files in a dedicated directory
@@ -106,13 +108,22 @@
  ;; no need to create lockfiles
 (setq create-lockfiles nil)
 
+;; remember cursor position when open file again
+(save-place-mode 1)
+
+;; recent files history
+(recentf-mode 1)
+
+;; change buffer when file changes on disk
+(global-auto-revert-mode 1)
+(setq global-auto-revert-non-file-buffers t)
+
 ;; themes
 (use-package almost-mono-themes
   :ensure t
   :config
   ;; (load-theme 'almost-mono-gray t)
-  (load-theme 'almost-mono-cream t)
-)
+  (load-theme 'almost-mono-cream t))
 
 ;;;;;;;;;;;;;;;;;;;;
 ;; general        ;;
@@ -124,7 +135,7 @@
   ;; integrate general with evil
   (general-def :states '(normal motion emacs) "SPC" nil)
   ;; set up 'SPC' as the global leader key
-  (general-create-definer patrl/leader-keys
+  (general-create-definer my/leader-keys
     :states '(normal visual emacs)
     :keymaps 'override
     :prefix "SPC") ;; set leader
@@ -133,24 +144,27 @@
    :prefix "]"
    :states '(normal)
    :keymaps 'override
-   "d" '(flymake-goto-next-error :whick-key "goto-next-error"))
+   "d" '(flymake-goto-next-error :which-key "goto-next-error")
+   "c" '(diff-hl-next-hunk :which-key "diff-hl-next-hunk"))
 
   (general-define-key
    :prefix "["
    :states '(normal)
    :keymaps 'override
-   "d" '(flymake-goto-prev-error :whick-key "goto-prev-error"))
+   "d" '(flymake-goto-prev-error :which-key "goto-prev-error")
+   "c" '(diff-hl-previous-hunk :which-key "diff-hl-previous-hunk"))
 
-  ;; set up ',' as the local leader key
-  (general-create-definer patrl/local-leader-keys
-    :states '(normal insert visual emacs)
-    :keymaps 'override
-    :prefix ",");; set local leader
+  (my/leader-keys
+    "h" '(:ignore t :wk "hunk")
+    "hp" '(diff-hl-show-hunk :wk "diff-hl-show-hunk")
+    "hr" '(diff-hl-revert-hunk :wk "diff-hl-revert-hunk")
+    "hh" '(help-command :wh "help-command"))
 
+  ;; jk to go to normal mode
   (general-imap "j"
-              (general-key-dispatch 'self-insert-command
-                :timeout 0.25
-                "k" 'evil-normal-state))
+    (general-key-dispatch 'self-insert-command
+      :timeout 0.25
+      "k" 'evil-normal-state))
 
   ;; unbind some annoying default bindings
   (general-unbind
@@ -159,64 +173,37 @@
     "C-x C-d"   ;; unbind list directory
    "<mouse-2>") ;; pasting with mouse wheel click
 
-
-  (patrl/leader-keys
-    "SPC" '(execute-extended-command :wk "execute command") ;; an alternative to 'M-x'
+  (my/leader-keys
+    ;; "SPC" '(execute-extended-command :wk "execute command") ;; an alternative to 'M-x'
+    "SPC" '(counsel-M-x :wk "execute command") ;; an alternative to 'M-x'
     "TAB" '(:keymap tab-prefix-map :wk "tab")) ;; remap tab bindings
 
-  (general-create-definer lsp-leader-def
-    :states 'normal
-    :keymap 'lsp-command-map
-    :prefix "SPC l"
-    :wk "lsp")
-
-  (lsp-leader-def
-   "gd" '(lsp-find-definition :wk "definition")
-   "gr" '(lsp-find-references :wk "references")
-   "hg" '(lsp-ui-doc-glance :wk "lsp-ui-doc-glance")
-   )
-
-  (patrl/leader-keys
-    "c" '(:ignore t :wk "code"))
-
-  ;; help
-  ;; namespace mostly used by 'helpful'
-  (patrl/leader-keys
-    "h" '(:ignore t :wk "help"))
+  (my/leader-keys
+   "g" '(:ignore t :wk "lsp")
+   "gd" '(lsp-find-definition :wk "lsp-find-definition")
+   "gr" '(lsp-find-references :wk "lsp-find-references")
+   "gh" '(lsp-ui-doc-glance :wk "lsp-ui-doc-glance"))
 
   ;; file
-  (patrl/leader-keys
+  (my/leader-keys
     "f" '(:ignore t :wk "file")
-    "ff" '(find-file :wk "find file") ;; gets overridden by consult
-    "fs" '(save-buffer :wk "save file"))
+    ;; "ff" '(find-file :wk "find file") ;; gets overridden by consult
+    "ff" '(counsel-find-file :wk "find file") ;; gets overridden by consult
+    "fs" '(save-buffer :wk "save file")
+    "fr" '(ivy-resume :wk "search resume")
+    "fw" '(counsel-rg :wk "grep text")
+    "ff" '(fzf-projectile :wk "find file in project")
+    )
 
   ;; buffer
   ;; see 'bufler' and 'popper'
-  (patrl/leader-keys
+  (my/leader-keys
     "b" '(:ignore t :wk "buffer")
-    "bb" '(switch-to-buffer :wk "switch buffer") ;; gets overridden by consult
+    "bb" '(ivy-switch-buffer :wk "switch buffer") ;; gets overridden by consult
     "bk" '(kill-this-buffer :wk "kill this buffer")
-    "br" '(revert-buffer :wk "reload buffer"))
+    "br" '(revert-buffer :wk "reload buffer")))
 
-  ;; code
-  ;; see 'flymake'
-  (patrl/leader-keys
-    "c" '(:ignore t :wk "code"))
 
-  ;; open
-  (patrl/leader-keys
-    "o" '(:ignore t :wk "open")
-    "os" '(speedbar t :wk "speedbar")) ;; TODO this needs some love
-
-  ;; search
-  ;; see 'consult'
-  (patrl/leader-keys
-    "s" '(:ignore t :wk "search"))
-
-  ;; templating
-  ;; see 'tempel'
-  (patrl/leader-keys
-    "t" '(:ignore t :wk "template")))
 
 ;;;;;;;;;;;;;;;;;
 ;;     evil    ;;
@@ -227,8 +214,64 @@
 
 (use-package evil
   :config
-  (evil-mode 1))
+  (evil-mode 1)
+  (evil-set-undo-system 'undo-redo))
 
+(use-package evil-surround
+  :ensure t
+  :config
+  (global-evil-surround-mode 1))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;      search            ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(use-package counsel)
+
+(use-package ivy-file-preview)
+(ivy-file-preview-mode 1)
+
+(use-package ivy
+  :ensure t
+  :diminish (ivy-mode)
+  :config
+  (ivy-mode 1)
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-display-style 'fancy))
+
+(use-package swiper
+  :ensure t
+  :config
+  (progn
+    (ivy-mode 1)
+    (setq ivy-use-virtual-buffers t)
+    (setq ivy-display-style 'fancy)))
+    ;; enable this if you want `swiper' to use it
+    ;; (setq search-default-mode #'char-fold-to-regexp)))
+
+(use-package ag
+  :ensure t)
+
+(use-package ripgrep
+  :ensure t)
+
+(use-package fzf
+  :ensure t
+  :config
+  (setq fzf/args "-x --color bw --print-query --margin=1,0 --no-hscroll"
+        fzf/executable "fzf"
+        fzf/git-grep-args "-i --line-number %s"
+        ;; command used for `fzf-grep-*` functions
+        ;; example usage for ripgrep:
+        fzf/grep-command "rg --no-heading -nH"
+        ;; fzf/grep-command "grep -nrH"
+        ;; If nil, the fzf buffer will appear at the top of the window
+        fzf/position-bottom t
+    fzf/window-height 15))
+
+(use-package projectile
+  :init
+  (projectile-mode +1))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;      tools             ;;
@@ -242,6 +285,42 @@
   :after flymake
   :config
   (add-hook 'flymake-mode-hook #'flymake-diagnostic-at-point-mode))
+
+(use-package diff-hl)
+(global-diff-hl-mode)
+(diff-hl-flydiff-mode 1)
+
+(use-package blamer
+  ;; :bind (("s-i" . blamer-show-commit-info)
+  ;;        ("C-c i" . ("s-i" . blamer-show-posframe-commit-info)))
+  :defer 20
+  :custom
+  (blamer-idle-time 0.3)
+  (blamer-min-offset 10)
+  :custom-face
+  (blamer-face ((t :foreground "#999999"
+                    :background nil
+                    :height 140
+                    :italic nil)))
+  :config
+  (global-blamer-mode 1))
+
+(use-package centaur-tabs
+  :demand
+  :config
+  (centaur-tabs-mode t)
+  :bind
+  ("C-h" . centaur-tabs-backward)
+  ("C-l" . centaur-tabs-forward))
+
+(setq centaur-tabs-style "bar")
+(setq centaur-tabs-plain-icons t)
+(setq centaur-tabs-set-bar 'left)
+(setq centaur-tabs-height 22)
+(setq centaur-tabs-set-modified-marker t)
+(centaur-tabs-change-fonts "Ricty Diminished" 160)
+
+(use-package desktop+)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;       lsp stuff        ;;
@@ -275,10 +354,6 @@
 (use-package lsp-ui
   :commands lsp-ui-mode)
 
-;; which key for lsp
-(with-eval-after-load 'lsp-mode
-  (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration))
-
 ;; Python
 (use-package lsp-pyright
   :defer t
@@ -296,7 +371,15 @@
                           (require 'lsp-pyright)
                           (lsp-deferred)))))
 
-(use-package pyvenv)
+;; golang
+(use-package go-mode)
+(add-hook 'go-mode-hook #'lsp-deferred)
+;; Set up before-save hooks to format buffer and add/delete imports.
+;; Make sure you don't have other gofmt/goimports hooks enabled.
+(defun lsp-go-install-save-hooks ()
+  (add-hook 'before-save-hook #'lsp-format-buffer t t))
+(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
+
 
 ;; Clojure
 ;; M-x lsp-install-server RET clojure-lsp RET

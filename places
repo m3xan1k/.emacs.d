@@ -1,0 +1,16 @@
+;;; -*- coding: utf-8; mode: lisp-data -*-
+(("/home/m3xan1k/.emacs.d/init.el" . 6961)
+ ("/home/m3xan1k/.emacs.d/elpa/ripgrep-20220520.1410/ripgrep.el" . 149)
+ ("/home/m3xan1k/.emacs.d/elpa/popup-20221231.1634/popup.el" . 911)
+ ("/home/m3xan1k/.emacs.d/elpa/ivy-file-preview-20220704.653/ivy-file-preview-autoloads.el" . 1599)
+ ("/home/m3xan1k/Documents/projects/perevod/main.py" . 8)
+ ("/home/m3xan1k/Documents/projects/perevod/"
+  (dired-filename . "/home/m3xan1k/Documents/projects/perevod/constants.py"))
+ ("/home/m3xan1k/Documents/projects/perevod/utils.py" . 74)
+ ("/home/m3xan1k/.emacs.d/elpa/ag-20201031.2202/ag-autoloads.el" . 3187)
+ ("/home/m3xan1k/.emacs.d/elpa/ripgrep-20220520.1410/ripgrep-autoloads.el" . 645)
+ ("/home/m3xan1k/.emacs.d/elpa/fzf-20230403.1304/fzf-autoloads.el" . 8480)
+ ("/home/m3xan1k/.emacs.d/elpa/projectile-20230713.1023/projectile-autoloads.el" . 22953)
+ ("/home/m3xan1k/.emacs.d/elpa/counsel-20230619.1623/counsel-autoloads.el" . 17175)
+ ("/home/m3xan1k/.emacs.d/elpa/swiper-20230410.1815/swiper-autoloads.el" . 1446)
+ ("/home/m3xan1k/.emacs.d/elpa/ivy-20230714.751/ivy-autoloads.el" . 5334))
