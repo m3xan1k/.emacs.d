@@ -1,3 +1,14 @@
+(defun set-exec-path-from-shell-PATH ()
+  (let ((path-from-shell (replace-regexp-in-string
+                          "[ \t\n]*$"
+                          ""
+                          (shell-command-to-string "$SHELL --login -i -c 'echo $PATH'"))))
+    (setenv "PATH" path-from-shell)
+    (setq eshell-path-env path-from-shell) ; for eshell users
+    (setq exec-path (split-string path-from-shell path-separator))))
+
+(when window-system (set-exec-path-from-shell-PATH))
+
 ;; custom file
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
@@ -34,16 +45,13 @@
 (global-hl-line-mode 1)
 
 ;; font
-(set-face-attribute 'default nil :font "Ricty Diminished-18")
+(set-face-attribute 'default nil :font "Ricty Diminished" :height 200)
 
 ;; line-numbers
 (global-display-line-numbers-mode 1)
 (setq display-line-numbers-type 'relative)
 (line-number-mode 1)
 (column-number-mode 1)
-
-;; kill line with \n if killing from beginning
-;; (setq kill-whole-line t)
 
 ;; highlight trailing whitespaces
 (setq-default show-trailing-whitespace t)
@@ -123,7 +131,7 @@
   :ensure t
   :config
   ;; (load-theme 'almost-mono-gray t)
-  (load-theme 'almost-mono-cream t))
+  (load-theme 'almost-mono-white t))
 
 ;;;;;;;;;;;;;;;;;;;;
 ;; general        ;;
@@ -202,8 +210,6 @@
     "bb" '(ivy-switch-buffer :wk "switch buffer") ;; gets overridden by consult
     "bk" '(kill-this-buffer :wk "kill this buffer")
     "br" '(revert-buffer :wk "reload buffer")))
-
-
 
 ;;;;;;;;;;;;;;;;;
 ;;     evil    ;;
@@ -370,6 +376,8 @@
   :hook ((python-mode . (lambda ()
                           (require 'lsp-pyright)
                           (lsp-deferred)))))
+
+(setq python-flymake-command '("flake8" "-"))
 
 ;; golang
 (use-package go-mode)

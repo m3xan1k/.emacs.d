@@ -1,11 +1,15 @@
 ;;; -*- coding: utf-8; mode: lisp-data -*-
-(("/home/m3xan1k/.emacs.d/init.el" . 6961)
+(("/home/m3xan1k/Documents/projects/perevod/"
+  (dired-filename . "/home/m3xan1k/Documents/projects/perevod/main.py"))
+ ("/home/m3xan1k/Documents/projects/perevod/main.py" . 43)
+ ("/home/m3xan1k/.emacs.d/init.el" . 10480)
+ ("/home/m3xan1k/.emacs.d/custom.el" . 662)
+ ("/home/m3xan1k/Documents/projects/"
+  (dired-filename . "/home/m3xan1k/Documents/projects/perevod"))
+ ("/home/m3xan1k/Documents/projects/perevod/translate.py" . 11)
  ("/home/m3xan1k/.emacs.d/elpa/ripgrep-20220520.1410/ripgrep.el" . 149)
  ("/home/m3xan1k/.emacs.d/elpa/popup-20221231.1634/popup.el" . 911)
  ("/home/m3xan1k/.emacs.d/elpa/ivy-file-preview-20220704.653/ivy-file-preview-autoloads.el" . 1599)
- ("/home/m3xan1k/Documents/projects/perevod/main.py" . 8)
- ("/home/m3xan1k/Documents/projects/perevod/"
-  (dired-filename . "/home/m3xan1k/Documents/projects/perevod/constants.py"))
  ("/home/m3xan1k/Documents/projects/perevod/utils.py" . 74)
  ("/home/m3xan1k/.emacs.d/elpa/ag-20201031.2202/ag-autoloads.el" . 3187)
  ("/home/m3xan1k/.emacs.d/elpa/ripgrep-20220520.1410/ripgrep-autoloads.el" . 645)
