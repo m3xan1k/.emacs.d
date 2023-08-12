@@ -21,6 +21,10 @@
 (setq use-package-always-ensure t)
 (setq use-package-always-pin "melpa-stable")
 
+;;;;;;;;;;;;;;;;;;
+;;  defaults    ;;
+;;;;;;;;;;;;;;;;;;
+
 ;; disable bars
 (tool-bar-mode -1)
 
@@ -59,37 +63,6 @@
 ;; scroll
 (setq scroll-conservatively 1)
 (setq scroll-margin 3)
-
-(use-package scroll-on-jump
-  :config
-  (setq scroll-on-jump-duration 1.0)
-  (setq scroll-on-jump-smooth t))
-
-(with-eval-after-load 'evil
-  (scroll-on-jump-advice-add evil-undo)
-  (scroll-on-jump-advice-add evil-redo)
-  (scroll-on-jump-advice-add evil-jump-item)
-  (scroll-on-jump-advice-add evil-jump-forward)
-  (scroll-on-jump-advice-add evil-jump-backward)
-  (scroll-on-jump-advice-add evil-ex-search-next)
-  (scroll-on-jump-advice-add evil-ex-search-previous)
-  (scroll-on-jump-advice-add evil-forward-paragraph)
-  (scroll-on-jump-advice-add evil-backward-paragraph)
-  (scroll-on-jump-advice-add evil-goto-mark)
-
-  ;; Actions that themselves scroll.
-  (scroll-on-jump-advice-add diff-hl-next-hunk)
-  (scroll-on-jump-advice-add diff-hl-previous-hunk)
-  (scroll-on-jump-with-scroll-advice-add evil-goto-line)
-  (scroll-on-jump-with-scroll-advice-add evil-scroll-down)
-  (scroll-on-jump-with-scroll-advice-add evil-scroll-up)
-  (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-center)
-  (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-top)
-  (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-bottom))
-
-(with-eval-after-load 'goto-chg
-  (scroll-on-jump-advice-add goto-last-change)
-  (scroll-on-jump-advice-add goto-last-change-reverse))
 
 ;; auto close parenthesis
 (electric-pair-mode 1)
@@ -131,7 +104,7 @@
   :ensure t
   :config
   ;; (load-theme 'almost-mono-gray t)
-  (load-theme 'almost-mono-white t))
+  (load-theme 'almost-mono-cream t))
 
 ;;;;;;;;;;;;;;;;;;;;
 ;; general        ;;
@@ -199,7 +172,7 @@
     "ff" '(counsel-find-file :wk "find file") ;; gets overridden by consult
     "fs" '(save-buffer :wk "save file")
     "fr" '(ivy-resume :wk "search resume")
-    "fw" '(counsel-rg :wk "grep text")
+    "fw" '(counsel-ag :wk "grep text")
     "ff" '(fzf-projectile :wk "find file in project")
     )
 
@@ -237,23 +210,20 @@
 (use-package ivy-file-preview)
 (ivy-file-preview-mode 1)
 
+(setq ivy-use-virtual-buffers t)
+(setq ivy-display-style 'fancy)
+
 (use-package ivy
   :ensure t
   :diminish (ivy-mode)
   :config
-  (ivy-mode 1)
-  (setq ivy-use-virtual-buffers t)
-  (setq ivy-display-style 'fancy))
+  (ivy-mode 1))
 
 (use-package swiper
   :ensure t
   :config
   (progn
-    (ivy-mode 1)
-    (setq ivy-use-virtual-buffers t)
-    (setq ivy-display-style 'fancy)))
-    ;; enable this if you want `swiper' to use it
-    ;; (setq search-default-mode #'char-fold-to-regexp)))
+    (ivy-mode 1)))
 
 (use-package ag
   :ensure t)
@@ -319,14 +289,61 @@
   ("C-h" . centaur-tabs-backward)
   ("C-l" . centaur-tabs-forward))
 
+(centaur-tabs-headline-match)
 (setq centaur-tabs-style "bar")
 (setq centaur-tabs-plain-icons t)
 (setq centaur-tabs-set-bar 'left)
-(setq centaur-tabs-height 22)
+(setq centaur-tabs-height 20)
 (setq centaur-tabs-set-modified-marker t)
 (centaur-tabs-change-fonts "Ricty Diminished" 160)
 
+(defadvice vc-git-mode-line-string (after plus-minus (file) compile activate)
+  "Show the information of git diff on modeline."
+  (setq ad-return-value
+	(concat (propertize ad-return-value 'face '(:foreground "white" :weight bold))
+		" ["
+		(let ((plus-minus (vc-git--run-command-string
+				   file "diff" "--numstat" "--")))
+		  (if (and plus-minus
+		       (string-match "^\\([0-9]+\\)\t\\([0-9]+\\)\t" plus-minus))
+		       (concat
+			(propertize (format "+%s" (match-string 1 plus-minus)) 'face '(:foreground "green3"))
+			(propertize (format "-%s" (match-string 2 plus-minus)) 'face '(:inherit font-lock-warning-face)))
+		    (propertize "✔" 'face '(:foreground "green3" :weight bold))))
+		"]")))
+
 (use-package desktop+)
+
+(use-package scroll-on-jump
+  :config
+  (setq scroll-on-jump-duration 1.0)
+  (setq scroll-on-jump-smooth t))
+
+(with-eval-after-load 'evil
+  (scroll-on-jump-advice-add evil-undo)
+  (scroll-on-jump-advice-add evil-redo)
+  (scroll-on-jump-advice-add evil-jump-item)
+  (scroll-on-jump-advice-add evil-jump-forward)
+  (scroll-on-jump-advice-add evil-jump-backward)
+  (scroll-on-jump-advice-add evil-ex-search-next)
+  (scroll-on-jump-advice-add evil-ex-search-previous)
+  (scroll-on-jump-advice-add evil-forward-paragraph)
+  (scroll-on-jump-advice-add evil-backward-paragraph)
+  (scroll-on-jump-advice-add evil-goto-mark)
+
+  ;; Actions that themselves scroll.
+  (scroll-on-jump-advice-add diff-hl-next-hunk)
+  (scroll-on-jump-advice-add diff-hl-previous-hunk)
+  (scroll-on-jump-with-scroll-advice-add evil-goto-line)
+  (scroll-on-jump-with-scroll-advice-add evil-scroll-down)
+  (scroll-on-jump-with-scroll-advice-add evil-scroll-up)
+  (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-center)
+  (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-top)
+  (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-bottom))
+
+(with-eval-after-load 'goto-chg
+  (scroll-on-jump-advice-add goto-last-change)
+  (scroll-on-jump-advice-add goto-last-change-reverse))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;       lsp stuff        ;;
