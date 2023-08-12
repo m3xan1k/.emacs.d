@@ -116,7 +116,7 @@
   ;; integrate general with evil
   (general-def :states '(normal motion emacs) "SPC" nil)
   ;; set up 'SPC' as the global leader key
-  (general-create-definer my/leader-keys
+  (general-create-definer my/leader
     :states '(normal visual emacs)
     :keymaps 'override
     :prefix "SPC") ;; set leader
@@ -135,11 +135,11 @@
    "d" '(flymake-goto-prev-error :which-key "goto-prev-error")
    "c" '(diff-hl-previous-hunk :which-key "diff-hl-previous-hunk"))
 
-  (my/leader-keys
+  (my/leader
     "h" '(:ignore t :wk "hunk")
-    "hp" '(diff-hl-show-hunk :wk "diff-hl-show-hunk")
-    "hr" '(diff-hl-revert-hunk :wk "diff-hl-revert-hunk")
-    "hh" '(help-command :wh "help-command"))
+    "h p" '(diff-hl-show-hunk :wk "diff-hl-show-hunk")
+    "h r" '(diff-hl-revert-hunk :wk "diff-hl-revert-hunk")
+    "h h" '(help-command :wh "help-command"))
 
   ;; jk to go to normal mode
   (general-imap "j"
@@ -154,36 +154,48 @@
     "C-x C-d"   ;; unbind list directory
    "<mouse-2>") ;; pasting with mouse wheel click
 
-  (my/leader-keys
+  (my/leader
     ;; "SPC" '(execute-extended-command :wk "execute command") ;; an alternative to 'M-x'
     "SPC" '(counsel-M-x :wk "execute command") ;; an alternative to 'M-x'
     "TAB" '(:keymap tab-prefix-map :wk "tab")) ;; remap tab bindings
 
-  (my/leader-keys
+  (my/leader
    "g" '(:ignore t :wk "lsp")
-   "gd" '(lsp-find-definition :wk "lsp-find-definition")
-   "gr" '(lsp-find-references :wk "lsp-find-references")
-   "gh" '(lsp-ui-doc-glance :wk "lsp-ui-doc-glance")
-   "gt" '(lsp-ui-doc-toggle :wk "lsp-ui-doc-toggle"))
+   "g d" '(lsp-find-definition :wk "lsp-find-definition")
+   "g r" '(lsp-find-references :wk "lsp-find-references")
+   "g h" '(lsp-ui-doc-glance :wk "lsp-ui-doc-glance")
+   "g t" '(lsp-ui-doc-toggle :wk "lsp-ui-doc-toggle"))
 
   ;; file
-  (my/leader-keys
+  (my/leader
     "f" '(:ignore t :wk "file")
-    ;; "ff" '(find-file :wk "find file") ;; gets overridden by consult
-    "ff" '(counsel-find-file :wk "find file") ;; gets overridden by consult
-    "fs" '(save-buffer :wk "save file")
-    "fr" '(ivy-resume :wk "search resume")
-    "fw" '(counsel-ag :wk "grep text")
-    "ff" '(fzf-projectile :wk "find file in project")
-    )
+    "f s" '(save-buffer :wk "save file")
+    "f r" '(ivy-resume :wk "search resume")
+    "f w" '(counsel-ag :wk "grep text")
+    "f f" '(fzf-projectile :wk "find file in project"))
 
   ;; buffer
-  ;; see 'bufler' and 'popper'
-  (my/leader-keys
+  (my/leader
     "b" '(:ignore t :wk "buffer")
-    "bb" '(ivy-switch-buffer :wk "switch buffer") ;; gets overridden by consult
-    "bk" '(kill-this-buffer :wk "kill this buffer")
-    "br" '(revert-buffer :wk "reload buffer")))
+    "b b" '(ivy-switch-buffer :wk "switch buffer") ;; gets overridden by consult
+    "b k" '(kill-this-buffer :wk "kill this buffer")
+    "b r" '(revert-buffer :wk "reload buffer")
+    "b l" '(evil-switch-to-window-last-buffer :wk "last buffer"))
+
+  (my/leader
+   :keymaps 'emacs-lisp-mode-map
+   "m" '(:ignore t :wk "elisp")
+   "m e" '(:ignore t :wk "eval")
+   "m e e" 'eval-last-sexp
+   "m e b" 'eval-buffer)
+
+  (my/leader
+   :keymaps 'clojure-mode-map
+   "m" '(:ignore t :wk "elisp")
+   "m e" '(:ignore t :wk "eval")
+   "m e e" 'cider-eval-last-sexp
+   "m c" 'cider-connect-clj
+   "m e b" 'cider-eval-buffer))
 
 ;;;;;;;;;;;;;;;;;
 ;;     evil    ;;
@@ -220,12 +232,6 @@
   :config
   (ivy-mode 1))
 
-(use-package swiper
-  :ensure t
-  :config
-  (progn
-    (ivy-mode 1)))
-
 (use-package ag
   :ensure t)
 
@@ -258,12 +264,19 @@
   :init
   (doom-modeline-mode 1))
 
+(define-key evil-visual-state-map (kbd "M-<down>") (concat ":m '>+1" (kbd "RET") "gv=gv"))
+(define-key evil-visual-state-map (kbd "M-<up>")   (concat ":m '<-2" (kbd "RET") "gv=gv"))
+(define-key evil-normal-state-map (kbd "M-<down>") (concat ":m +1" (kbd "RET") "=="))
+(define-key evil-normal-state-map (kbd "M-<up>")   (concat ":m -2" (kbd "RET") "=="))
+
 ;; The maximum displayed length of the branch name of version control.
 (setq doom-modeline-vcs-max-length 32)
 
 (use-package which-key
-  :ensure t
   :config (which-key-mode))
+
+(setq which-key-idle-delay 0.5)
+(setq which-key-idle-secondary-delay 0)
 
 (use-package flymake-diagnostic-at-point
   :after flymake
@@ -302,6 +315,12 @@
 (setq centaur-tabs-height 20)
 (setq centaur-tabs-set-modified-marker t)
 (centaur-tabs-change-fonts "Ricty Diminished" 160)
+
+(use-package smartparens
+  :config
+  (require 'smartparens-config)
+  :hook
+  ((clojure-mode emacs-lisp-mode) . smartparens-mode))
 
 (defadvice vc-git-mode-line-string (after plus-minus (file) compile activate)
   "Show the information of git diff on modeline."
@@ -359,10 +378,13 @@
 (use-package company
   :config
   (setq company-idle-delay 0)
-  (setq company-minimum-prefix-Length 1)
+  (setq company-minimum-prefix-length 1)
   :bind (:map company-active-map
           ("C-n" . company-select-next)
-          ("C-p" . company-select-previous)))
+          ("C-p" . company-select-previous))
+  :hook
+  ((emacs-lisp-mode clojure-mode) . company-mode))
+
 
 ;; Lsp mode
 (use-package lsp-mode
@@ -372,12 +394,8 @@
   (setenv "PATH" (concat
                    "/usr/local/bin" path-separator
                    (getenv "PATH")))
-  ;; (dolist (m '(clojure-mode
-  ;;              clojurec-mode
-  ;;              clojurescript-mode
-  ;;              clojurex-mode))
-  ;;   (add-to-list 'lsp-language-id-configuration `(,m . "clojure")))
-  )
+  :hook
+  (clojure-mode . lsp))
 
 ;; lsp-ui
 (use-package lsp-ui
@@ -418,5 +436,5 @@
 
 ;; Clojure
 ;; M-x lsp-install-server RET clojure-lsp RET
-;; (use-package clojure-mode)
-;; (use-package cider)
+(use-package clojure-mode)
+(use-package cider)
