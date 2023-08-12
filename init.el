@@ -163,7 +163,8 @@
    "g" '(:ignore t :wk "lsp")
    "gd" '(lsp-find-definition :wk "lsp-find-definition")
    "gr" '(lsp-find-references :wk "lsp-find-references")
-   "gh" '(lsp-ui-doc-glance :wk "lsp-ui-doc-glance"))
+   "gh" '(lsp-ui-doc-glance :wk "lsp-ui-doc-glance")
+   "gt" '(lsp-ui-doc-toggle :wk "lsp-ui-doc-toggle"))
 
   ;; file
   (my/leader-keys
@@ -253,6 +254,13 @@
 ;;      tools             ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(use-package doom-modeline
+  :init
+  (doom-modeline-mode 1))
+
+;; The maximum displayed length of the branch name of version control.
+(setq doom-modeline-vcs-max-length 32)
+
 (use-package which-key
   :ensure t
   :config (which-key-mode))
@@ -267,8 +275,6 @@
 (diff-hl-flydiff-mode 1)
 
 (use-package blamer
-  ;; :bind (("s-i" . blamer-show-commit-info)
-  ;;        ("C-c i" . ("s-i" . blamer-show-posframe-commit-info)))
   :defer 20
   :custom
   (blamer-idle-time 0.3)
@@ -300,7 +306,7 @@
 (defadvice vc-git-mode-line-string (after plus-minus (file) compile activate)
   "Show the information of git diff on modeline."
   (setq ad-return-value
-	(concat (propertize ad-return-value 'face '(:foreground "white" :weight bold))
+	(concat (propertize ad-return-value 'face '(:foreground "black" :weight bold))
 		" ["
 		(let ((plus-minus (vc-git--run-command-string
 				   file "diff" "--numstat" "--")))
@@ -376,6 +382,10 @@
 ;; lsp-ui
 (use-package lsp-ui
   :commands lsp-ui-mode)
+
+(add-hook 'lsp-ui-doc-frame-hook
+          (lambda (frame _w)
+            (set-face-attribute 'default frame :font "Ricty Diminished" :height 150)))
 
 ;; Python
 (use-package lsp-pyright
