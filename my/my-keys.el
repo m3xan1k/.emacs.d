@@ -7,11 +7,6 @@
 (setq evil-want-C-u-scroll t)
 (setq evil-want-Y-yank-to-eol t)
 
-(define-key evil-visual-state-map (kbd "M-<down>") (concat ":m '>+1" (kbd "RET") "gv=gv"))
-(define-key evil-visual-state-map (kbd "M-<up>")   (concat ":m '<-2" (kbd "RET") "gv=gv"))
-(define-key evil-normal-state-map (kbd "M-<down>") (concat ":m +1" (kbd "RET") "=="))
-(define-key evil-normal-state-map (kbd "M-<up>")   (concat ":m -2" (kbd "RET") "=="))
-
 ;; general
 (use-package general
   :config
@@ -23,6 +18,11 @@
     :states '(normal visual emacs)
     :keymaps 'override
     :prefix "SPC") ;; set leader
+
+  (general-create-definer my/local-leader
+    :states '(normal visual emacs)
+    :keymaps 'override
+    :prefix ",") ;; set leader
 
   (general-define-key
    :prefix "]"
@@ -52,6 +52,8 @@
 
   ;; unbind some annoying default bindings
   (general-unbind
+    "M-j"
+    "M-k"
     "C-x C-r"   ;; unbind find file read only
     "C-x C-z"   ;; unbind suspend frame
     "C-x C-d"   ;; unbind list directory
@@ -66,8 +68,12 @@
    "g" '(:ignore t :wk "lsp")
    "g d" '(lsp-find-definition :wk "lsp-find-definition")
    "g r" '(lsp-find-references :wk "lsp-find-references")
-   "g h" '(lsp-ui-doc-glance :wk "lsp-ui-doc-glance")
    "g t" '(lsp-ui-doc-toggle :wk "lsp-ui-doc-toggle"))
+
+  (general-define-key
+   :states '(normal)
+   :keymaps 'override
+   "K" '(lsp-ui-doc-glance :wk "Signature help"))
 
   ;; file
   (my/leader
@@ -85,19 +91,53 @@
     "b r" '(revert-buffer :wk "reload buffer")
     "b l" '(evil-switch-to-window-last-buffer :wk "last buffer"))
 
-  (my/leader
+  (my/local-leader
    :keymaps 'emacs-lisp-mode-map
-   "m" '(:ignore t :wk "elisp")
-   "m e" '(:ignore t :wk "eval")
-   "m e e" 'eval-last-sexp
-   "m e b" 'eval-buffer)
+   "e" '(:ignore t :wk "elisp")
+   "e e" 'eval-last-sexp
+   "e b" 'eval-buffer)
 
-  (my/leader
+  (my/local-leader
    :keymaps 'clojure-mode-map
-   "m" '(:ignore t :wk "elisp")
-   "m e" '(:ignore t :wk "eval")
-   "m e e" 'cider-eval-last-sexp
-   "m c" 'cider-connect-clj
-   "m e b" 'cider-eval-buffer))
+   "e" '(:ignore t :wk "clojure")
+   "e e" 'cider-eval-last-sexp
+   "c" 'cider-connect-clj
+   "e b" 'cider-eval-buffer))
+
+(defun move-text-internal (arg)
+   (cond
+    ((and mark-active transient-mark-mode)
+     (if (> (point) (mark))
+            (exchange-point-and-mark))
+     (let ((column (current-column))
+              (text (delete-and-extract-region (point) (mark))))
+       (forward-line arg)
+       (move-to-column column t)
+       (set-mark (point))
+       (insert text)
+       (exchange-point-and-mark)
+       (setq deactivate-mark nil)))
+    (t
+     (beginning-of-line)
+     (when (or (> arg 0) (not (bobp)))
+       (forward-line)
+       (when (or (< arg 0) (not (eobp)))
+            (transpose-lines arg))
+       (forward-line -1)))))
+
+(defun move-text-down (arg)
+   "Move region (transient-mark-mode active) or current line
+  arg lines down."
+   (interactive "*p")
+   (move-text-internal arg))
+
+(defun move-text-up (arg)
+   "Move region (transient-mark-mode active) or current line
+  arg lines up."
+   (interactive "*p")
+   (move-text-internal (- arg)))
+
+(global-set-key (kbd "M-k") 'move-text-up)
+(global-set-key (kbd "M-j") 'move-text-down)
 
 (provide 'my-keys)
