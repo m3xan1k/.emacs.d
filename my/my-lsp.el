@@ -11,9 +11,16 @@
   (setq company-minimum-prefix-length 1)
   :bind (:map company-active-map
           ("C-n" . company-select-next)
+          ("C-j" . company-select-next)
+          ("C-k" . company-select-previous)
           ("C-p" . company-select-previous))
   :hook
   ((emacs-lisp-mode clojure-mode) . company-mode))
+
+(use-package company-quickhelp)
+
+(eval-after-load 'company
+  '(define-key company-active-map (kbd "C-h") #'company-quickhelp-manual-begin))
 
 ;; Lsp mode
 (use-package lsp-mode

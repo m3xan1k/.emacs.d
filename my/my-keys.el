@@ -61,7 +61,7 @@
 
   (my/leader
     ;; "SPC" '(execute-extended-command :wk "execute command") ;; an alternative to 'M-x'
-    "SPC" '(counsel-M-x :wk "execute command") ;; an alternative to 'M-x'
+    "SPC" '(execute-extended-command :wk "execute command") ;; an alternative to 'M-x'
     "TAB" '(:keymap tab-prefix-map :wk "tab")) ;; remap tab bindings
 
   (my/leader
@@ -79,14 +79,14 @@
   (my/leader
     "f" '(:ignore t :wk "file")
     "f s" '(save-buffer :wk "save file")
-    "f r" '(ivy-resume :wk "search resume")
-    "f w" '(counsel-ag :wk "grep text")
+    "f r" '(vertico-repeat :wk "search resume")
+    "f w" '(consult-ripgrep :wk "grep text")
     "f f" '(fzf-projectile :wk "find file in project"))
 
   ;; buffer
   (my/leader
     "b" '(:ignore t :wk "buffer")
-    "b b" '(ivy-switch-buffer :wk "switch buffer") ;; gets overridden by consult
+    "b b" '(consult-buffer :wk "switch buffer") ;; gets overridden by consult
     "b k" '(kill-this-buffer :wk "kill this buffer")
     "b r" '(revert-buffer :wk "reload buffer")
     "b l" '(evil-switch-to-window-last-buffer :wk "last buffer"))

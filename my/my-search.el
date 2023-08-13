@@ -1,20 +1,17 @@
-;; search tools
-(use-package counsel)
+;; ;; search tools
+(use-package vertico
+  :init
+  (vertico-mode +1)
+  (setq enable-recursive-minibuffers t)
+  (add-hook 'minibuffer-setup-hook #'vertico-repeat-save))
 
-(use-package ivy-file-preview)
-(ivy-file-preview-mode 1)
+(use-package orderless
+  :init
+  (setq completion-styles '(orderless)
+	completion-category-defaults nil
+	completion-category-overrides nil))
 
-(setq ivy-use-virtual-buffers t)
-(setq ivy-display-style 'fancy)
-
-(use-package ivy
-  :ensure t
-  :diminish (ivy-mode)
-  :config
-  (ivy-mode 1))
-
-(use-package ag
-  :ensure t)
+(use-package consult)
 
 (use-package ripgrep
   :ensure t)
