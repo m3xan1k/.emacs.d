@@ -60,4 +60,6 @@
 (global-auto-revert-mode 1)
 (setq global-auto-revert-non-file-buffers t)
 
+(add-hook 'prog-mode-hook #'display-fill-column-indicator-mode)
+
 (provide 'my-defaults)

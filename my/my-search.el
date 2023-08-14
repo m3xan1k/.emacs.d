@@ -1,5 +1,6 @@
 ;; ;; search tools
 (use-package vertico
+  :pin gnu
   :init
   (vertico-mode +1)
   (setq enable-recursive-minibuffers t)

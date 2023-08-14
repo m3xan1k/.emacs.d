@@ -15,7 +15,7 @@
           ("C-k" . company-select-previous)
           ("C-p" . company-select-previous))
   :hook
-  ((emacs-lisp-mode clojure-mode) . company-mode))
+  ((emacs-lisp-mode clojure-mode python-mode go-mode) . company-mode))
 
 (use-package company-quickhelp)
 
@@ -36,6 +36,12 @@
 ;; lsp-ui
 (use-package lsp-ui
   :commands lsp-ui-mode)
+
+;; (setq lsp-ui-doc-enabled nil)
+;; (setq pgtk-wait-for-event-timeout nil)
+;; (setq make-frame-invisible 0.01)
+
+(setq lsp-eldoc-enable-hover nil)
 
 (add-hook 'lsp-ui-doc-frame-hook
           (lambda (frame _w)
@@ -59,6 +65,7 @@
                           (lsp-deferred)))))
 
 (setq python-flymake-command '("flake8" "-"))
+;; (setq python-flymake-command '("ruff" "--quiet" "--stdin-filename=stdin" "-"))
 
 (use-package pipenv
   :hook (python-mode . pipenv-mode)

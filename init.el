@@ -18,9 +18,9 @@
 (add-to-list 'package-archives
              '("melpa-stable" . "https://melpa.org/packages/") t)
 
+(require 'use-package-ensure)
 (setq use-package-always-ensure t)
 (setq use-package-always-pin "melpa-stable")
-
 
 (add-to-list 'load-path "~/.emacs.d/my")
 
