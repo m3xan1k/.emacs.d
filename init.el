@@ -17,6 +17,11 @@
 (require 'package)
 (add-to-list 'package-archives
              '("melpa-stable" . "https://melpa.org/packages/") t)
+(add-to-list 'package-archives
+    '("gnu" . "http://elpa.gnu.org/packages/") t)
+(add-to-list 'package-archives
+    '("org" . "https://orgmode.org/elpa/") t)
+(package-initialize)
 
 (require 'use-package-ensure)
 (setq use-package-always-ensure t)
