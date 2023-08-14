@@ -36,4 +36,5 @@
 (require 'my-search)
 (require 'my-tools)
 (require 'my-ui)
+(require 'my-telega)
 (put 'dired-find-alternate-file 'disabled nil)
