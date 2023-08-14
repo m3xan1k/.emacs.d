@@ -24,13 +24,18 @@
   ("C-h" . centaur-tabs-backward)
   ("C-l" . centaur-tabs-forward))
 
+(add-hook 'dired-mode-hook 'centaur-tabs-local-mode)
+
 (centaur-tabs-headline-match)
 (setq centaur-tabs-style "bar")
 (setq centaur-tabs-plain-icons t)
 (setq centaur-tabs-set-bar 'left)
-(setq centaur-tabs-height 20)
+(setq centaur-tabs-height 22)
+(setq centaur-tabs-show-new-tab-button t)
 (setq centaur-tabs-set-modified-marker t)
-(centaur-tabs-change-fonts "Ricty Diminished" 160)
+(setq centaur-tabs-cycle-scope 'tabs)
+(centaur-tabs-group-by-projectile-project)
+(centaur-tabs-change-fonts "Ricty Diminished" 120)
 
 (defadvice vc-git-mode-line-string (after plus-minus (file) compile activate)
   "Show the information of git diff on modeline."

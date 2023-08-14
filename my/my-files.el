@@ -16,4 +16,7 @@
  ;; no need to create lockfiles
 (setq create-lockfiles nil)
 
+(setq projectile-project-search-path
+      '(("~/Documents/projects/" . 1) ("~/Documents/SPELL/" . 1)))
+
 (provide 'my-files)

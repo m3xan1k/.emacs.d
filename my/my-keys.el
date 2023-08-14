@@ -44,6 +44,10 @@
     "h r" '(diff-hl-revert-hunk :wk "diff-hl-revert-hunk")
     "h h" '(help-command :wh "help-command"))
 
+  (my/leader
+    "p" '(:ignore t :wk "projectile")
+    "p p" 'projectile-switch-project)
+
   ;; jk to go to normal mode
   (general-imap "j"
     (general-key-dispatch 'self-insert-command
