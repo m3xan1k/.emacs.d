@@ -4,7 +4,3 @@
 !init.el
 !my/
 !my/*
-!elpa/
-!elpa/*
-!straight/
-!straight/build/*
