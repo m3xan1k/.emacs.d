@@ -1,13 +1,6 @@
-;;;;;;;;;;;;;;;;;;
-;;  defaults    ;;
-;;;;;;;;;;;;;;;;;;
-
 ;; disable bars
 (tool-bar-mode -1)
-
-(setq default-scroll-bar-width 6)
 (scroll-bar-mode -1)
-
 (menu-bar-mode -1)
 
 ;; cursor
@@ -38,14 +31,11 @@
 (setq scroll-conservatively 1)
 (setq scroll-margin 3)
 
-;; auto close parenthesis
-(electric-pair-mode 1)
-
 ;; use clipboard for cut
 (setq select-enable-clipboard t)
 
 ;; dont close emacs
-(setq confirm-kill-emacs 'yes-or-no-p)
+(setq confirm-kill-emacs 'y-or-n-p)
 
 ;; supress warnings
 (setq warning-minimum-level :error)
@@ -60,6 +50,7 @@
 (global-auto-revert-mode 1)
 (setq global-auto-revert-non-file-buffers t)
 
+;; border color column
 (add-hook 'prog-mode-hook #'display-fill-column-indicator-mode)
 
 (provide 'my-defaults)

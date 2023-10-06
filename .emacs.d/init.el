@@ -1,4 +1,4 @@
-;; $PATH
+;; load $PATH
 (defun set-exec-path-from-shell-PATH ()
   (let ((path-from-shell (replace-regexp-in-string
                           "[ \t\n]*$"
@@ -14,10 +14,10 @@
 (setq custom-file "~/.emacs.d/my/custom.el")
 (load custom-file)
 
-;; use-package
+;; use-package setup
 (require 'package)
 (add-to-list 'package-archives
-             '("melpa-stable" . "https://melpa.org/packages/") t)
+    '("melpa-stable" . "https://melpa.org/packages/") t)
 (add-to-list 'package-archives
     '("gnu" . "http://elpa.gnu.org/packages/") t)
 (add-to-list 'package-archives
@@ -28,20 +28,8 @@
 (setq use-package-always-ensure t)
 (setq use-package-always-pin "melpa-stable")
 
-;; (use-package server
-;;   :config
-;;   (unless (server-running-p)
-;;     (server-start)))
-
-;; custom files
+;; load config modules
 (add-to-list 'load-path "~/.emacs.d/my")
-
 (require 'my-defaults)
-(require 'my-files)
 (require 'my-keys)
-(require 'my-lsp)
-(require 'my-search)
-(require 'my-tools)
 (require 'my-ui)
-;; (require 'my-telega)
-(put 'dired-find-alternate-file 'disabled nil)

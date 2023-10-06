@@ -7,15 +7,12 @@
   (add-hook 'minibuffer-setup-hook #'vertico-repeat-save))
 
 (use-package orderless
-  :init
+  :config
   (setq completion-styles '(orderless)
 	completion-category-defaults nil
 	completion-category-overrides nil))
 
 (use-package consult)
-
-(use-package ripgrep
-  :ensure t)
 
 (use-package fzf
   :ensure t

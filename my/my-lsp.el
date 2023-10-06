@@ -7,7 +7,7 @@
 ;; Company mode
 (use-package company
   :config
-  (setq company-idle-delay 0)
+  (setq company-idle-delay 0.2)
   (setq company-minimum-prefix-length 1)
   :bind (:map company-active-map
           ("C-n" . company-select-next)
@@ -15,7 +15,7 @@
           ("C-k" . company-select-previous)
           ("C-p" . company-select-previous))
   :hook
-  ((emacs-lisp-mode clojure-mode python-mode go-mode) . company-mode))
+  (prog-mode . company-mode))
 
 (use-package company-quickhelp)
 
@@ -30,8 +30,15 @@
   (setenv "PATH" (concat
                    "/usr/local/bin" path-separator
                    (getenv "PATH")))
-  :hook
-  (clojure-mode . lsp))
+  (setq lsp-ui-doc-enabled nil
+	lsp-ui-doc-show-with-cursor nil
+	lsp-ui-doc-show-with-mouse nil
+	lsp-lens-enable nil
+	lsp-ui-sideline-enable nil
+	lsp-ui-sideline-enable nil
+	lsp-modeline-code-actions-enable nil
+	lsp-eldoc-enable-hover nil
+	lsp-signature-auto-activate nil))
 
 ;; lsp-ui
 (use-package lsp-ui
@@ -41,11 +48,11 @@
 ;; (setq pgtk-wait-for-event-timeout nil)
 ;; (setq make-frame-invisible 0.01)
 
-(setq lsp-eldoc-enable-hover nil)
+;; (setq lsp-eldoc-enable-hover nil)
 
 (add-hook 'lsp-ui-doc-frame-hook
           (lambda (frame _w)
-            (set-face-attribute 'default frame :font "Ricty Diminished" :height 150)))
+            (set-face-attribute 'default frame :font "Input" :height 140)))
 
 ;; Python
 (use-package lsp-pyright
@@ -56,16 +63,12 @@
 	lsp-pyright-typechecking-mode "basic"
 	lsp-pyright-auto-search-paths t
 	lsp-pyright-use-library-code-for-types t
-	lsp-headerline-breadcrumb-mode t
-    ;; lsp-pyright-stub-path (concat (getenv "HOME") "/Documents/projects/python-type-stubs")
-    )
-
+	lsp-headerline-breadcrumb-mode t)
   :hook ((python-mode . (lambda ()
                           (require 'lsp-pyright)
                           (lsp-deferred)))))
 
 (setq python-flymake-command '("flake8" "-"))
-;; (setq python-flymake-command '("ruff" "--quiet" "--stdin-filename=stdin" "-"))
 
 (use-package pipenv
   :hook (python-mode . pipenv-mode)
@@ -84,9 +87,16 @@
 (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
 
 
-;; Clojure
+;; Lisps
 ;; M-x lsp-install-server RET clojure-lsp RET
-(use-package clojure-mode)
+(use-package clojure-mode
+  :hook
+  (clojure-mode . lsp-deferred))
+
+(use-package racket-mode
+  :hook
+  (racket-mode . lsp-deferred))
+
 (use-package cider)
 
 (provide 'my-lsp)
