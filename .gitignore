@@ -1,6 +1,11 @@
 *
+!*/
 
 !.gitignore
 !init.el
 !my/
 !my/*
+
+straight/*
+!straight/versions/
+!straight/versions/default.el
