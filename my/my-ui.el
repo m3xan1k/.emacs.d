@@ -1,5 +1,5 @@
 ;; font
-(set-face-attribute 'default nil :font "Input" :height 180)
+(set-face-attribute 'default nil :font "Input" :height 170)
 
 ;; themes
 (use-package almost-mono-themes

@@ -123,7 +123,7 @@
   (general-define-key
    :states '(normal)
    :keymaps 'override
-   "g h" '(lsp-ui-doc-glance :wk "Signature help"))
+   "g h" '(lsp-ui-doc-glance :wk "signature help"))
 
 
 (provide 'my-keys)

@@ -44,12 +44,6 @@
 (use-package lsp-ui
   :commands lsp-ui-mode)
 
-;; (setq lsp-ui-doc-enabled nil)
-;; (setq pgtk-wait-for-event-timeout nil)
-;; (setq make-frame-invisible 0.01)
-
-;; (setq lsp-eldoc-enable-hover nil)
-
 (add-hook 'lsp-ui-doc-frame-hook
           (lambda (frame _w)
             (set-face-attribute 'default frame :font "Input" :height 140)))
@@ -77,9 +71,15 @@
    pipenv-projectile-after-switch-function
    #'pipenv-projectile-after-switch-extended))
 
+(defun dev/go-mode-hook ()
+  (setq tab-width 4))
+
 ;; golang
-(use-package go-mode)
-(add-hook 'go-mode-hook #'lsp-deferred)
+(use-package go-mode
+  :hook
+  ((go-mode . lsp-deferred)
+   (go-mode . dev/go-mode-hook)))
+
 ;; Set up before-save hooks to format buffer and add/delete imports.
 ;; Make sure you don't have other gofmt/goimports hooks enabled.
 (defun lsp-go-install-save-hooks ()
@@ -98,5 +98,12 @@
   (racket-mode . lsp-deferred))
 
 (use-package cider)
+
+;; sql
+(add-hook 'sql-mode-hook 'lsp)
+(setq lsp-sqls-workspace-config-path nil)
+(setq lsp-sqls-connections
+    '(((driver . "postgresql") (dataSourceName . "host=127.0.0.1 port=5432 user=myprojectuser password=password dbname=spell sslmode=disable"))))
+
 
 (provide 'my-lsp)

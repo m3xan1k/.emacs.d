@@ -14,19 +14,39 @@
 (setq custom-file "~/.emacs.d/my/custom.el")
 (load custom-file)
 
-;; use-package
-(require 'package)
-(add-to-list 'package-archives
-             '("melpa-stable" . "https://melpa.org/packages/") t)
-(add-to-list 'package-archives
-    '("gnu" . "http://elpa.gnu.org/packages/") t)
-(add-to-list 'package-archives
-    '("org" . "https://orgmode.org/elpa/") t)
-(package-initialize)
+;; straight for package management
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
 
-(require 'use-package-ensure)
-(setq use-package-always-ensure t)
-(setq use-package-always-pin "melpa-stable")
+(straight-use-package 'use-package)
+
+(use-package straight
+  :custom
+  (straight-use-package-by-default t))
+
+;; use-package
+; (require 'package)
+; (add-to-list 'package-archives
+;              '("melpa-stable" . "https://melpa.org/packages/") t)
+; (add-to-list 'package-archives
+;     '("gnu" . "http://elpa.gnu.org/packages/") t)
+; (add-to-list 'package-archives
+;     '("org" . "https://orgmode.org/elpa/") t)
+; (package-initialize)
+;
+; (require 'use-package-ensure)
+; (setq use-package-always-ensure t)
+; (setq use-package-always-pin "melpa-stable")
 
 ;; (use-package server
 ;;   :config

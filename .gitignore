@@ -1,5 +1,4 @@
 *
-!*/
 
 !.gitignore
 !init.el
@@ -7,3 +6,5 @@
 !my/*
 !elpa/
 !elpa/*
+!straight/
+!straight/build/*
