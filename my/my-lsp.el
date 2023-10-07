@@ -22,6 +22,11 @@
 (eval-after-load 'company
   '(define-key company-active-map (kbd "C-h") #'company-quickhelp-manual-begin))
 
+;; debug
+(use-package dap-mode
+  :defer
+  :commands dap-debug)
+
 ;; lsp mode
 (use-package lsp-mode
   :hook
@@ -78,7 +83,9 @@
 (use-package go-mode
   :hook
   ((go-mode . lsp-deferred)
-   (go-mode . dev/go-mode-hook)))
+   (go-mode . dev/go-mode-hook))
+  :config
+  (require 'dap-dlv-go))
 
 ;; Set up before-save hooks to format buffer and add/delete imports.
 ;; Make sure you don't have other gofmt/goimports hooks enabled.
