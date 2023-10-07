@@ -9,6 +9,7 @@
 (setq cursor-in-non-selected-windows nil)
 (set-cursor-color "red")
 
+;; some sane defaults
 (setq inhibit-splash-screen t ;; no thanks
       use-file-dialog nil ;; don't use system file dialog
       tab-bar-new-button-show nil ;; don't show new tab button
@@ -34,7 +35,7 @@
 ;; use clipboard for cut
 (setq select-enable-clipboard t)
 
-;; dont close emacs
+;; confirm quit
 (setq confirm-kill-emacs 'y-or-n-p)
 
 ;; supress warnings

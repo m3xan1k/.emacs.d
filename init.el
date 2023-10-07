@@ -34,24 +34,11 @@
   :custom
   (straight-use-package-by-default t))
 
-;; use-package
-; (require 'package)
-; (add-to-list 'package-archives
-;              '("melpa-stable" . "https://melpa.org/packages/") t)
-; (add-to-list 'package-archives
-;     '("gnu" . "http://elpa.gnu.org/packages/") t)
-; (add-to-list 'package-archives
-;     '("org" . "https://orgmode.org/elpa/") t)
-; (package-initialize)
-;
-; (require 'use-package-ensure)
-; (setq use-package-always-ensure t)
-; (setq use-package-always-pin "melpa-stable")
-
-;; (use-package server
-;;   :config
-;;   (unless (server-running-p)
-;;     (server-start)))
+;; using emacs server
+(use-package server
+  :config
+  (unless (server-running-p)
+    (server-start)))
 
 ;; custom files
 (add-to-list 'load-path "~/.emacs.d/my")

@@ -1,10 +1,10 @@
-;; diagnostic
+;; diagnostic popup at point
 (use-package flymake-diagnostic-at-point
   :after flymake
   :config
   (add-hook 'flymake-mode-hook #'flymake-diagnostic-at-point-mode))
 
-;; Company mode
+;; company mode for completion
 (use-package company
   :config
   (setq company-idle-delay 0.2)
@@ -17,12 +17,12 @@
   :hook
   (prog-mode . company-mode))
 
+;; help inside company interface
 (use-package company-quickhelp)
-
 (eval-after-load 'company
   '(define-key company-active-map (kbd "C-h") #'company-quickhelp-manual-begin))
 
-;; Lsp mode
+;; lsp mode
 (use-package lsp-mode
   :hook
   (lsp-mode . lsp-enable-which-key-integration)
@@ -46,9 +46,9 @@
 
 (add-hook 'lsp-ui-doc-frame-hook
           (lambda (frame _w)
-            (set-face-attribute 'default frame :font "Input" :height 140)))
+            (set-face-attribute 'default frame :font "Input" :height 150)))
 
-;; Python
+;; python
 (use-package lsp-pyright
   :defer t
   :config
@@ -71,10 +71,10 @@
    pipenv-projectile-after-switch-function
    #'pipenv-projectile-after-switch-extended))
 
+;; golang
 (defun dev/go-mode-hook ()
   (setq tab-width 4))
 
-;; golang
 (use-package go-mode
   :hook
   ((go-mode . lsp-deferred)
@@ -100,10 +100,6 @@
 (use-package cider)
 
 ;; sql
-(add-hook 'sql-mode-hook 'lsp)
-(setq lsp-sqls-workspace-config-path nil)
-(setq lsp-sqls-connections
-    '(((driver . "postgresql") (dataSourceName . "host=127.0.0.1 port=5432 user=myprojectuser password=password dbname=spell sslmode=disable"))))
-
+(add-hook 'sql-mode-hook #'lsp-deferred)
 
 (provide 'my-lsp)

@@ -3,6 +3,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(consult-async-input-throttle 0.2)
+ '(consult-async-min-input 1)
+ '(consult-preview-key '(:debounce 0.4 any))
  '(fill-column 80)
  '(package-selected-packages
    '(doom-modeline centaur-tabs almost-mono-themes evil-surround desktop+ smartparens diff-hl which-key projectile fzf consult orderless vertico cider racket-mode go-mode pipenv lsp-pyright lsp-ui company-quickhelp flymake-diagnostic-at-point general)))

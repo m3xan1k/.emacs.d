@@ -11,11 +11,13 @@
 (use-package general
   :config
   (general-evil-setup)
-  ;; escape
+
+  ;; escape on jk
   (general-imap "j"
 		(general-key-dispatch 'self-insert-command
 		  :timeout 0.25
 		  "k" 'evil-normal-state))
+
   ;; make SPC noop
   (general-def
     :states
@@ -48,7 +50,7 @@
   (my/leader
    "e" '(:ignore t :wk "error")
    "e n" '(flymake-goto-next-error :wk "goto-next-error")
-   "e p" '(flymake-goto-previous-error :wk "goto-previous-error"))
+   "e p" '(flymake-goto-prev-error :wk "goto-prev-error"))
 
   ;; git
   (my/leader
@@ -87,24 +89,28 @@
   (my/leader
     "s" '(:ignore t :wk "search")
     "s r" '(vertico-repeat :wk "resume search")
-    "s f" '(project-file :wk "find file in project")
+    "s f" '(project-find-file :wk "find file in project")
     "s /" '(consult-ripgrep :wk "search in project"))
 
+  ;; buffer management
   (my/leader
     "b" '(:ignore t :wk "buffers")
     "b n" '(centaur-tabs-forward :wk "next tab")
     "b p" '(centaur-tabs-backward :wk "previous tab")
-    "b d" '(kill-buffer :wk "close tab")
+    "b d" '(kill-this-buffer :wk "close current buffer")
+    "b D" '(kill-buffer :wk "close buffer interactively")
     "b b" '(consult-buffer :wk "search buffers")
     "b r" '(reload-buffer :wk "reload buffer")
     "b l" '(evil-switch-to-window-last-buffer :wk "last buffer"))
 
+  ;; window management
   (my/leader
     "w" '(:ignore t :wk "windows")
     "w d" '(delete-window :wk "close window")
     "w D" '(delete-other-windows :wk "close all other windows")
     "w o" '(other-window :wk "switch to other window"))
 
+  ;; lisp evaluation
   (my/local-leader
    :keymaps 'emacs-lisp-mode-map
    "e" '(:ignore t :wk "elisp")
@@ -112,18 +118,30 @@
    "e r" '(eval-defun :wk "eval root form")
    "e b" '(eval-buffer :wk "eval-buffer"))
 
+  ;; cider for clojure
   (my/local-leader
    :keymaps 'clojure-mode-map
    "c" '(cider-connect-clj :wk "connect to nrepl")
    "e" '(:ignore t :wk "clojure")
    "e e" '(cider-eval-last-sexp :wk "cider-eval-last-sexp")
    "e r" '(cider-eval-defun-at-point :wk "cider-eval-defun-at-point")
-   "e b" '(cider-eval-buffer :wk "cider-eval-buffer")))
+   "e b" '(cider-eval-buffer :wk "cider-eval-buffer"))
 
+  ;; sql
+  (my/local-leader
+    :keymaps 'sql-mode-map
+    "e" '(lsp-sql-execute-query :wk "lsp-sql-execute-query"))
+
+  ;; lsp stuff
   (general-define-key
    :states '(normal)
    :keymaps 'override
-   "g h" '(lsp-ui-doc-glance :wk "signature help"))
+   "g h" '(lsp-ui-doc-glance :wk "signature help")
 
+   ;; quit
+   (my/leader
+     "q" '(:ignore t :wk "quit")
+     "q Q" '(save-buffers-kill-terminal :wk "quit emacs")
+     "q w" '(quit-window :wk "quit window"))))
 
 (provide 'my-keys)

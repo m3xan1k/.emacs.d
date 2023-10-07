@@ -16,6 +16,7 @@
   (centaur-tabs-change-fonts "Input" 120))
 
 (setq centaur-tabs-cycle-scope 'tabs)
+(setq centaur-tabs-set-modified-marker t)
 
 ;; disable in dired
 (add-hook 'dired-mode-hook 'centaur-tabs-local-mode)
