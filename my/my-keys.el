@@ -108,7 +108,13 @@
     "w" '(:ignore t :wk "windows")
     "w d" '(delete-window :wk "close window")
     "w D" '(delete-other-windows :wk "close all other windows")
-    "w o" '(other-window :wk "switch to other window"))
+    "w o" '(other-window :wk "switch to other window")
+    "w -" '(evil-window-split :wk "evil-window-spit")
+    "w /" '(evil-window-vsplit :wk "evil-window-spit")
+    "w h" '(evil-window-left :wk "evil-window-left")
+    "w l" '(evil-window-right :wk "evil-window-right")
+    "w j" '(evil-window-down :wk "evil-window-down")
+    "w k" '(evil-window-up :wk "evil-window-up"))
 
   ;; lisp evaluation
   (my/local-leader
@@ -121,11 +127,18 @@
   ;; cider for clojure
   (my/local-leader
    :keymaps 'clojure-mode-map
-   "c" '(cider-connect-clj :wk "connect to nrepl")
+   "c" '(cider-jack-in :wk "connect to nrepl")
    "e" '(:ignore t :wk "clojure")
    "e e" '(cider-eval-last-sexp :wk "cider-eval-last-sexp")
    "e r" '(cider-eval-defun-at-point :wk "cider-eval-defun-at-point")
    "e b" '(cider-eval-buffer :wk "cider-eval-buffer"))
+
+  (my/local-leader
+    :keymaps 'racket-mode-map
+    "e" '(:ignore t :wk "eval/send")
+    "e e" '(racket-send-last-sexp :wk "racket-send-last-sexp")
+    "e r" '(racket-send-definition :wk "racket-send-definition")
+    "e b" '(racket-run :wk "racket run"))
 
   ;; sql
   (my/local-leader

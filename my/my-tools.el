@@ -18,7 +18,7 @@
   :config
   (require 'smartparens-config))
 
-(add-hook 'prog-mode-hook #'smartparens-mode)
+(add-hook 'prog-mode-hook #'smartparens-strict-mode)
 
 ;; save sessions
 (use-package desktop+)
