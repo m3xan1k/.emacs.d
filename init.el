@@ -34,12 +34,6 @@
   :custom
   (straight-use-package-by-default t))
 
-;; using emacs server
-(use-package server
-  :config
-  (unless (server-running-p)
-    (server-start)))
-
 ;; custom files
 (add-to-list 'load-path "~/.emacs.d/my")
 
