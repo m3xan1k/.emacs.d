@@ -7,6 +7,24 @@
   (evil-mode 1)
   (evil-set-undo-system 'undo-redo))
 
+;; custom resize
+
+(defun my/enlarge-window-horizontally ()
+  (interactive)
+  (enlarge-window-horizontally 5))
+
+(defun my/enlarge-window ()
+  (interactive)
+  (enlarge-window 5))
+
+(defun my/shrink-window-horizontally ()
+  (interactive)
+  (shrink-window-horizontally 5))
+
+(defun my/shrink-window ()
+  (interactive)
+  (shrink-window 5))
+
 ;; general
 (use-package general
   :config
@@ -114,7 +132,12 @@
     "w h" '(evil-window-left :wk "evil-window-left")
     "w l" '(evil-window-right :wk "evil-window-right")
     "w j" '(evil-window-down :wk "evil-window-down")
-    "w k" '(evil-window-up :wk "evil-window-up"))
+    "w k" '(evil-window-up :wk "evil-window-up")
+    "w r" '(:ignore t :wk "resize")
+    "w r l" '(my/enlarge-window-horizontally :wk "enlarge-window-horizontally")
+    "w r h" '(my/shrink-window-horizontally :wk "shrink-window-horizontally")
+    "w r j" '(my/enlarge-window :wk "enlarge-window")
+    "w r k" '(my/shrink-window :wk "shrink-window"))
 
   ;; lisp evaluation
   (my/local-leader
@@ -149,12 +172,20 @@
   (general-define-key
    :states '(normal)
    :keymaps 'override
-   "g h" '(lsp-ui-doc-glance :wk "signature help")
+   "g h" '(lsp-ui-doc-glance :wk "signature help"))
 
    ;; quit
    (my/leader
      "q" '(:ignore t :wk "quit")
      "q Q" '(save-buffers-kill-terminal :wk "quit emacs")
-     "q w" '(quit-window :wk "quit window"))))
+     "q w" '(quit-window :wk "quit window"))
+
+   (my/leader
+     "d" '(:ignore t :wk "debug")
+     "d b" '(dap-breakpoint-toggle :wk "dap-breakpoint-toggle")
+     "d s" '(dap-start-debugging :wk "dap-start-debugging")
+     "d c" '(dap-continue :wk "dap-continue")
+     "d u" '(dap-ui-mode :wk "dap-ui-mode")
+     "d r" '(dap-debug-restart :wk "dap-debug-restart")))
 
 (provide 'my-keys)

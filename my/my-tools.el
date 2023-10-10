@@ -13,6 +13,11 @@
 (global-diff-hl-mode)
 (diff-hl-flydiff-mode 1)
 
+(add-hook 'diff-hl-mode-on-hook
+          (lambda ()
+            (unless (window-system)
+              (diff-hl-margin-local-mode))))
+
 ;; parens
 (use-package smartparens
   :config
@@ -38,5 +43,10 @@
 (setq dashboard-items '((recents  . 5)
                         (projects . 5)
                         (agenda . 5)))
+
+;; terminal clipboard
+(use-package xclip
+  :init
+  (xclip-mode))
 
 (provide 'my-tools)

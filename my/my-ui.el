@@ -2,10 +2,17 @@
 (set-face-attribute 'default nil :font "Input" :height 170)
 
 ;; themes
-(use-package almost-mono-themes
+;; (use-package almost-mono-themes
+;;   :ensure t
+;;   :config
+;;   (load-theme 'almost-mono-cream t))
+
+(use-package base16-theme
   :ensure t
+  :init
+  (setq base16-theme-256-color-source "colors")
   :config
-  (load-theme 'almost-mono-cream t))
+  (load-theme 'base16-grayscale-light t))
 
 ;; tab bar
 (use-package centaur-tabs
