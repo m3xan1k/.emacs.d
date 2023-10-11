@@ -25,6 +25,12 @@
 
 (add-hook 'prog-mode-hook #'smartparens-mode)
 
+(use-package parinfer-rust-mode
+  :hook ((emacs-lisp-mode . parinfer-rust-mode)
+	 (clojure-mode . parinfer-rust-mode)
+	 (common-lisp-mode . parinfer-rust-mode)
+	 (racket-mode . parinfer-rust-mode)))
+
 ;; save sessions
 (use-package desktop+)
 
