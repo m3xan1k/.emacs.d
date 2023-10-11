@@ -7,6 +7,9 @@
   (evil-mode 1)
   (evil-set-undo-system 'undo-redo))
 
+(evil-set-initial-state 'telega-root-mode 'emacs)
+(evil-set-initial-state 'telega-chat-mode 'emacs)
+
 ;; custom resize
 
 (defun my/enlarge-window-horizontally ()
@@ -39,7 +42,7 @@
   ;; make SPC noop
   (general-def
     :states
-    '(normal motion emacs)
+    '(normal motion)
     "SPC"
     nil)
 
@@ -54,13 +57,13 @@
 
   ;; leader
   (general-create-definer my/leader
-    :states '(normal visual emacs)
+    :states '(normal visual)
     :keymaps 'override
     :prefix "SPC")
 
   ;; local-leader
   (general-create-definer my/local-leader
-    :states '(normal visual emacs)
+    :states '(normal visual)
     :keymaps 'override
     :prefix ",")
 

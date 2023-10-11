@@ -49,4 +49,7 @@
   :init
   (xclip-mode))
 
+;; restclient
+(use-package restclient)
+
 (provide 'my-tools)
