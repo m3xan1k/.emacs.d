@@ -9,6 +9,7 @@
 
 (evil-set-initial-state 'telega-root-mode 'emacs)
 (evil-set-initial-state 'telega-chat-mode 'emacs)
+(evil-set-initial-state 'org-mode 'emacs)
 
 ;; custom resize
 
@@ -165,6 +166,13 @@
     "e e" '(racket-send-last-sexp :wk "racket-send-last-sexp")
     "e r" '(racket-send-definition :wk "racket-send-definition")
     "e b" '(racket-run :wk "racket run"))
+
+  (my/local-leader
+    :keymaps 'lisp-mode-map
+    "e" '(:ignore t :wk "eval")
+    "e e" '(sly-eval-last-expression :wk "sly-eval-last-expression")
+    "e r" '(sly-eval-defun :wk "sly-eval-defun")
+    "e b" '(sly-eval-buffer :wk "sly-eval-buffer"))
 
   ;; sql
   (my/local-leader

@@ -106,8 +106,10 @@
 
 (use-package cider)
 
-(load (expand-file-name "~/.quicklisp/slime-helper.el"))
+;; (load (expand-file-name "~/.quicklisp/slime-helper.el"))
 (setq inferior-lisp-program "sbcl")
+
+(use-package sly)
 
 ;; sql
 (add-hook 'sql-mode-hook #'lsp-deferred)
