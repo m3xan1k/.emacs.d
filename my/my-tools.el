@@ -58,4 +58,7 @@
 ;; restclient
 (use-package restclient)
 
+;; org
+(setq org-adapt-indentation t)
+
 (provide 'my-tools)
