@@ -45,4 +45,5 @@
 (require 'my-tools)
 (require 'my-ui)
 (require 'my-telega)
+(require 'my-org)
 (put 'dired-find-alternate-file 'disabled nil)

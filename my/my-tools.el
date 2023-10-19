@@ -58,12 +58,4 @@
 ;; restclient
 (use-package restclient)
 
-;; org
-(setq org-adapt-indentation t)
-(setq org-agenda-files '("~/org" "~/Downloads/orgmode-coursefiles/sec-2.4-start-mylife.org"))
-
-(use-package org-bullets
-  :config
-  (add-hook 'org-mode-hook 'org-bullets-mode))
-
 (provide 'my-tools)
