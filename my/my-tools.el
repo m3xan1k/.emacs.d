@@ -58,4 +58,7 @@
 ;; restclient
 (use-package restclient)
 
+;; profile
+(use-package esup)
+
 (provide 'my-tools)

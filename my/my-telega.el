@@ -3,6 +3,8 @@
 ;; telega
 (use-package telega
   :ensure t
+  :commands
+  (telega)
   :general
   (my/leader
    "t" '(:keymap telega-prefix-map :which-key "telega"))

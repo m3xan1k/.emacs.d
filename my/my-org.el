@@ -14,8 +14,13 @@
     "DONE(d)"
     "CANCELLED(c)")))
 
+(setq org-tag-alist
+ '(("ADDRESS" . ?a)
+   ("PHONE" . ?p)
+   ("URGENT" . ?u)))
+
 (use-package org-bullets
-  :config
-  (add-hook 'org-mode-hook 'org-bullets-mode))
+  :hook
+  (org-mode . org-bullets-mode))
 
 (provide 'my-org)

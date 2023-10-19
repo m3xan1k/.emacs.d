@@ -22,11 +22,6 @@
 (eval-after-load 'company
   '(define-key company-active-map (kbd "C-h") #'company-quickhelp-manual-begin))
 
-;; debug
-(use-package dap-mode
-  :defer
-  :commands dap-debug)
-
 ;; lsp mode
 (use-package lsp-mode
   :hook
@@ -83,9 +78,7 @@
 (use-package go-mode
   :hook
   ((go-mode . lsp-deferred)
-   (go-mode . dev/go-mode-hook))
-  :config
-  (require 'dap-dlv-go))
+   (go-mode . dev/go-mode-hook)))
 
 ;; Set up before-save hooks to format buffer and add/delete imports.
 ;; Make sure you don't have other gofmt/goimports hooks enabled.
@@ -96,20 +89,25 @@
 
 ;; Lisps
 ;; M-x lsp-install-server RET clojure-lsp RET
+;; clojure
 (use-package clojure-mode
   :hook
   (clojure-mode . lsp-deferred))
 
+(use-package cider
+  :hook
+  (clojure-mode . cider-mode))
+
+;; racket
 (use-package racket-mode
   :hook
   (racket-mode . lsp-deferred))
 
-(use-package cider)
-
-;; (load (expand-file-name "~/.quicklisp/slime-helper.el"))
+;; common lisp
 (setq inferior-lisp-program "sbcl")
-
-(use-package sly)
+(use-package sly
+  :hook
+  (common-lisp-mode . sly-mode))
 
 ;; sql
 (add-hook 'sql-mode-hook #'lsp-deferred)
