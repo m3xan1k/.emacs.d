@@ -28,10 +28,6 @@
    ("PHONE" . ?p)
    ("URGENT" . ?u)))
 
-
-;; open link in current frame
-(add-to-list 'org-link-frame-setup '(file . find-file))
-
 ;; custom template
 (with-eval-after-load "org"
   (add-to-list 'org-structure-template-alist

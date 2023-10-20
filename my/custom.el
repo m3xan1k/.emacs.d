@@ -7,6 +7,12 @@
  '(consult-async-min-input 1)
  '(consult-preview-key '(:debounce 0.4 any))
  '(fill-column 80)
+ '(org-link-frame-setup
+   '((vm . vm-visit-folder-other-frame)
+     (vm-imap . vm-visit-imap-folder-other-frame)
+     (gnus . org-gnus-no-new-news)
+     (file . find-file)
+     (wl . wl-other-frame)))
  '(package-selected-packages
    '(doom-modeline centaur-tabs almost-mono-themes evil-surround desktop+ smartparens diff-hl which-key projectile fzf consult orderless vertico cider racket-mode go-mode pipenv lsp-pyright lsp-ui company-quickhelp flymake-diagnostic-at-point general)))
 (custom-set-faces
