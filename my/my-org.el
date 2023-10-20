@@ -1,6 +1,6 @@
 ;; org
 (setq org-adapt-indentation t)
-(setq org-agenda-files '("~/Nextcloud/org/src/todos" "~/Downloads/orgmode-coursefiles/sec-2.4-start-mylife.org"))
+(setq org-agenda-files '("~/Nextcloud/org/src/todos"))
 (setq org-todo-keywords
  '((sequence
     "NEXT(n)"
