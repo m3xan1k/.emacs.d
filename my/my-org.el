@@ -23,4 +23,6 @@
   :hook
   (org-mode . org-bullets-mode))
 
+(add-to-list 'org-link-frame-setup '(file . find-file))
+
 (provide 'my-org)
