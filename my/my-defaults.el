@@ -1,3 +1,7 @@
+;; contact
+(setq user-full-name "Sergey Shevtsov")
+(setq user-mail-address "m3xan1k@duck.com")
+
 ;; disable bars
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
