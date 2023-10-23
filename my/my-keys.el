@@ -74,14 +74,13 @@
    "e n" '(flymake-goto-next-error :wk "goto-next-error")
    "e p" '(flymake-goto-prev-error :wk "goto-prev-error"))
 
-  ;; git
   (my/leader
    "g" '(:ignore t :wk "git")
    "g h" '(:ignore t :wk "hunk")
-   "g h n" '(diff-hl-next-hunk :wk "diff-hl-next-hunk")
-   "g h p" '(diff-hl-previous-hunk :wk "diff-hl-previous-hunk")
-   "g h s" '(diff-hl-show-hunk :wk "diff-hl-show-hunk")
-   "g h r" '(diff-hl-revert-hunk :wk "diff-hl-revert-hunk"))
+   "g h n" '(git-gutter:next-hunk :wk "git-gutter:next-hunk")
+   "g h p" '(git-gutter:previous-hunk :wk "git-gutter:previous-hunk")
+   "g h s" '(git-gutter:popup-hunk :wk "git-gutter:popup-hunk")
+   "g h r" '(git-gutter:revert-hunk :wk "git-gutter:revert-hunk"))
 
   ;; help
   (my/leader
@@ -90,8 +89,8 @@
 
   ;; project
   (my/leader
-    "p" '(:ignore t :wk "projectile")
-    "p p" '(projectile-switch-project :wk "projectile-switch-project")
+    "p" '(:ignore t :wk "project")
+    "p p" '(project-switch-project :wk "project-switch-project")
     "p f" '(project-find-file :wk "project-find-file"))
 
   ;; widely used
@@ -189,14 +188,6 @@
    (my/leader
      "q" '(:ignore t :wk "quit")
      "q Q" '(save-buffers-kill-terminal :wk "quit emacs")
-     "q w" '(quit-window :wk "quit window"))
-
-   (my/leader
-     "d" '(:ignore t :wk "debug")
-     "d b" '(dap-breakpoint-toggle :wk "dap-breakpoint-toggle")
-     "d s" '(dap-start-debugging :wk "dap-start-debugging")
-     "d c" '(dap-continue :wk "dap-continue")
-     "d u" '(dap-ui-mode :wk "dap-ui-mode")
-     "d r" '(dap-debug-restart :wk "dap-debug-restart")))
+     "q w" '(quit-window :wk "quit window")))
 
 (provide 'my-keys)

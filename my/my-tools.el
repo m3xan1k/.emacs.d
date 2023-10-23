@@ -8,15 +8,11 @@
 (setq which-key-max-display-columns 5)
 (setq which-key-add-column-padding 3)
 
-;; git diff
-(use-package diff-hl)
-(global-diff-hl-mode)
-(diff-hl-flydiff-mode 1)
+;; git gutter
+(use-package git-gutter)
 
-(add-hook 'diff-hl-mode-on-hook
-          (lambda ()
-            (unless (window-system)
-              (diff-hl-margin-local-mode))))
+;; If you enable global minor mode
+(global-git-gutter-mode t)
 
 ;; parens
 (use-package smartparens
@@ -24,12 +20,6 @@
   (require 'smartparens-config))
 
 (add-hook 'prog-mode-hook #'smartparens-mode)
-
-(use-package parinfer-rust-mode
-  :hook ((emacs-lisp-mode . parinfer-rust-mode)
-	 (clojure-mode . parinfer-rust-mode)
-	 (common-lisp-mode . parinfer-rust-mode)
-	 (racket-mode . parinfer-rust-mode)))
 
 ;; save sessions
 (use-package desktop+)
@@ -46,6 +36,7 @@
   :config
   (dashboard-setup-startup-hook))
 
+(setq dashboard-projects-backend 'project-el)
 (setq dashboard-items '((recents  . 5)
                         (projects . 5)
                         (agenda . 5)))

@@ -12,7 +12,7 @@
 (setq create-lockfiles nil)
 
 ;; projectile will list projects from these paths
-(setq projectile-project-search-path
-      '(("~/Documents/projects/" . 1) ("~/Documents/SPELL/" . 1) ("~/.emacs.d/" . 1)))
+;; (setq projectile-project-search-path
+;;       '(("~/Documents/projects/" . 1) ("~/Documents/SPELL/" . 1) ("~/.emacs.d/" . 1)))
 
 (provide 'my-files)

@@ -7,6 +7,7 @@
  '(consult-async-min-input 1)
  '(consult-preview-key '(:debounce 0.4 any))
  '(fill-column 80)
+ '(git-gutter:update-interval 1)
  '(org-link-frame-setup
    '((vm . vm-visit-folder-other-frame)
      (vm-imap . vm-visit-imap-folder-other-frame)

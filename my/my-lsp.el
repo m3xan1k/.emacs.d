@@ -65,11 +65,7 @@
 (setq python-flymake-command '("flake8" "-"))
 
 (use-package pipenv
-  :hook (python-mode . pipenv-mode)
-  :init
-  (setq
-   pipenv-projectile-after-switch-function
-   #'pipenv-projectile-after-switch-extended))
+  :hook (python-mode . pipenv-mode))
 
 ;; golang
 (defun dev/go-mode-hook ()

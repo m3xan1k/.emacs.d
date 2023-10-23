@@ -17,6 +17,9 @@
 (setq centaur-tabs-cycle-scope 'tabs)
 (setq centaur-tabs-set-modified-marker t)
 
+;; projectile for tabs grouping
+(use-package projectile)
+
 ;; disable in dired
 (add-hook 'dired-mode-hook 'centaur-tabs-local-mode)
 
