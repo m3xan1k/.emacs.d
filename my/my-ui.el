@@ -7,22 +7,23 @@
   (load-theme 'berrys t))
 
 ;; tab bar
-(use-package centaur-tabs
-  :demand
-  :config
-  (centaur-tabs-mode t)
-  (centaur-tabs-group-by-projectile-project)
-  (centaur-tabs-change-fonts "Input" 120))
+;; (use-package centaur-tabs
+;;   :demand
+;;   :config
+;;   (centaur-tabs-mode t)
+;;   (centaur-tabs-group-by-projectile-project)
+;;   (centaur-tabs-change-fonts "Input" 120))
 
-(setq centaur-tabs-cycle-scope 'tabs)
-(setq centaur-tabs-set-modified-marker t)
+;; (setq centaur-tabs-cycle-scope 'tabs)
+;; (setq centaur-tabs-set-modified-marker t)
 
 ;; projectile for tabs grouping
-(use-package projectile)
-(projectile-mode t)
+(use-package projectile
+  :init
+  (projectile-mode t))
 
 ;; disable in dired
-(add-hook 'dired-mode-hook 'centaur-tabs-local-mode)
+;; (add-hook 'dired-mode-hook 'centaur-tabs-local-mode)
 
 ;; The maximum displayed length of the branch name of version control.
 (setq doom-modeline-vcs-max-length 32)
