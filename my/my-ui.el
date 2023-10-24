@@ -19,6 +19,7 @@
 
 ;; projectile for tabs grouping
 (use-package projectile)
+(projectile-mode t)
 
 ;; disable in dired
 (add-hook 'dired-mode-hook 'centaur-tabs-local-mode)

@@ -90,7 +90,7 @@
   ;; project
   (my/leader
     "p" '(:ignore t :wk "project")
-    "p p" '(project-switch-project :wk "project-switch-project")
+    "p p" '(projectile-switch-project :wk "projectile-switch-project")
     "p f" '(project-find-file :wk "project-find-file"))
 
   ;; widely used

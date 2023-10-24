@@ -16,9 +16,6 @@
   (consult-customize
    consult-async-min-input 1))
 
-;; projectile replacement
-(require 'project)
-
 (use-package marginalia
   :init
   (marginalia-mode))
