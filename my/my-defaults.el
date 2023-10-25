@@ -39,6 +39,12 @@
 ;; use clipboard for cut
 (setq select-enable-clipboard t)
 
+(defun m3xan1k-selection-value ()
+  (let ((select-enable-clipboard nil))
+    (gui-selection-value)))
+
+(setq interprogram-paste-function 'm3xan1k-selection-value)
+
 ;; confirm quit
 (setq confirm-kill-emacs 'y-or-n-p)
 
