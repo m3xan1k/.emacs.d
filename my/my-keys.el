@@ -148,7 +148,8 @@
    :keymaps 'emacs-lisp-mode-map
    "e" '(:ignore t :wk "elisp")
    "e e" '(eval-last-sexp :wk "eval-last-sexp")
-   "e r" '(eval-defun :wk "eval root form")
+   "e r" '(eval-region :wk "eval region")
+   "e d" '(eval-defun :wk "eval root form")
    "e b" '(eval-buffer :wk "eval-buffer"))
 
   ;; cider for clojure
@@ -188,7 +189,7 @@
    ;; quit
    (my/leader
      "q" '(:ignore t :wk "quit")
-     "q Q" '(save-buffers-kill-terminal :wk "quit emacs")
+     "q q" '(save-buffers-kill-terminal :wk "quit emacs")
      "q w" '(quit-window :wk "quit window")))
 
 (provide 'my-keys)

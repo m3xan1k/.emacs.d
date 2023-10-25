@@ -17,7 +17,7 @@
      (file . find-file)
      (wl . wl-other-frame)))
  '(package-selected-packages
-   '(doom-modeline centaur-tabs almost-mono-themes evil-surround desktop+ smartparens diff-hl which-key projectile fzf consult orderless vertico cider racket-mode go-mode pipenv lsp-pyright lsp-ui company-quickhelp flymake-diagnostic-at-point general)))
+   '()))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
