@@ -22,7 +22,7 @@
 (add-hook 'prog-mode-hook #'smartparens-mode)
 
 ;; save sessions
-(use-package desktop+)
+;; (use-package desktop+)
 
 ;; same as vim-surround
 (use-package evil-surround
@@ -50,6 +50,6 @@
 (use-package restclient)
 
 ;; profile
-(use-package esup)
+;; (use-package esup)
 
 (provide 'my-tools)

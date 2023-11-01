@@ -161,6 +161,7 @@
    "e r" '(cider-eval-defun-at-point :wk "cider-eval-defun-at-point")
    "e b" '(cider-eval-buffer :wk "cider-eval-buffer"))
 
+  ;; racket
   (my/local-leader
     :keymaps 'racket-mode-map
     "e" '(:ignore t :wk "eval/send")
@@ -168,6 +169,7 @@
     "e r" '(racket-send-definition :wk "racket-send-definition")
     "e b" '(racket-run :wk "racket run"))
 
+  ;; common lisp
   (my/local-leader
     :keymaps 'lisp-mode-map
     "e" '(:ignore t :wk "eval")
