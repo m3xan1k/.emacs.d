@@ -3,6 +3,7 @@
 
 !.gitignore
 !init.el
+!early-init.el
 !my/
 !my/*
 !my-packages/
