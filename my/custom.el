@@ -16,8 +16,7 @@
      (gnus . org-gnus-no-new-news)
      (file . find-file)
      (wl . wl-other-frame)))
- '(package-selected-packages
-   '()))
+ '(package-selected-packages 'nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

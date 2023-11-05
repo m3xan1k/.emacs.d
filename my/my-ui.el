@@ -1,11 +1,6 @@
 ;; font
-(set-face-attribute 'default nil :font "Ricty Diminished" :height 220)
-
-;; theme
-(use-package berrys-theme
-  :ensure t
-  :config
-  (load-theme 'berrys t))
+(set-face-attribute 'default nil :font "Ricty Diminished" :height 230)
+(set-face-attribute 'fringe nil :background nil)
 
 ;; projectile for projects discovery
 (use-package projectile
