@@ -55,4 +55,7 @@
 ;; border color column
 (add-hook 'prog-mode-hook #'display-fill-column-indicator-mode)
 
+;; word delimiters
+(modify-syntax-entry ?_ "w")
+
 (provide 'my-defaults)
