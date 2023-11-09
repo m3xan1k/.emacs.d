@@ -49,6 +49,9 @@
 ;; restclient
 (use-package restclient)
 
+;; magit
+(use-package magit)
+
 ;; profile
 ;; (use-package esup)
 

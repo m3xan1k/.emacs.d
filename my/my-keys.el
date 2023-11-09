@@ -172,9 +172,10 @@
   ;; common lisp
   (my/local-leader
     :keymaps 'lisp-mode-map
+    "c" '(sly :wk "sly")
     "e" '(:ignore t :wk "eval")
     "e e" '(sly-eval-last-expression :wk "sly-eval-last-expression")
-    "e r" '(sly-eval-defun :wk "sly-eval-defun")
+    "e d" '(sly-eval-defun :wk "sly-eval-defun")
     "e b" '(sly-eval-buffer :wk "sly-eval-buffer"))
 
   ;; sql
