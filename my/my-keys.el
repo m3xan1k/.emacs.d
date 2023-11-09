@@ -7,12 +7,19 @@
   (evil-mode 1)
   (evil-set-undo-system 'undo-redo))
 
-(evil-set-initial-state 'telega-root-mode 'emacs)
-(evil-set-initial-state 'telega-chat-mode 'emacs)
-(evil-set-initial-state 'org-mode 'emacs)
+;; emacs for some modes
+(setq m3xan1k-emacs-state-modes '(telega-root-mode
+				  telega-chat-mode
+				  org-mode
+				  eww-mode))
+
+(defun m3xan1k-apply-emacs-state (modes)
+  (while (> (length modes) 0)
+    (evil-set-initial-state (pop modes) 'emacs)))
+
+(m3xan1k-apply-emacs-state m3xan1k-emacs-state-modes)
 
 ;; custom resize
-
 (defun my/enlarge-window-horizontally ()
   (interactive)
   (enlarge-window-horizontally 5))
