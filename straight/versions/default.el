@@ -25,6 +25,7 @@
  ("lsp-mode" . "8df561298588a23ee46f3d7e806f483937d9497d")
  ("lsp-pyright" . "2f2631ae242d5770dbe6cb924e44c1ee5671789d")
  ("lsp-ui" . "0dd39900c8ed8145d207985cb2f65cedd1ffb410")
+ ("magit" . "2b02bfb0495bf738e006d82f3a233e8f511b90b8")
  ("map" . "941b1e5fa39acce026b287565cb1a95c57d611ed")
  ("marginalia" . "4e14bc0fa05ae8c35e019721d19acdec8b51248c")
  ("markdown-mode" . "c12adcfbeb2d45d376df50c843758c6ef22fdd08")
@@ -56,5 +57,6 @@
  ("use-package" . "a6e856418d2ebd053b34e0ab2fda328abeba731c")
  ("vertico" . "3baad81495ea8db56966066732d69fd8a25d7d18")
  ("visual-fill-column" . "695a59789209c42fa08a5bce92963ee32f4455be")
+ ("with-editor" . "fcd186d1e684c2dca6497c89af77b27b2b036c11")
  ("xclip" . "2dfa5fa1754470253fc106b8bd55d9b2bd6702fe"))
 :gamma
