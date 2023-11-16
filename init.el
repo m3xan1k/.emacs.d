@@ -46,6 +46,7 @@
 (require 'my-ui)
 (require 'my-telega)
 (require 'my-org)
+;; (require 'my-mail)
 (require 'berrys-theme)
 (load-theme 'berrys t)
 (put 'dired-find-alternate-file 'disabled nil)
