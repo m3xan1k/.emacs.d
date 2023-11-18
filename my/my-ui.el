@@ -1,5 +1,5 @@
 ;; font
-(set-face-attribute 'default nil :font "Input" :height 210)
+(set-face-attribute 'default nil :font "Iosevka Extended" :height 220)
 (set-face-attribute 'fringe nil :background nil)
 
 ;; projectile for projects discovery
