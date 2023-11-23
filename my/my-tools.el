@@ -21,9 +21,6 @@
 
 (add-hook 'prog-mode-hook #'smartparens-mode)
 
-;; save sessions
-;; (use-package desktop+)
-
 ;; same as vim-surround
 (use-package evil-surround
   :ensure t
