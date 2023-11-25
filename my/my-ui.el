@@ -2,6 +2,18 @@
 (set-face-attribute 'default nil :font "Iosevka Extended" :height 220)
 (set-face-attribute 'fringe nil :background nil)
 
+;; tabs
+(use-package centaur-tabs
+  :demand
+  :config
+  (centaur-tabs-mode t)
+  (centaur-tabs-group-by-projectile-project)
+  (centaur-tabs-change-fonts "Iosevka Extended" 120))
+
+(setq centaur-tabs-cycle-scope 'tabs)
+(setq centaur-tabs-set-modified-marker t)
+(add-hook 'dired-mode-hook 'centaur-tabs-local-mode)
+
 ;; projectile for projects discovery
 (use-package projectile
   :init
