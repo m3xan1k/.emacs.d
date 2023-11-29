@@ -4,6 +4,9 @@
   :config
   (add-hook 'flymake-mode-hook #'flymake-diagnostic-at-point-mode))
 
+(use-package flymake-python-pyflakes)
+(setq flymake-python-pyflakes-executable "flake8")
+
 ;; company mode for completion
 (use-package company
   :config
@@ -61,8 +64,6 @@
   :hook ((python-mode . (lambda ()
                           (require 'lsp-pyright)
                           (lsp-deferred)))))
-
-(setq python-flymake-command '("flake8" "-"))
 
 (use-package pipenv
   :hook (python-mode . pipenv-mode))
