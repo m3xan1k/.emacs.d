@@ -4,8 +4,6 @@
   :config
   (add-hook 'flymake-mode-hook #'flymake-diagnostic-at-point-mode))
 
-(setq python-flymake-command '("flake8" "-"))
-
 ;; company mode for completion
 (use-package company
   :config
@@ -24,12 +22,20 @@
 (eval-after-load 'company
   '(define-key company-active-map (kbd "C-h") #'company-quickhelp-manual-begin))
 
-(use-package pipenv
-  :hook (python-mode . pipenv-mode))
-
+;; lsp client
 (use-package eglot
   :ensure t
   :defer t)
+
+;; lsp breadcrumbs
+(use-package breadcrumb
+  :ensure t
+  :config
+  (breadcrumb-mode t))
+
+;; python
+(use-package pipenv
+  :hook (python-mode . pipenv-mode))
 
 (add-hook 'python-mode-hook
 	  (lambda () (eglot-ensure)))
@@ -43,23 +49,26 @@
   ((go-mode . eglot-ensure)
    (go-mode . dev/go-mode-hook)))
 
-;; Set up before-save hooks to format buffer and add/delete imports.
-;; Make sure you don't have other gofmt/goimports hooks enabled.
 (defun go-install-save-hooks ()
   (add-hook 'before-save-hook #'eglot-format-buffer t t))
 (add-hook 'go-mode-hook #'go-install-save-hooks)
 
-(use-package breadcrumb
-  :ensure t
-  :config
-  (breadcrumb-mode t))
+;; w3
+(use-package emmet-mode
+  :ensure t)
+
+(use-package web-mode
+  :ensure t)
+
+(add-to-list 'auto-mode-alist '("\\.html$" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
+
+(add-hook 'web-mode-hook 'emmet-mode)
 
 ;; ruby
 ;; (setq lsp-solargraph-server-command '("/home/m3xan1k/.gem/bin/solargraph" "stdio"))
 ;; (setq lsp-solargraph-use-bundler t)
 ;; (add-hook 'ruby-mode-hook #'lsp-deferred)
-
-;; sql
-;; (add-hook 'sql-mode-hook #'lsp-deferred)
 
 (provide 'my-lsp)

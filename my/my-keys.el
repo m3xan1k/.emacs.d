@@ -119,7 +119,8 @@
     "s" '(:ignore t :wk "search")
     "s r" '(vertico-repeat :wk "resume search")
     "s f" '(project-find-file :wk "find file in project")
-    "s /" '(consult-ripgrep :wk "search in project"))
+    "s /" '(consult-ripgrep :wk "search in project")
+    "s c" '(consult-ripgrep-at-point :wk "consult-ripgrep-at-point"))
 
   ;; buffer management
   (my/leader
@@ -138,8 +139,8 @@
     "w d" '(delete-window :wk "close window")
     "w D" '(delete-other-windows :wk "close all other windows")
     "w o" '(other-window :wk "switch to other window")
-    "w -" '(evil-window-split :wk "evil-window-spit")
-    "w /" '(evil-window-vsplit :wk "evil-window-spit")
+    "w ;" '(evil-window-split :wk "evil-window-spit")
+    "w '" '(evil-window-vsplit :wk "evil-window-spit")
     "w h" '(evil-window-left :wk "evil-window-left")
     "w l" '(evil-window-right :wk "evil-window-right")
     "w j" '(evil-window-down :wk "evil-window-down")
@@ -194,12 +195,20 @@
   (general-define-key
    :states '(normal)
    :keymaps 'override
-   "g h" '(lsp-ui-doc-glance :wk "signature help"))
+   "g h" '(eldoc :wk "signature help"))
 
    ;; quit
    (my/leader
      "q" '(:ignore t :wk "quit")
      "q q" '(save-buffers-kill-terminal :wk "quit emacs")
-     "q w" '(quit-window :wk "quit window")))
+     "q w" '(quit-window :wk "quit window"))
+
+   (general-define-key
+    :states 'normal
+    "C-h" 'centaur-tabs-backward)
+
+   (general-define-key
+    :states 'normal
+    "C-l" 'centaur-tabs-forward))
 
 (provide 'my-keys)

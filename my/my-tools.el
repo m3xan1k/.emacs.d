@@ -43,9 +43,6 @@
   :init
   (xclip-mode))
 
-;; restclient
-(use-package restclient)
-
 ;; magit
 (use-package magit)
 
