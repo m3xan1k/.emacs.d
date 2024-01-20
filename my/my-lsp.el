@@ -4,8 +4,7 @@
   :config
   (add-hook 'flymake-mode-hook #'flymake-diagnostic-at-point-mode))
 
-(use-package flymake-python-pyflakes)
-(setq flymake-python-pyflakes-executable "flake8")
+(setq python-flymake-command '("flake8" "-"))
 
 ;; company mode for completion
 (use-package company
@@ -25,48 +24,15 @@
 (eval-after-load 'company
   '(define-key company-active-map (kbd "C-h") #'company-quickhelp-manual-begin))
 
-;; lsp mode
-(use-package lsp-mode
-  :hook
-  (lsp-mode . lsp-enable-which-key-integration)
-  :config
-  (setenv "PATH" (concat
-                   "/usr/local/bin" path-separator
-                   (getenv "PATH")))
-  (setq lsp-ui-doc-enabled nil
-	lsp-ui-doc-show-with-cursor nil
-	lsp-ui-doc-show-with-mouse nil
-	lsp-lens-enable nil
-	lsp-ui-sideline-enable nil
-	lsp-ui-sideline-enable nil
-	lsp-modeline-code-actions-enable nil
-	lsp-eldoc-enable-hover nil
-	lsp-signature-auto-activate nil))
-
-;; lsp-ui
-(use-package lsp-ui
-  :commands lsp-ui-mode)
-
-(add-hook 'lsp-ui-doc-frame-hook
-          (lambda (frame _w)
-            (set-face-attribute 'default frame :font "Input" :height 150)))
-
-;; python
-(use-package lsp-pyright
-  :defer t
-  :config
-  (setq lsp-pyright-disable-language-service nil
-	lsp-pyright-diagnostic-mode "openFilesOnly"
-	lsp-pyright-typechecking-mode "basic"
-	lsp-pyright-auto-search-paths t
-	lsp-pyright-use-library-code-for-types t
-	lsp-headerline-breadcrumb-mode t)
-  :hook ((python-mode . (lambda ()
-                          (require 'lsp-pyright)
-                          (lsp-deferred)))))
-
 (use-package pipenv
   :hook (python-mode . pipenv-mode))
+
+(use-package eglot
+  :ensure t
+  :defer t)
+
+(add-hook 'python-mode-hook
+	  (lambda () (eglot-ensure)))
 
 ;; golang
 (defun dev/go-mode-hook ()
@@ -74,39 +40,26 @@
 
 (use-package go-mode
   :hook
-  ((go-mode . lsp-deferred)
+  ((go-mode . eglot-ensure)
    (go-mode . dev/go-mode-hook)))
 
 ;; Set up before-save hooks to format buffer and add/delete imports.
 ;; Make sure you don't have other gofmt/goimports hooks enabled.
-(defun lsp-go-install-save-hooks ()
-  (add-hook 'before-save-hook #'lsp-format-buffer t t))
-(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
+(defun go-install-save-hooks ()
+  (add-hook 'before-save-hook #'eglot-format-buffer t t))
+(add-hook 'go-mode-hook #'go-install-save-hooks)
 
+(use-package breadcrumb
+  :ensure t
+  :config
+  (breadcrumb-mode t))
 
-;; Lisps
-;; M-x lsp-install-server RET clojure-lsp RET
-;; clojure
-(use-package clojure-mode
-  :hook
-  (clojure-mode . lsp-deferred))
-
-(use-package cider
-  :hook
-  (clojure-mode . cider-mode))
-
-;; racket
-(use-package racket-mode
-  :hook
-  (racket-mode . lsp-deferred))
-
-;; common lisp
-(setq inferior-lisp-program "sbcl")
-(use-package sly
-  :hook
-  (common-lisp-mode . sly-mode))
+;; ruby
+;; (setq lsp-solargraph-server-command '("/home/m3xan1k/.gem/bin/solargraph" "stdio"))
+;; (setq lsp-solargraph-use-bundler t)
+;; (add-hook 'ruby-mode-hook #'lsp-deferred)
 
 ;; sql
-(add-hook 'sql-mode-hook #'lsp-deferred)
+;; (add-hook 'sql-mode-hook #'lsp-deferred)
 
 (provide 'my-lsp)

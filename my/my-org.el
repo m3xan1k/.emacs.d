@@ -5,6 +5,8 @@
   :hook
   (org-mode . org-bullets-mode))
 
+(use-package org-preview-html)
+
 ;; todos path for agenda
 (setq org-agenda-files '("~/Nextcloud/org/src/todos"))
 
