@@ -2,6 +2,9 @@
 (set-face-attribute 'default nil :font "Dejavu Sans Mono" :height 180)
 (set-face-attribute 'fringe nil :background nil)
 
+;; additional theme
+(use-package almost-mono-themes)
+
 ;; tabs
 (use-package centaur-tabs
   :demand
