@@ -34,7 +34,7 @@
   :custom
   (straight-use-package-by-default t))
 
-;; custom files
+;; config files
 (add-to-list 'load-path "~/.emacs.d/my")
 
 (require 'my-defaults)
@@ -49,5 +49,12 @@
 ;; (require 'my-mail)
 (require 'berrys-theme)
 (load-theme 'berrys t)
+
+;; my packages
+(add-to-list 'load-path "~/.emacs.d/my-packages/cbr")
+(require 'cbr)
+
+(add-to-list 'load-path "~/.emacs.d/my-packages/g-trans")
+(require 'g-trans)
 
 (put 'dired-find-alternate-file 'disabled nil)

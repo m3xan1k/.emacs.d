@@ -6,8 +6,9 @@
 !early-init.el
 !my/
 !my/*
-!my-packages/
-!my-packages/*
+# !my-packages/
+# !my-packages/*
+my-packages/*
 
 straight/*
 !straight/versions/

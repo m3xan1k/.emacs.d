@@ -46,6 +46,9 @@
 ;; magit
 (use-package magit)
 
+;; for my packages
+(use-package esxml)
+
 ;; profile
 ;; (use-package esup)
 
