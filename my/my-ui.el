@@ -15,7 +15,6 @@
 
 (setq centaur-tabs-cycle-scope 'tabs)
 (setq centaur-tabs-set-modified-marker t)
-(add-hook 'dired-mode-hook 'centaur-tabs-local-mode)
 
 ;; projectile for projects discovery
 (use-package projectile

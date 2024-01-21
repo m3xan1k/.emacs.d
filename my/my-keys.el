@@ -120,7 +120,7 @@
     "s r" '(vertico-repeat :wk "resume search")
     "s f" '(project-find-file :wk "find file in project")
     "s /" '(consult-ripgrep :wk "search in project")
-    "s c" '(consult-ripgrep-at-point :wk "consult-ripgrep-at-point"))
+    "s c" '(m3xan1k-consult-ripgrep-at-point :wk "m3xan1k-consult-ripgrep-at-point"))
 
   ;; buffer management
   (my/leader

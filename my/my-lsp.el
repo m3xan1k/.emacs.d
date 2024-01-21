@@ -24,12 +24,10 @@
 
 ;; lsp client
 (use-package eglot
-  :ensure t
   :defer t)
 
 ;; lsp breadcrumbs
 (use-package breadcrumb
-  :ensure t
   :config
   (breadcrumb-mode t))
 
@@ -54,11 +52,9 @@
 (add-hook 'go-mode-hook #'go-install-save-hooks)
 
 ;; w3
-(use-package emmet-mode
-  :ensure t)
+(use-package emmet-mode)
 
-(use-package web-mode
-  :ensure t)
+(use-package web-mode)
 
 (add-to-list 'auto-mode-alist '("\\.html$" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))

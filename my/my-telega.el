@@ -2,7 +2,6 @@
 
 ;; telega
 (use-package telega
-  :ensure t
   :commands
   (telega)
   :general

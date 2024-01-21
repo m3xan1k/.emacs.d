@@ -23,13 +23,11 @@
 
 ;; same as vim-surround
 (use-package evil-surround
-  :ensure t
   :config
   (global-evil-surround-mode 1))
 
 ;; start page
 (use-package dashboard
-  :ensure t
   :config
   (dashboard-setup-startup-hook))
 

@@ -20,7 +20,7 @@
   :init
   (marginalia-mode))
 
-(defun consult-ripgrep-at-point ()
+(defun m3xan1k-consult-ripgrep-at-point ()
   (interactive)
   (consult-ripgrep (projectile-project-root)(thing-at-point 'symbol)))
 
