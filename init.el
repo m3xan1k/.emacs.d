@@ -47,7 +47,7 @@
 (require 'my-telega)
 (require 'my-org)
 ;; (require 'my-mail)
-(require 'berrys-theme)
+;; (require 'berrys-theme)
 ;; (load-theme 'berrys t)
 (load-theme 'almost-mono-cream t)
 
