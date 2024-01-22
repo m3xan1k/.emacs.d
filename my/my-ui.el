@@ -63,4 +63,8 @@
   :config
   (mood-line-mode))
 
+;; scrollbar
+(use-package yascroll)
+(global-yascroll-bar-mode 1)
+
 (provide 'my-ui)
