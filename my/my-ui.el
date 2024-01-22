@@ -1,5 +1,5 @@
 ;; font
-(set-face-attribute 'default nil :font "Dejavu Sans Mono" :height 180)
+(set-face-attribute 'default nil :font "Liberation Mono" :height 165)
 (set-face-attribute 'fringe nil :background nil)
 
 ;; additional theme
@@ -11,7 +11,7 @@
   :config
   (centaur-tabs-mode t)
   (centaur-tabs-group-by-projectile-project)
-  (centaur-tabs-change-fonts "Dejavu Sans Mono" 120))
+  (centaur-tabs-change-fonts "Liberation Mono" 120))
 
 (setq centaur-tabs-cycle-scope 'tabs)
 (setq centaur-tabs-set-modified-marker t)

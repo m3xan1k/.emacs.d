@@ -48,7 +48,8 @@
 (require 'my-org)
 ;; (require 'my-mail)
 (require 'berrys-theme)
-(load-theme 'berrys t)
+;; (load-theme 'berrys t)
+(load-theme 'almost-mono-cream t)
 
 ;; my packages
 (add-to-list 'load-path "~/.emacs.d/my-packages/cbr")
