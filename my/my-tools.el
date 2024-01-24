@@ -1,3 +1,12 @@
+;; projectile for projects discovery
+(use-package projectile
+  :init
+  (projectile-mode t))
+
+;; projectile will list projects from these paths
+(setq projectile-project-search-path
+      '(("~/Documents/projects/" . 1) ("~/Documents/SPELL/" . 1) ("~/.emacs.d/" . 1)))
+
 ;; which key
 (use-package which-key
   :config

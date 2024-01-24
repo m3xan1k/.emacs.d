@@ -160,23 +160,6 @@
    "e d" '(eval-defun :wk "eval root form")
    "e b" '(eval-buffer :wk "eval-buffer"))
 
-  ;; cider for clojure
-  (my/local-leader
-   :keymaps 'clojure-mode-map
-   "c" '(cider-jack-in :wk "connect to nrepl")
-   "e" '(:ignore t :wk "clojure")
-   "e e" '(cider-eval-last-sexp :wk "cider-eval-last-sexp")
-   "e r" '(cider-eval-defun-at-point :wk "cider-eval-defun-at-point")
-   "e b" '(cider-eval-buffer :wk "cider-eval-buffer"))
-
-  ;; racket
-  (my/local-leader
-    :keymaps 'racket-mode-map
-    "e" '(:ignore t :wk "eval/send")
-    "e e" '(racket-send-last-sexp :wk "racket-send-last-sexp")
-    "e r" '(racket-send-definition :wk "racket-send-definition")
-    "e b" '(racket-run :wk "racket run"))
-
   ;; common lisp
   (my/local-leader
     :keymaps 'lisp-mode-map
