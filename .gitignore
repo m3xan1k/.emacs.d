@@ -4,6 +4,7 @@
 !.gitignore
 !init.el
 !early-init.el
+!after-init.org
 !my/
 !my/*
 # !my-packages/
