@@ -35,8 +35,11 @@
 (use-package pipenv
   :hook (python-mode . pipenv-mode))
 
+;; activate virtual environment from .venv
 (add-hook 'python-mode-hook
-	  (lambda () (eglot-ensure)))
+	  (lambda () (progn
+		       (pyvenv-activate (concat (projectile-project-root) ".venv/"))
+		       (eglot-ensure))))
 
 ;; golang
 (defun dev/go-mode-hook ()
@@ -47,13 +50,13 @@
   ((go-mode . eglot-ensure)
    (go-mode . dev/go-mode-hook)))
 
+;; gofmt before save
 (defun go-install-save-hooks ()
   (add-hook 'before-save-hook #'eglot-format-buffer t t))
 (add-hook 'go-mode-hook #'go-install-save-hooks)
 
 ;; w3
 (use-package emmet-mode)
-
 (use-package web-mode)
 
 (add-to-list 'auto-mode-alist '("\\.html$" . web-mode))

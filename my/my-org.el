@@ -9,6 +9,7 @@
 
 ;; todos path for agenda
 (setq org-agenda-files '("~/Nextcloud/org/src/todos"))
+(setq org-agenda-inhibit-startup t)
 
 ;; some defaults
 (setq org-adapt-indentation t)
