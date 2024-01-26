@@ -4,3 +4,6 @@
 [submodule "my-packages/g-trans"]
 	path = my-packages/g-trans
 	url = git@codeberg.org:m3xan1k/g-trans.el
+[submodule "thirdpart/surround"]
+	path = thirdpart/surround
+	url = git@codeberg.org:m3xan1k/surround.git
