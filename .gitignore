@@ -7,9 +7,9 @@
 !after-init.org
 !my/
 !my/*
-# !my-packages/
-# !my-packages/*
-my-packages/*
+!my-packages/
+!my-packages/*
+# my-packages/*
 !thirdpart/
 !thirdpart/*
 
