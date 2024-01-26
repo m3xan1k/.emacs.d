@@ -32,6 +32,8 @@
 ;; scroll
 (setq scroll-conservatively 1)
 (setq scroll-margin 3)
+(setq scroll-preserve-screen-position t)
+(setq next-screen-context-lines (- (/ (window-body-height) 2) 5))
 
 ;; use clipboard for cut
 (setq select-enable-clipboard t)

@@ -56,6 +56,7 @@
 
   ;; unbind some annoying default bindings
   (general-unbind
+    "M-;"
     "M-j"
     "M-k"
     "C-x C-r"   ;; unbind find file read only
@@ -125,8 +126,8 @@
   ;; buffer management
   (my/leader
     "b" '(:ignore t :wk "buffers")
-    "b n" '(centaur-tabs-forward :wk "next tab")
-    "b p" '(centaur-tabs-backward :wk "previous tab")
+    "b n" '(awesome-tab-forward :wk "next tab")
+    "b p" '(awesome-tab-backward :wk "previous tab")
     "b d" '(kill-this-buffer :wk "close current buffer")
     "b D" '(kill-buffer :wk "close buffer interactively")
     "b b" '(consult-buffer :wk "search buffers")
@@ -188,10 +189,18 @@
 
    (general-define-key
     :states 'normal
-    "C-h" 'centaur-tabs-backward)
+    "C-h" 'awesome-tab-backward)
 
    (general-define-key
     :states 'normal
-    "C-l" 'centaur-tabs-forward))
+    "C-l" 'awesome-tab-forward)
+
+   (general-define-key
+    :states '(normal emacs)
+    "M-;" 'comment-line)
+
+   (general-define-key
+    :states '(visual)
+    "M-;" 'comment-dwim))
 
 (provide 'my-keys)
