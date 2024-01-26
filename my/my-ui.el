@@ -6,15 +6,13 @@
 (use-package almost-mono-themes)
 
 ;; tabs
-(use-package centaur-tabs
-  :demand
+(use-package awesome-tab
+  :load-path "path/to/your/awesome-tab"
   :config
-  (centaur-tabs-mode t)
-  (centaur-tabs-group-by-projectile-project)
-  (centaur-tabs-change-fonts "Dejavu Sans Mono" 120))
+  (awesome-tab-mode t))
 
-(setq centaur-tabs-cycle-scope 'tabs)
-(setq centaur-tabs-set-modified-marker t)
+(setq awesome-tab-height 120)
+(setq awesome-tab-cycle-scope 'tabs)
 
 ;; The maximum displayed length of the branch name of version control.
 (setq modeline-vcs-max-length 32)
