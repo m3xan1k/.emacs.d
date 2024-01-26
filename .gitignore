@@ -10,6 +10,8 @@
 # !my-packages/
 # !my-packages/*
 my-packages/*
+!thirdpart/
+!thirdpart/*
 
 straight/*
 !straight/versions/
