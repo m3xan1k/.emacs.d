@@ -36,15 +36,20 @@
 
 ;; thirdpart non melpa
 (add-to-list 'load-path "~/.emacs.d/thirdpart/surround")
-;; (require 'surround)
+(require 'surround)
+
+;; my scripts
+(add-to-list 'load-path "~/.emacs.d/my-scripts")
+(require 'comment)
+(require 'scroll)
 
 ;; config files
 (add-to-list 'load-path "~/.emacs.d/my")
 
 (require 'my-defaults)
 (require 'my-files)
-(require 'my-keys)
-;; (require 'my-vanilla-keys)
+;; (require 'my-keys)
+(require 'my-vanilla-keys)
 (require 'my-lsp)
 (require 'my-search)
 (require 'my-tools)
