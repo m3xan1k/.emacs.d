@@ -6,7 +6,10 @@
   (god-mode))
 
 ;; god mode
-(global-set-key (kbd "<escape>") #'god-local-mode)
+(if (display-graphic-p)
+    (global-set-key (kbd "<escape>") #'god-local-mode)
+  (global-set-key (kbd "M-\\") #'god-local-mode))
+
 (define-key god-local-mode-map (kbd "i") #'god-local-mode)
 (define-key god-local-mode-map (kbd ".") #'repeat)
 
