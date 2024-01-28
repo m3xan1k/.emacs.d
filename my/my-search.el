@@ -24,4 +24,8 @@
   (interactive)
   (consult-ripgrep (projectile-project-root)(thing-at-point 'symbol)))
 
+(defun m3xan1k-consult-line-from-isearch ()
+  (interactive)
+  (consult-line isearch-string))
+
 (provide 'my-search)

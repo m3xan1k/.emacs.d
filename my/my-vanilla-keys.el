@@ -6,15 +6,22 @@
   (god-mode))
 
 ;; god mode
-(if (display-graphic-p)
-    (global-set-key (kbd "<escape>") #'god-local-mode)
-  (global-set-key (kbd "M-\\") #'god-local-mode))
+;; (if (display-graphic-p)
+;;     (global-set-key (kbd "<escape>") #'god-local-mode)
+;;   (global-set-key (kbd "M-\\") #'god-local-mode))
 
+;; (global-set-key (kbd "M-\\") 'god-local-mode)
 (define-key god-local-mode-map (kbd "i") #'god-local-mode)
 (define-key god-local-mode-map (kbd ".") #'repeat)
 
 (use-package general
   :config
+  ;; escape on jk
+  (general-define-key "j"
+		(general-key-dispatch 'self-insert-command
+		  :timeout 0.25
+		  "k" 'god-local-mode))
+
   ;; unbind defaults
   (general-unbind
     "M-SPC"     ;; this is main prefix
@@ -143,8 +150,17 @@
 
   ;; scroll vim-like
   (general-define-key (kbd "M-<down>") 'm3xan1k-scroll-10-lines-down)
-  (general-define-key (kbd "M-<up>") 'm3xan1k-scroll-10-lines-up))
+  (general-define-key (kbd "M-<up>") 'm3xan1k-scroll-10-lines-up)
 
+  ;; kill whole line not depending on point position
+  (general-define-key (kbd "C-K") (lambda ()
+				      (interactive)
+				      (beginning-of-line)
+				      (kill-line)))
+
+  ;; isearch results selection
+  (general-unbind "C-s")
+  (general-define-key (kbd "C-s") 'm3xan1k-consult-line-from-isearch))
 
 ;; surround
 (define-key global-map (kbd "M-'") surround-keymap)
