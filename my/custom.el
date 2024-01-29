@@ -10,7 +10,8 @@
      "\\`\\*Semantic SymRef\\*\\'" "\\`\\*tramp/.*\\*\\'" "\\`\\*Messages\\*\\'"
      "\\`\\*scratch\\*\\'" "\\`\\*dashboard\\*\\'"
      "\\`\\*straight-process\\*\\'" "\\`\\*lsp-log\\*\\'" "\\`\\*Warnings\\*\\'"
-     "\\`\\*Backtrace\\*\\'" "\\`\\*Flymake log\\*\\'" "\\`\\*Pipenv\\*\\'"))
+     "\\`\\*Backtrace\\*\\'" "\\`\\*Flymake log\\*\\'" "\\`\\*Pipenv\\*\\'"
+      "\\`\\*vc-dir*\\*\\'" "\\`\\*vc-diff\\*\\'" "\\`\\*straight-/.*\\*\\'"))
  '(consult-preview-key '(:debounce 0.4 any))
  '(fill-column 80)
  '(git-gutter:update-interval 1)

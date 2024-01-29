@@ -5,15 +5,11 @@
   (setq god-exempt-predicates nil)
   (god-mode))
 
-;; god mode
-;; (if (display-graphic-p)
-;;     (global-set-key (kbd "<escape>") #'god-local-mode)
-;;   (global-set-key (kbd "M-\\") #'god-local-mode))
-
 ;; (global-set-key (kbd "M-\\") 'god-local-mode)
 (define-key god-local-mode-map (kbd "i") #'god-local-mode)
 (define-key god-local-mode-map (kbd ".") #'repeat)
 
+;; jump forward/backward
 (use-package jumplist)
 
 (custom-set-variables
@@ -61,7 +57,7 @@
 
   ;; unbind defaults
   (general-unbind
-    "M-SPC"     ;; this is main prefix
+    "C-c"     ;; this is main prefix
     "C-x C-r"   ;; find file read only
     "C-x C-z"   ;; suspend frame
     "C-x C-d"   ;; list directory
@@ -69,7 +65,7 @@
 
   ;; main prefix
   (general-create-definer m3xan1k-prefix
-    :prefix "M-SPC")
+    :prefix "C-c")
 
   ;; annotation
   (m3xan1k-prefix
@@ -85,31 +81,31 @@
 
   ;; define custom prefixes
   (general-create-definer m3xan1k-buffer-prefix
-    :prefix "M-SPC b")
+    :prefix "C-c b")
 
   (general-create-definer m3xan1k-diagnostics-prefix
-    :prefix "M-SPC e")
+    :prefix "C-c e")
 
   (general-create-definer m3xan1k-git-prefix
-    :prefix "M-SPC g")
+    :prefix "C-c g")
 
   (general-create-definer m3xan1k-help-prefix
-    :prefix "M-SPC h")
+    :prefix "C-c h")
 
   (general-create-definer m3xan1k-project-prefix
-    :prefix "M-SPC p")
+    :prefix "C-c p")
 
   (general-create-definer m3xan1k-file-prefix
-    :prefix "M-SPC f")
+    :prefix "C-c f")
 
   (general-create-definer m3xan1k-search-prefix
-    :prefix "M-SPC s")
+    :prefix "C-c s")
 
   (general-create-definer m3xan1k-window-prefix
-    :prefix "M-SPC w")
+    :prefix "C-c w")
 
   (general-create-definer m3xan1k-jump-prefix
-    :prefix "M-SPC j")
+    :prefix "C-c j")
 
   ;; error diagnostics
   (m3xan1k-diagnostics-prefix
@@ -190,8 +186,8 @@
   (general-define-key (kbd "M-;") 'm3xan1k-comment)
 
   ;; scroll vim-like
-  (general-define-key (kbd "M-<down>") 'm3xan1k-scroll-10-lines-down)
-  (general-define-key (kbd "M-<up>") 'm3xan1k-scroll-10-lines-up)
+  (general-define-key (kbd "M-]") 'm3xan1k-scroll-10-lines-down)
+  (general-define-key (kbd "M-[") 'm3xan1k-scroll-10-lines-up)
 
   ;; kill whole line not depending on point position
   (general-define-key (kbd "C-K") (lambda ()
@@ -210,8 +206,6 @@
   ;; smart copy
   (general-unbind "M-w")
   (general-define-key (kbd "M-w") 'm3xan1k-copy))
-
-
 
 ;; surround
 (define-key global-map (kbd "M-'") surround-keymap)
