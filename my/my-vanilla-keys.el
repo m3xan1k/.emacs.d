@@ -31,6 +31,12 @@
       (comment-or-uncomment-region (region-beginning) (region-end))
     (comment-or-uncomment-region (line-beginning-position) (line-end-position))))
 
+(defun m3xan1k-copy ()
+  (interactive)
+  (if (use-region-p)
+      (kill-ring-save (region-beginning) (region-end))
+    (kill-ring-save (line-beginning-position) (line-end-position))))
+
 ;; half page scroll
 (defun m3xan1k-scroll-10-lines-down ()
  "Scroll down 10 lines."
@@ -199,7 +205,11 @@
 
   ;; jump backward/forward
   (global-set-key (kbd "C-<") 'jumplist-previous)
-  (global-set-key (kbd "C->") 'jumplist-next))
+  (global-set-key (kbd "C->") 'jumplist-next)
+
+  ;; smart copy
+  (general-unbind "M-w")
+  (general-define-key (kbd "M-w") 'm3xan1k-copy))
 
 
 
