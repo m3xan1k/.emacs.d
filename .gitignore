@@ -10,7 +10,6 @@
 !my-packages/
 !my-packages/*
 # my-packages/*
-!my-scripts/*
 
 !thirdpart/
 !thirdpart/surround/*

@@ -14,6 +14,28 @@
 (define-key god-local-mode-map (kbd "i") #'god-local-mode)
 (define-key god-local-mode-map (kbd ".") #'repeat)
 
+;; smart comment
+(defun m3xan1k-comment ()
+  "Comment or uncomment line or region."
+  (interactive)
+  (if (use-region-p)
+      (comment-or-uncomment-region (region-beginning) (region-end))
+    (comment-or-uncomment-region (line-beginning-position) (line-end-position))))
+
+;; half page scroll
+(defun m3xan1k-scroll-10-lines-down ()
+ "Scroll down 10 lines."
+ (interactive)
+ (next-line 10)
+ (recenter))
+
+(defun m3xan1k-scroll-10-lines-up ()
+ "Scroll up 10 lines."
+ (interactive)
+ (previous-line 10)
+ (recenter))
+
+;; keymaps
 (use-package general
   :config
   ;; escape on jk

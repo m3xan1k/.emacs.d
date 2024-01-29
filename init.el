@@ -38,11 +38,6 @@
 (add-to-list 'load-path "~/.emacs.d/thirdpart/surround")
 (require 'surround)
 
-;; my scripts
-(add-to-list 'load-path "~/.emacs.d/my-scripts")
-(require 'comment)
-(require 'scroll)
-
 ;; config files
 (add-to-list 'load-path "~/.emacs.d/my")
 

@@ -7,6 +7,11 @@
   (evil-mode 1)
   (evil-set-undo-system 'undo-redo))
 
+;; same as vim-surround
+(use-package evil-surround
+  :config
+  (global-evil-surround-mode 1))
+
 ;; emacs for some modes
 (setq m3xan1k-emacs-state-modes '(telega-root-mode
 				  telega-chat-mode
