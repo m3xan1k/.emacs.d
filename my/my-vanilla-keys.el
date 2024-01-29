@@ -14,6 +14,15 @@
 (define-key god-local-mode-map (kbd "i") #'god-local-mode)
 (define-key god-local-mode-map (kbd ".") #'repeat)
 
+(use-package jumplist)
+
+(custom-set-variables
+ '(jumplist-hook-commands
+   '(dired-jump helm-for-files
+     isearch-forward end-of-buffer beginning-of-buffer
+     find-file))
+ '(jumplist-ex-mode t))
+
 ;; smart comment
 (defun m3xan1k-comment ()
   "Comment or uncomment line or region."
@@ -65,7 +74,8 @@
     "h" '(:wk "help")
     "p" '(:wk "project")
     "s" '(:wk "search")
-    "w" '(:wk "window"))
+    "w" '(:wk "window")
+    "j" '(:wk "jump"))
 
   ;; define custom prefixes
   (general-create-definer m3xan1k-buffer-prefix
@@ -91,6 +101,9 @@
 
   (general-create-definer m3xan1k-window-prefix
     :prefix "M-SPC w")
+
+  (general-create-definer m3xan1k-jump-prefix
+    :prefix "M-SPC j")
 
   ;; error diagnostics
   (m3xan1k-diagnostics-prefix
@@ -182,7 +195,13 @@
 
   ;; isearch results selection
   (general-unbind "C-s")
-  (general-define-key (kbd "C-s") 'm3xan1k-consult-line-from-isearch))
+  (general-define-key (kbd "C-s") 'm3xan1k-consult-line-from-isearch)
+
+  ;; jump backward/forward
+  (global-set-key (kbd "C-<") 'jumplist-previous)
+  (global-set-key (kbd "C->") 'jumplist-next))
+
+
 
 ;; surround
 (define-key global-map (kbd "M-'") surround-keymap)

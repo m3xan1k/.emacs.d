@@ -1,5 +1,5 @@
 ;; font
-(set-face-attribute 'default nil :font "Dejavu Sans Mono" :height 170)
+(set-face-attribute 'default nil :font "Dejavu Sans Mono" :height 165)
 (set-face-attribute 'fringe nil :background nil)
 
 ;; additional theme

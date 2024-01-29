@@ -8,7 +8,7 @@
 (use-package org-preview-html)
 
 ;; todos path for agenda
-(setq org-agenda-files '("~/Nextcloud/org/src/todos"))
+(setq org-agenda-files '("~/Nextcloud/org/todos"))
 (setq org-agenda-inhibit-startup t)
 
 ;; some defaults
