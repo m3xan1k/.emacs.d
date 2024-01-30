@@ -105,7 +105,8 @@
     "p" '(:ignore t :wk "project")
     "p p" '(projectile-switch-project :wk "projectile-switch-project")
     "p b" '(consult-project-buffer :wk "project buffers")
-    "p f" '(project-find-file :wk "project-find-file"))
+    "p f" '(project-find-file :wk "project-find-file")
+    "p v" '(project-vc-dir :wk "project-vc-dir"))
 
   ;; widely used
   (my/leader
