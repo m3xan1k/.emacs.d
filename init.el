@@ -63,3 +63,4 @@
 (require 'g-trans)
 
 (put 'dired-find-alternate-file 'disabled nil)
+(put 'narrow-to-region 'disabled nil)

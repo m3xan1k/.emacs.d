@@ -31,6 +31,9 @@
       (insert buffer-file-name)
     (insert (replace-regexp-in-string (projectile-project-root) "" buffer-file-name))))
 
+;; current region to new file
+(defun m3xan1k-region-to-new-file ())
+
 ;; custom resize
 (defun my/enlarge-window-horizontally ()
   (interactive)
