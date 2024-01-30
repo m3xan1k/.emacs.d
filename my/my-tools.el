@@ -55,9 +55,9 @@
 (use-package expand-region)
 
 ;; keycast
-(use-package keycast
-  :config
-  (keycast-header-line-mode))
+;; (use-package keycast
+;;   :config
+;;   (keycast-mode-line-mode))
 
 ;; profile
 ;; (use-package esup)

@@ -35,16 +35,16 @@
   (straight-use-package-by-default t))
 
 ;; thirdpart non melpa
-(add-to-list 'load-path "~/.emacs.d/thirdpart/surround")
-(require 'surround)
+;; (add-to-list 'load-path "~/.emacs.d/thirdpart/surround")
+;; (require 'surround)
 
 ;; config files
 (add-to-list 'load-path "~/.emacs.d/my")
 
 (require 'my-defaults)
 (require 'my-files)
-;; (require 'my-keys)
-(require 'my-vanilla-keys)
+(require 'my-keys)
+;; (require 'my-vanilla-keys)
 (require 'my-lsp)
 (require 'my-search)
 (require 'my-tools)
@@ -54,7 +54,6 @@
 ;; (require 'my-mail)
 ;; (require 'berrys-theme)
 ;; (load-theme 'berrys t)
-(load-theme 'almost-mono-cream t)
 
 ;; my packages
 (add-to-list 'load-path "~/.emacs.d/my-packages/cbr")

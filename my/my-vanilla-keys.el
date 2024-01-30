@@ -1,13 +1,13 @@
-;; god mode
-(use-package god-mode
-  :config
-  (setq god-exempt-major-modes '(dired-mode))
-  (setq god-exempt-predicates nil)
-  (god-mode))
+;; ;; god mode
+;; (use-package god-mode
+;;   :config
+;;   (setq god-exempt-major-modes '(dired-mode))
+;;   (setq god-exempt-predicates nil)
+;;   (god-mode))
 
-;; (global-set-key (kbd "M-\\") 'god-local-mode)
-(define-key god-local-mode-map (kbd "i") #'god-local-mode)
-(define-key god-local-mode-map (kbd ".") #'repeat)
+;; ;; (global-set-key (kbd "M-\\") 'god-local-mode)
+;; (define-key god-local-mode-map (kbd "i") #'god-local-mode)
+;; (define-key god-local-mode-map (kbd ".") #'repeat)
 
 ;; jump forward/backward
 (use-package jumplist)
@@ -209,5 +209,13 @@
 
 ;; surround
 (define-key global-map (kbd "M-'") surround-keymap)
+
+;; navigation in Russian layout
+(cl-loop
+ for from across "йцукенгшщзхъфывапролджэячсмитьбюЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖ\ЭЯЧСМИТЬБЮ№"
+ for to   across "qwertyuiop[]asdfghjkl;'zxcvbnm,.QWERTYUIOP{}ASDFGHJKL:\"ZXCVBNM<>#"
+ do
+ (eval `(define-key key-translation-map (kbd ,(concat "C-" (string from))) (kbd ,(concat     "C-" (string to)))))
+ (eval `(define-key key-translation-map (kbd ,(concat "M-" (string from))) (kbd ,(concat     "M-" (string to))))))
 
 (provide 'my-vanilla-keys)
