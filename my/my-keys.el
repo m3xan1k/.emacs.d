@@ -5,7 +5,9 @@
 	evil-want-Y-yank-to-eol t)
   :config
   (evil-mode 1)
-  (evil-set-undo-system 'undo-redo))
+  (evil-set-undo-system 'undo-redo)
+  :bind
+  ((:map evil-normal-state-map ("/" . 'm3xan1k-consult-line-from-isearch))))
 
 ;; same as vim-surround
 (use-package evil-surround
@@ -193,6 +195,7 @@
      "q q" '(save-buffers-kill-terminal :wk "quit emacs")
      "q w" '(quit-window :wk "quit window"))
 
+   ;; tabs shortcuts
    (general-define-key
     :states 'normal
     "C-h" 'awesome-tab-backward)
@@ -201,6 +204,7 @@
     :states 'normal
     "C-l" 'awesome-tab-forward)
 
+   ;; smart comment
    (general-define-key
     :states '(normal emacs)
     "M-;" 'comment-line)
