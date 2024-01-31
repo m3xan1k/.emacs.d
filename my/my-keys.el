@@ -26,6 +26,13 @@
 
 (m3xan1k-apply-emacs-state m3xan1k-emacs-state-modes)
 
+;; insert current file name
+(defun m3xan1k-get-file-name ()
+  (interactive)
+  (if (y-or-n-p "Absolute?")
+      (insert buffer-file-name)
+    (insert (replace-regexp-in-string (projectile-project-root) "" buffer-file-name))))
+
 ;; custom resize
 (defun my/enlarge-window-horizontally ()
   (interactive)
@@ -121,7 +128,8 @@
     "f" '(:ignore t :wk "file")
     "f s" '(save-buffer :wk "save file")
     "f S" '(save-buffers :wk "save all files")
-    "f f" '(find-file :wk "find file"))
+    "f f" '(find-file :wk "find file")
+    "f n" '(m3xan1k-get-file-name :wk "file name"))
 
   ;; search
   (my/leader
