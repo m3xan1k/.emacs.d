@@ -1,4 +1,4 @@
-;; ;; search tools
+;; search tools
 (use-package vertico
   :init
   (vertico-mode +1)
