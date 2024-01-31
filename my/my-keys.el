@@ -31,8 +31,15 @@
       (insert buffer-file-name)
     (insert (replace-regexp-in-string (projectile-project-root) "" buffer-file-name))))
 
-;; current region to new file
-(defun m3xan1k-region-to-new-file ())
+(defun m3xan1k-region-to-another-file ()
+  "Copies selected region to selected file"
+  (interactive)
+  (when (use-region-p)
+    (kill-ring-save (region-beginning) (region-end))
+    (find-file (read-file-name "Pick a file: "))
+    (goto-char (point-max))
+    (insert "\n")
+    (yank)))
 
 ;; custom resize
 (defun my/enlarge-window-horizontally ()
