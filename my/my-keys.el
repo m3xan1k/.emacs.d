@@ -18,6 +18,7 @@
 (setq m3xan1k-emacs-state-modes '(telega-root-mode
 				  telega-chat-mode
 				  org-mode
+				  dired-mode
 				  eww-mode))
 
 (defun m3xan1k-apply-emacs-state (modes)
@@ -42,6 +43,11 @@
     (goto-char (point-max))
     (insert "\n")
     (yank)))
+
+;; open url in firefox
+(defun m3xan1k-open-in-firefox ()
+  (interactive)
+  (eshell-command (format "firefox %s" (thing-at-point 'url))))
 
 ;; custom resize
 (defun my/enlarge-window-horizontally ()
