@@ -8,7 +8,7 @@
 (use-package org-preview-html)
 
 ;; todos path for agenda
-(setq org-agenda-files '("~/Nextcloud/org/todos"))
+(setq org-agenda-files '("~/Nextcloud/org/agenda"))
 (setq org-agenda-inhibit-startup t)
 
 ;; some defaults
@@ -37,5 +37,17 @@
    '("my"
      .
      "#+TITLE:\n#+TAGS: PHONE(o) COMPUTER(c) SHOPPING(s) URGENT(u)\n#+SEQ_TODO: NEXT(n) TODO(t) WAITING(w) SOMEDAY(s) PROJ(p) INPROGRESS(i) REPEAT(r) | DONE(d) CANCELLED(c)\n#+STARTUP: nologrepeat\n")))
+
+; (use-package org-roam
+;   :ensure t
+;   :init
+;   (setq org-roam-v2-ack t)
+;   :custom
+;   (org-roam-directory "~/roam")
+;   :bind (("C-c o t" . org-roam-buffer-toggle)
+;          ("C-c o f" . org-roam-node-find)
+;          ("C-c o i" . org-roam-node-insert))
+;   :config
+;   (org-roam-setup))
 
 (provide 'my-org)
