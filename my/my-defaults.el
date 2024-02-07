@@ -15,7 +15,8 @@
 
 ;; some sane defaults
 (setq inhibit-splash-screen t ;; no thanks
-      use-file-dialog nil) ;; don't use system file dialog
+      use-file-dialog nil ;; don't use system file dialog
+      ring-bell-function 'ignore)
 
 ;; line highlight
 (global-hl-line-mode 1)
@@ -59,5 +60,18 @@
 
 ;; word delimiters
 (modify-syntax-entry ?_ "w")
+
+;; enable word-wrap
+(setq-default truncate-lines nil)
+
+;; formats
+(setq display-time-24hr-format t)
+(display-time-mode t)
+
+;; no backups
+(setq auto-save-default nil)
+(setq make-backup-files nil)
+(setq auto-save-list-file-name nil)
+(setq create-lockfiles nil)
 
 (provide 'my-defaults)

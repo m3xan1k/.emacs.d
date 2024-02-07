@@ -7,9 +7,22 @@
 
 (use-package org-preview-html)
 
+;; for org-capture notes
+(setq org-directory "~/Nextcloud/org/capture")
+
+(setq org-capture-templates
+      '(("t" "Todo" entry (file+headline "~/Nextcloud/org/capture/gtd.org" "Tasks")
+         "* TODO %?\n  %i\n  %a")
+        ("s" "Spell" entry (file+datetree "~/Nextcloud/org/capture/spell.org")
+         "* %?\nEntered on %U\n  %i\n  %a")
+	("n" "Notes" entry (file+headline "~/Nextcloud/org/capture/notes.org" "Notes")
+	 "* %?\n")))
+
 ;; todos path for agenda
 (setq org-agenda-files '("~/Nextcloud/org/agenda"))
 (setq org-agenda-inhibit-startup t)
+(setq org-agenda-skip-deadline-if-done t)
+(setq org-agenda-skip-scheduled-if-done t)
 
 ;; some defaults
 (setq org-adapt-indentation t)

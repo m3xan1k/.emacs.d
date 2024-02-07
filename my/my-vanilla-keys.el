@@ -1,14 +1,3 @@
-;; ;; god mode
-;; (use-package god-mode
-;;   :config
-;;   (setq god-exempt-major-modes '(dired-mode))
-;;   (setq god-exempt-predicates nil)
-;;   (god-mode))
-
-;; ;; (global-set-key (kbd "M-\\") 'god-local-mode)
-;; (define-key god-local-mode-map (kbd "i") #'god-local-mode)
-;; (define-key god-local-mode-map (kbd ".") #'repeat)
-
 ;; jump forward/backward
 (use-package jumplist)
 
@@ -27,6 +16,7 @@
       (comment-or-uncomment-region (region-beginning) (region-end))
     (comment-or-uncomment-region (line-beginning-position) (line-end-position))))
 
+;; smart copy
 (defun m3xan1k-copy ()
   (interactive)
   (if (use-region-p)
@@ -128,7 +118,8 @@
   (m3xan1k-project-prefix
     "p" '(projectile-switch-project :wk "projectile-switch-project")
     "b" '(consult-project-buffer :wk "project buffers")
-    "f" '(project-find-file :wk "project-find-file"))
+    "f" '(project-find-file :wk "project-find-file")
+    "v" '(project-vc-dir :wk "project-vc-dir"))
 
   ;; widely used
   (m3xan1k-prefix
@@ -188,12 +179,6 @@
   ;; scroll vim-like
   (general-define-key (kbd "M-]") 'm3xan1k-scroll-10-lines-down)
   (general-define-key (kbd "M-[") 'm3xan1k-scroll-10-lines-up)
-
-  ;; kill whole line not depending on point position
-  (general-define-key (kbd "C-K") (lambda ()
-				      (interactive)
-				      (beginning-of-line)
-				      (kill-line)))
 
   ;; isearch results selection
   (general-unbind "C-s")
