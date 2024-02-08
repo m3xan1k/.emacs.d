@@ -51,9 +51,6 @@
 ;; for my packages
 (use-package esxml)
 
-;; selection inside surrounding
-(use-package expand-region)
-
 ;; keycast
 ;; (use-package keycast
 ;;   :config
