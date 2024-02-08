@@ -65,6 +65,9 @@
 
 (add-hook 'web-mode-hook 'emmet-mode)
 
+;; elisp
+(add-hook 'elisp-mode-hook (lambda () (eglot-ensure)))
+
 ;; ruby
 ;; (setq lsp-solargraph-server-command '("/home/m3xan1k/.gem/bin/solargraph" "stdio"))
 ;; (setq lsp-solargraph-use-bundler t)
