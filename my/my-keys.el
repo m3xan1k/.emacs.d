@@ -114,8 +114,6 @@
   (my/leader
    "g" '(:ignore t :wk "git")
    "g h" '(:ignore t :wk "hunk")
-   "g h n" '(git-gutter:next-hunk :wk "git-gutter:next-hunk")
-   "g h p" '(git-gutter:previous-hunk :wk "git-gutter:previous-hunk")
    "g h s" '(git-gutter:popup-hunk :wk "git-gutter:popup-hunk")
    "g h r" '(git-gutter:revert-hunk :wk "git-gutter:revert-hunk"))
 
@@ -144,7 +142,8 @@
     "f s" '(save-buffer :wk "save file")
     "f S" '(save-buffers :wk "save all files")
     "f f" '(find-file :wk "find file")
-    "f n" '(m3xan1k-get-file-name :wk "file name"))
+    "f n" '(m3xan1k-get-file-name :wk "file name")
+    "f e" '(neotree-toggle :wk "neotree-toggle"))
 
   ;; search
   (my/leader
@@ -235,5 +234,20 @@
    (general-define-key
     :states '(visual)
     "M-;" 'comment-dwim))
+
+(evil-global-set-key 'normal (kbd "SPC g h n") (scroll-on-jump-interactive 'git-gutter:next-hunk))
+(evil-global-set-key 'normal (kbd "SPC g h p") (scroll-on-jump-interactive 'git-gutter:previous-hunk))
+
+;; neotree
+(evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
+(evil-define-key 'normal neotree-mode-map (kbd "a") 'neotree-create-node)
+(evil-define-key 'normal neotree-mode-map (kbd "m") 'neotree-rename-node)
+(evil-define-key 'normal neotree-mode-map (kbd "d") 'neotree-delete-node)
+(evil-define-key 'normal neotree-mode-map (kbd "ESC") 'neotree-hide)
+(evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
+(evil-define-key 'normal neotree-mode-map (kbd "R") 'neotree-refresh)
+(evil-define-key 'normal neotree-mode-map (kbd "p") 'neotree-copy-filepath-to-yank-ring)
+(evil-define-key 'normal neotree-mode-map (kbd "c") 'neotree-copy-node)
+(evil-define-key 'normal neotree-mode-map (kbd "H") 'neotree-hidden-file-toggle)
 
 (provide 'my-keys)

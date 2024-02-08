@@ -38,7 +38,6 @@
 (add-to-list 'load-path "~/.emacs.d/my")
 
 (require 'my-defaults)
-(require 'my-keys)
 (require 'my-lsp)
 (require 'my-search)
 (require 'my-tools)
@@ -46,6 +45,7 @@
 ;; (require 'my-telega)
 (require 'my-org)
 ;; (require 'my-mail)
+(require 'my-keys)
 
 ;; my packages
 (add-to-list 'load-path "~/.emacs.d/my-packages/cbr")
