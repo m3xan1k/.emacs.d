@@ -59,7 +59,7 @@
 ;; scroll
 (use-package scroll-on-jump
   :config
-  (setq scroll-on-jump-duration 0.7
+  (setq scroll-on-jump-duration 0.6
 	scroll-on-jump-curve-power 2.0
 	scroll-on-jump-curve 'linear))
 
@@ -77,6 +77,7 @@
 
   ;; Actions that themselves scroll.
   (scroll-on-jump-with-scroll-advice-add evil-goto-line)
+  (scroll-on-jump-with-scroll-advice-add evil-goto-first-line)
   (scroll-on-jump-with-scroll-advice-add evil-scroll-down)
   (scroll-on-jump-with-scroll-advice-add evil-scroll-up)
   (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-center)
