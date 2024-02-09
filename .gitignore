@@ -11,8 +11,7 @@
 !my-packages/*
 # my-packages/*
 
-!thirdpart/
-!thirdpart/surround/*
+!thirdpart/*
 
 straight/*
 !straight/versions/

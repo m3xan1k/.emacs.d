@@ -1,6 +1,7 @@
-;; font
-(set-face-attribute 'default nil :font "Dejavu Sans Mono" :height 165)
+;; font @
+(set-face-attribute 'default nil :font "Ricty Diminished" :height 200)
 (set-face-attribute 'fringe nil :background nil)
+(setq-default line-spacing 1)
 
 ;; typography
 (set-char-table-range char-width-table '(?— . ?—) 2)

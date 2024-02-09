@@ -17,7 +17,6 @@
 ;; emacs for some modes
 (setq m3xan1k-emacs-state-modes '(telega-root-mode
 				  telega-chat-mode
-				  dired-mode
 				  eww-mode))
 
 (defun m3xan1k-apply-emacs-state (modes)
