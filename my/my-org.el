@@ -3,18 +3,18 @@
   :hook
   (org-mode . org-bullets-mode))
 
-(use-package org-preview-html)
-
 ;; for org-capture notes
-(setq org-directory "~/Nextcloud/org/capture")
+(setq org-directory "~/Nextcloud/org")
 
 (setq org-capture-templates
-      '(("t" "Todo" entry (file+headline "~/Nextcloud/org/capture/gtd.org" "Tasks")
-         "* TODO %?\n  %i\n  %a")
-        ("s" "Spell" entry (file+datetree "~/Nextcloud/org/capture/spell.org")
+      '(("w" "Work" entry (file+datetree "~/Nextcloud/org/capture/work.org")
          "* %?\nEntered on %U\n  %i\n  %a")
-	("n" "Notes" entry (file+headline "~/Nextcloud/org/capture/notes.org" "Notes")
-	 "* %?\n")))
+	("t" "Tech" entry (file+headline "~/Nextcloud/org/capture/tech.org" "Tech")
+	 "* %?\nEntered on %U\n  %i\n  %a")
+	("p" "Personal" entry (file+headline "~/Nextcloud/org/capture/personal.org" "Personal")
+	 "* %?\nEntered on %U\n  %i\n  %a")
+	("j" "Journal" entry (file+datetree "~/org/journal.org")
+         "* %?\nEntered on %U\n  %i\n  %a")))
 
 ;; todos path for agenda
 (setq org-agenda-files '("~/Nextcloud/org/agenda"))
@@ -37,11 +37,6 @@
     "DONE(d)"
     "CANCELLED(c)")))
 
-(setq org-tag-alist
- '(("ADDRESS" . ?a)
-   ("PHONE" . ?p)
-   ("URGENT" . ?u)))
-
 ;; custom template
 (with-eval-after-load "org"
   (add-to-list 'org-structure-template-alist
@@ -49,16 +44,9 @@
      .
      "#+TITLE:\n#+TAGS: PHONE(o) COMPUTER(c) SHOPPING(s) URGENT(u)\n#+SEQ_TODO: NEXT(n) TODO(t) WAITING(w) SOMEDAY(s) PROJ(p) INPROGRESS(i) REPEAT(r) | DONE(d) CANCELLED(c)\n#+STARTUP: nologrepeat\n")))
 
-; (use-package org-roam
-;   :ensure t
-;   :init
-;   (setq org-roam-v2-ack t)
-;   :custom
-;   (org-roam-directory "~/roam")
-;   :bind (("C-c o t" . org-roam-buffer-toggle)
-;          ("C-c o f" . org-roam-node-find)
-;          ("C-c o i" . org-roam-node-insert))
-;   :config
-;   (org-roam-setup))
+(use-package denote)
+(setq denote-directory (expand-file-name "~/denote/"))
+(setq denote-prompts '(subdirectory title keywords))
+(setq denote-org-store-link-to-heading t)
 
 (provide 'my-org)

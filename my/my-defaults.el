@@ -74,4 +74,8 @@
 (setq auto-save-list-file-name nil)
 (setq create-lockfiles nil)
 
+;; for my packages
+(setq g-trans-default-source-lang "en")
+(setq g-trans-default-target-lang "ru")
+
 (provide 'my-defaults)

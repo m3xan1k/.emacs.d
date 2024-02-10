@@ -54,7 +54,7 @@
 ;; file management
 (use-package neotree
   :config
-  (setq projectile-switch-project-action 'neotree-projectile-action))
+  (setq neo-theme 'arrows))
 
 ;; scroll
 (use-package scroll-on-jump

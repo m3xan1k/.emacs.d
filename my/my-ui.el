@@ -1,14 +1,18 @@
-;; font @
-(set-face-attribute 'default nil :font "DejaVuSansM Nerd Font Mono" :height 180)
-(set-face-attribute 'fringe nil :background nil)
-(setq-default line-spacing 1)
-
-;; typography
-(set-char-table-range char-width-table '(?— . ?—) 2)
-
 ;; additional theme
 (use-package almost-mono-themes)
 (load-theme 'almost-mono-cream t)
+
+;; font @
+(set-face-attribute 'default nil :font "Liberation Mono" :height 180)
+(set-face-attribute 'fringe nil
+		    :background (face-background 'default)
+		    :foreground (face-foreground 'default))
+(set-face-attribute 'line-number nil
+                    :background (face-background 'default nil t))
+(setq-default line-spacing 3)
+
+;; typography
+(set-char-table-range char-width-table '(?— . ?—) 2)
 
 ;; tabs
 (use-package awesome-tab
