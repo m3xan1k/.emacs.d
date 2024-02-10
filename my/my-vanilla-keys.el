@@ -36,6 +36,19 @@
  (scroll-on-jump (previous-line 10))
  (recenter))
 
+(defun m3xan1k-new-line-down ()
+  "New line without break."
+  (interactive)
+  (end-of-line)
+  (newline))
+
+(defun m3xan1k-new-line-up ()
+  "New line on top without break."
+  (interactive)
+  (beginning-of-line)
+  (newline)
+  (previous-line))
+
 ;; keymaps
 (use-package general
   :config
@@ -96,6 +109,9 @@
 
   (general-create-definer m3xan1k-jump-prefix
     :prefix "C-c j")
+
+  (general-create-definer m3xan1k-org-prefix
+    :prefix "C-c o")
 
   ;; error diagnostics
   (m3xan1k-diagnostics-prefix
@@ -168,6 +184,12 @@
     "r h" '(my/shrink-window-horizontally :wk "shrink-window-horizontally")
     "r j" '(my/enlarge-window :wk "enlarge-window")
     "r k" '(my/shrink-window :wk "shrink-window"))
+
+  ;; org
+
+  ;; new line without break
+  (general-define-key (kbd "C-<return>") 'm3xan1k-new-line-down)
+  (general-define-key (kbd "C-S-<return>") 'm3xan1k-new-line-up)
 
   ;; select from the inside
   (general-define-key (kbd "C-=") 'er/expand-region)

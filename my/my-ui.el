@@ -1,5 +1,5 @@
 ;; font @
-(set-face-attribute 'default nil :font "Ricty Diminished" :height 200)
+(set-face-attribute 'default nil :font "DejaVuSansM Nerd Font Mono" :height 180)
 (set-face-attribute 'fringe nil :background nil)
 (setq-default line-spacing 1)
 

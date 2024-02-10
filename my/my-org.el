@@ -1,5 +1,3 @@
-;; org
-
 ;; bullets for better visibility
 (use-package org-bullets
   :hook
