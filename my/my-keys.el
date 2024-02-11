@@ -29,9 +29,11 @@
 ;; insert current file name
 (defun m3xan1k-get-file-name ()
   (interactive)
-  (if (y-or-n-p "Absolute?")
-      (insert buffer-file-name)
-    (insert (replace-regexp-in-string (projectile-project-root) "" buffer-file-name))))
+  (let ((filename (if (y-or-n-p "Absolute?")
+		      buffer-file-name
+		    (replace-regexp-in-string (projectile-project-root) "" buffer-file-name))))
+    (kill-new filename)
+    (message "Filename: %s is copied to clipboard." filename)))
 
 (defun m3xan1k-region-to-another-file ()
   "Copies selected region to selected file"

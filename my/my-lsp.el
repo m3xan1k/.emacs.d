@@ -68,6 +68,10 @@
 ;; elisp
 (add-hook 'elisp-mode-hook (lambda () (eglot-ensure)))
 
+;; clojure
+(use-package clojure-mode)
+(add-hook 'clojure-mode-hook 'eglot-ensure)
+
 ;; ruby
 ;; (setq lsp-solargraph-server-command '("/home/m3xan1k/.gem/bin/solargraph" "stdio"))
 ;; (setq lsp-solargraph-use-bundler t)

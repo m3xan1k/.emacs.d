@@ -1,9 +1,10 @@
 ;; additional theme
 (use-package almost-mono-themes)
+(load-theme 'tsdh-light)
 (load-theme 'almost-mono-cream t)
 
 ;; font @
-(set-face-attribute 'default nil :font "Dejavu Sans Mono" :height 180)
+(set-face-attribute 'default nil :font "Dejavu Sans Mono" :height 190)
 (set-face-attribute 'fringe nil
 		    :background (face-background 'default)
 		    :foreground (face-foreground 'default))
