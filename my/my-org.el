@@ -3,6 +3,8 @@
   :hook
   (org-mode . org-bullets-mode))
 
+(setq org-hide-emphasis-markers t)
+
 ;; for org-capture notes
 (setq org-directory "~/Nextcloud/org")
 
@@ -45,8 +47,7 @@
      "#+TITLE:\n#+TAGS: PHONE(o) COMPUTER(c) SHOPPING(s) URGENT(u)\n#+SEQ_TODO: NEXT(n) TODO(t) WAITING(w) SOMEDAY(s) PROJ(p) INPROGRESS(i) REPEAT(r) | DONE(d) CANCELLED(c)\n#+STARTUP: nologrepeat\n")))
 
 (use-package denote)
-(setq denote-directory (expand-file-name "~/denote/"))
-(setq denote-prompts '(subdirectory title keywords))
+(setq denote-directory (expand-file-name "~/Nextcloud/denote/"))
 (setq denote-org-store-link-to-heading t)
 
 (provide 'my-org)

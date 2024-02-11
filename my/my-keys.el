@@ -1,4 +1,5 @@
 ;; evil
+(setq evil-disable-insert-state-bindings t)
 (use-package evil
   :init
   (setq evil-want-C-u-scroll t
