@@ -32,4 +32,5 @@
  '(trailing-whitespace ((t (:background "red1"))))
  '(org-indent ((t (:background "gray75" :foreground "gray78"))))
  '(org-block ((t (:background "#fdf6e3" :family "FreeMono" :height 175))))
- '(org-block-begin-line ((t (:background "gray75")))))
+ '(org-block-begin-line ((t (:background "gray75"))))
+ '(awesome-tab-selected-face ((t (:foreground unspecified :distant-foreground unspecified)))))

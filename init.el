@@ -34,6 +34,9 @@
   :custom
   (straight-use-package-by-default t))
 
+;; thirdpart
+(add-to-list 'load-path "~/.emacs.d/thirdpart")
+
 ;; config files
 (add-to-list 'load-path "~/.emacs.d/my")
 
