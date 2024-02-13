@@ -222,11 +222,11 @@
    ;; tabs shortcuts
    (general-define-key
     :states 'normal
-    "C-h" 'm3xan1k-previous-tab)
+    "C-h" 'awesome-tab-backward-tab)
 
    (general-define-key
     :states 'normal
-    "C-l" 'm3xan1k-next-tab)
+    "C-l" 'awesome-tab-forward-tab)
 
    ;; smart comment
    (general-define-key
