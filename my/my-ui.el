@@ -6,7 +6,7 @@
 (load-theme 'almost-mono-cream t)
 
 ;; font @
-(set-face-attribute 'default nil :font "Liberation Mono" :height 165)
+(set-face-attribute 'default nil :font "Ricty Diminished" :height 195)
 (set-face-attribute 'fringe nil
 		    :background (face-background 'default)
 		    :foreground (face-foreground 'default))
@@ -16,7 +16,7 @@
 (set-face-attribute 'line-number nil
                     :background (face-background 'default nil t))
 
-(setq-default line-spacing 4)
+(setq-default line-spacing 2)
 
 ;; typography
 (set-char-table-range char-width-table '(?— . ?—) 2)
