@@ -15,6 +15,7 @@
 		    :foreground (face-foreground 'default))
 (set-face-attribute 'line-number nil
                     :background (face-background 'default nil t))
+
 (setq-default line-spacing 4)
 
 ;; typography
