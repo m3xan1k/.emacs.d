@@ -6,7 +6,7 @@
 (load-theme 'almost-mono-cream t)
 
 ;; font @
-(set-face-attribute 'default nil :font "Ricty Diminished" :height 195)
+(set-face-attribute 'default nil :font "Ricty Diminished" :height 200)
 (set-face-attribute 'fringe nil
 		    :background (face-background 'default)
 		    :foreground (face-foreground 'default))
