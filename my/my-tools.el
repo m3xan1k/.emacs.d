@@ -88,6 +88,36 @@
   (scroll-on-jump-advice-add goto-last-change)
   (scroll-on-jump-advice-add goto-last-change-reverse))
 
+;; select from the inside
+(use-package expand-region)
+
+;; jump forward/backward
+(use-package jumplist)
+
+;; insert current file name
+(defun m3xan1k-get-file-name ()
+  (interactive)
+  (let ((filename (if (y-or-n-p "Absolute?")
+		      buffer-file-name
+		    (replace-regexp-in-string (projectile-project-root) "" buffer-file-name))))
+    (kill-new filename)
+    (message "Filename: %s is copied to clipboard." filename)))
+
+(defun m3xan1k-region-to-another-file ()
+  "Copies selected region to selected file"
+  (interactive)
+  (when (use-region-p)
+    (kill-ring-save (region-beginning) (region-end))
+    (find-file (read-file-name "Pick a file: "))
+    (goto-char (point-max))
+    (insert "\n")
+    (yank)))
+
+;; open url in firefox
+(defun m3xan1k-open-in-firefox ()
+  (interactive)
+  (eshell-command (format "firefox %s" (thing-at-point 'url))))
+
 ;; keycast
 ;; (use-package keycast
 ;;   :config

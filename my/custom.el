@@ -22,7 +22,12 @@
  '(package-selected-packages 'nil)
  '(spacemacs-theme-comment-bg nil)
  '(spacemacs-theme-comment-italic t)
- '(eglot-connect-timeout 500))
+ '(eglot-connect-timeout 500)
+ '(jumplist-hook-commands
+   '(dired-jump helm-for-files
+		isearch-forward end-of-buffer beginning-of-buffer
+		find-file))
+ '(jumplist-ex-mode t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

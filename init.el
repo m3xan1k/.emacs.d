@@ -36,6 +36,7 @@
 
 ;; thirdpart
 (add-to-list 'load-path "~/.emacs.d/thirdpart")
+(require 'surround)
 
 ;; config files
 (add-to-list 'load-path "~/.emacs.d/my")
@@ -49,6 +50,7 @@
 (require 'my-org)
 ;; (require 'my-mail)
 (require 'my-keys)
+;; (require 'my-vanilla-keys)
 
 ;; my packages
 (add-to-list 'load-path "~/.emacs.d/my-packages/cbr")
@@ -57,5 +59,5 @@
 (add-to-list 'load-path "~/.emacs.d/my-packages/g-trans")
 (require 'g-trans)
 
-(put 'dired-find-alternate-file 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
+(put 'dired-find-alternate-file 'disabled nil)
