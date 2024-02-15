@@ -72,6 +72,8 @@
 (use-package clojure-mode)
 (add-hook 'clojure-mode-hook 'eglot-ensure)
 
+(use-package cider)
+
 ;; ruby
 ;; (setq lsp-solargraph-server-command '("/home/m3xan1k/.gem/bin/solargraph" "stdio"))
 ;; (setq lsp-solargraph-use-bundler t)

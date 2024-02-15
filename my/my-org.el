@@ -1,3 +1,12 @@
+;; org defaults
+(defun setup-org-defaults ()
+  (setq-local word-wrap t)
+  (setq-local fill-column 70)
+  (auto-fill-mode t)
+  (visual-line-mode t))
+
+(add-hook 'org-mode-hook #'setup-org-defaults)
+
 ;; bullets for better visibility
 (use-package org-bullets
   :hook

@@ -43,6 +43,19 @@
   (interactive)
   (shrink-window 5))
 
+(defun m3xan1k-new-line-down ()
+  "New line without break."
+  (interactive)
+  (end-of-line)
+  (newline))
+
+(defun m3xan1k-new-line-up ()
+  "New line on top without break."
+  (interactive)
+  (beginning-of-line)
+  (newline)
+  (previous-line))
+
 ;; buffers
 (defvar-keymap m3xan1k-buffer-prefix
   :doc "buffer"
@@ -61,8 +74,8 @@
 
 ;; git hunks
 (defvar-keymap m3xan1k-git-prefix
-  "h n" #'git-gutter:next-hunk
-  "h p" #'git-gutter:previous-hunk
+  ;; "h n" #'git-gutter:next-hunk
+  ;; "h p" #'git-gutter:previous-hunk
   "h s" #'git-gutter:popup-hunk
   "h r" #'git-gutter:revert-hunk)
 
@@ -132,6 +145,16 @@
   ";" #'comment-line
   "q q" #'save-buffers-kill-emacs)
 
+(defvar-keymap m3xan1k-clojure-prefix
+  "c" #'cider-connect
+  "e" #'cider-eval-last-sexp
+  "d" #'cider-eval-defun-at-point
+  "b" #'cider-eval-buffer)
+
+(defvar-keymap m3xan1k-prefix-local
+  :doc "m3xan1k-prefix-local"
+  "e" m3xan1k-clojure-prefix)
+
 
 (which-key-add-keymap-based-replacements m3xan1k-prefix
   "b" `("Buffer" . ,m3xan1k-buffer-prefix)
@@ -146,10 +169,17 @@
 (which-key-add-keymap-based-replacements m3xan1k-window-prefix
   "r" `("Resize" . ,m3xan1k-window-resize-prefix))
 
+;; local
+(which-key-add-keymap-based-replacements m3xan1k-prefix-local
+  "e" `("Clojure" . ,m3xan1k-clojure-prefix))
+
 ;; main prefix/leader
 (global-unset-key (kbd "C-z"))
 (global-unset-key (kbd "C-x C-z"))
 (keymap-set global-map "C-z" m3xan1k-prefix)
+
+;; localleader
+(keymap-set global-map "C-," m3xan1k-prefix-local)
 
 ;; select from the inside
 (global-set-key (kbd "C-=") #'er/expand-region)
@@ -158,9 +188,9 @@
 (global-unset-key (kbd "M-;"))
 (global-set-key (kbd "M-;") 'm3xan1k-comment)
 
-;;   ;; scroll vim-like
-;;   (general-define-key (kbd "M-]") 'm3xan1k-scroll-10-lines-down)
-;;   (general-define-key (kbd "M-[") 'm3xan1k-scroll-10-lines-up)
+;; scroll vim-like
+(global-set-key (kbd "M-]") 'm3xan1k-scroll-10-lines-down)
+(global-set-key (kbd "M-[") 'm3xan1k-scroll-10-lines-up)
 
 ;; isearch results selection
 (global-unset-key (kbd "C-s"))
@@ -177,6 +207,14 @@
 ;; surround
 (define-key global-map (kbd "M-'") surround-keymap)
 
+;; New line tweaks
+(global-set-key (kbd "C-<return>") 'm3xan1k-new-line-down)
+(global-set-key (kbd "C-S-<return>") 'm3xan1k-new-line-up)
+
+;; Tabs shortcuts
+(global-set-key (kbd "C-<tab>") #'awesome-tab-forward-tab)
+(global-set-key (kbd "C-<iso-lefttab>") #'awesome-tab-backward-tab)
+
 ;; navigation in Russian layout
 (cl-loop
  for from across "йцукенгшщзхъфывапролджэячсмитьбюЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖ\ЭЯЧСМИТЬБЮ№"
@@ -189,10 +227,10 @@
 (scroll-on-jump-advice-add backward-paragraph)
 (scroll-on-jump-advice-add beginning-of-buffer)
 (scroll-on-jump-advice-add end-of-buffer)
-(scroll-on-jump-advice-add scroll-down-command)
-(scroll-on-jump-advice-add scroll-up-command)
+(scroll-on-jump-with-scroll-advice-add scroll-down-command)
+(scroll-on-jump-with-scroll-advice-add scroll-up-command)
 
-(global-set-key (kbd "C-c g h n") (scroll-on-jump-interactive 'git-gutter:next-hunk))
-(global-set-key (kbd "C-c g h p") (scroll-on-jump-interactive 'git-gutter:previous-hunk))
+(global-set-key (kbd "C-z g h n") (scroll-on-jump-interactive 'git-gutter:next-hunk))
+(global-set-key (kbd "C-z g h p") (scroll-on-jump-interactive 'git-gutter:previous-hunk))
 
 (provide 'my-vanilla-keys)
