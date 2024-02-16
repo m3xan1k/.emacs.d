@@ -72,7 +72,28 @@
 (use-package clojure-mode)
 (add-hook 'clojure-mode-hook 'eglot-ensure)
 
-(use-package cider)
+(use-package cider
+  :hook
+  (clojure-mode . cider-mode)
+  :bind
+  (:map cider-mode-map
+	("C-, s" . cider-connect)
+	("C-, d" . cider-eval-defun-at-point)
+	("C-, e" . cider-eval-last-sexp)
+	("C-, b" . cider-eval-buffer)))
+
+;; common lisp
+(setq inferior-lisp-program "sbcl")
+(use-package sly
+  :hook
+  (common-lisp-mode . sly-mode)
+  :bind
+  (:map lisp-mode-map
+	("C-, s" . sly)
+	("C-, d" . sly-eval-defun)
+	("C-, e" . sly-eval-last-expression)
+	("C-, r" . sly-eval-region)
+	("C-, b" . sly-eval-buffer)))
 
 ;; ruby
 ;; (setq lsp-solargraph-server-command '("/home/m3xan1k/.gem/bin/solargraph" "stdio"))

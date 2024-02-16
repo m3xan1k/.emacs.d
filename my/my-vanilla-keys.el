@@ -145,17 +145,6 @@
   ";" #'comment-line
   "q q" #'save-buffers-kill-emacs)
 
-(defvar-keymap m3xan1k-clojure-prefix
-  "c" #'cider-connect
-  "e" #'cider-eval-last-sexp
-  "d" #'cider-eval-defun-at-point
-  "b" #'cider-eval-buffer)
-
-(defvar-keymap m3xan1k-prefix-local
-  :doc "m3xan1k-prefix-local"
-  "e" m3xan1k-clojure-prefix)
-
-
 (which-key-add-keymap-based-replacements m3xan1k-prefix
   "b" `("Buffer" . ,m3xan1k-buffer-prefix)
   "e" `("Error" . ,m3xan1k-diagnostics-prefix)
@@ -169,17 +158,10 @@
 (which-key-add-keymap-based-replacements m3xan1k-window-prefix
   "r" `("Resize" . ,m3xan1k-window-resize-prefix))
 
-;; local
-(which-key-add-keymap-based-replacements m3xan1k-prefix-local
-  "e" `("Clojure" . ,m3xan1k-clojure-prefix))
-
 ;; main prefix/leader
 (global-unset-key (kbd "C-z"))
 (global-unset-key (kbd "C-x C-z"))
 (keymap-set global-map "C-z" m3xan1k-prefix)
-
-;; localleader
-(keymap-set global-map "C-," m3xan1k-prefix-local)
 
 ;; select from the inside
 (global-set-key (kbd "C-=") #'er/expand-region)
