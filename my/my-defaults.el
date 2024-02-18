@@ -5,13 +5,12 @@
 ;; disable bars
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
-(menu-bar-mode -1)
+;; (menu-bar-mode -1)
 
 ;; cursor
 (blink-cursor-mode 0)
 (setq x-stretch-cursor t)
 (setq cursor-in-non-selected-windows nil)
-(set-cursor-color "red")
 
 ;; some sane defaults
 (setq inhibit-splash-screen t ;; no thanks

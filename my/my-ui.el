@@ -1,8 +1,8 @@
 ;; additional theme
 (use-package almost-mono-themes)
-;; (use-package spacemacs-theme)
+(use-package spacemacs-theme)
 
-;; (load-theme 'spacemacs-light t)
+(load-theme 'spacemacs-light t)
 (load-theme 'almost-mono-cream t)
 
 ;; font @
@@ -15,6 +15,8 @@
 		    :foreground (face-foreground 'default))
 (set-face-attribute 'line-number nil
                     :background (face-background 'default nil t))
+
+(set-cursor-color "red")
 
 (setq-default line-spacing 2)
 

@@ -118,6 +118,19 @@
   (interactive)
   (eshell-command (format "firefox %s" (thing-at-point 'url))))
 
+(defun m3xan1k-jump-to-char ()
+  (interactive)
+  (let ((ch (read-char "Jump to char: ")))
+
+    ;; to search next occurance
+    (when (eq ch (char-after))
+      (forward-char))
+
+    (search-forward (char-to-string ch) (line-end-position))
+    (backward-char)))
+
+(define-key global-map (kbd "M-o") 'm3xan1k-jump-to-char)
+
 ;; keycast
 ;; (use-package keycast
 ;;   :config
