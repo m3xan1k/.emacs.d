@@ -95,6 +95,9 @@
 	("C-, r" . sly-eval-region)
 	("C-, b" . sly-eval-buffer)))
 
+;; c
+(add-hook 'c-mode-hook #'eglot-ensure)
+
 ;; ruby
 ;; (setq lsp-solargraph-server-command '("/home/m3xan1k/.gem/bin/solargraph" "stdio"))
 ;; (setq lsp-solargraph-use-bundler t)

@@ -64,7 +64,7 @@
   "d" #'kill-this-buffer
   "D" #'kill-buffer
   "b" #'consult-buffer
-  "r" #'reload-buffer
+  "r" #'revert-buffer
   "l" #'evil-switch-to-window-last-buffer)
 
 ;; diagnostics
@@ -125,8 +125,8 @@
   "d" #'delete-window
   "D" #'delete-other-windows
   "o" #'other-window
-  ";" #'evil-window-split
-  "'" #'evil-window-vsplit
+  ";" #'split-window-right
+  "'" #'split-window-below
   "r" m3xan1k-window-resize-prefix)
 
 ;; keymap
@@ -196,6 +196,9 @@
 ;; Tabs shortcuts
 (global-set-key (kbd "C-<tab>") #'awesome-tab-forward-tab)
 (global-set-key (kbd "C-<iso-lefttab>") #'awesome-tab-backward-tab)
+
+;; reopen closed tab
+(global-set-key (kbd "C-S-t") #'m3xan1k-reopen-killed-file)
 
 ;; navigation in Russian layout
 (cl-loop
