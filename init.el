@@ -59,6 +59,9 @@
 (add-to-list 'load-path "~/.emacs.d/my-packages/g-trans")
 (require 'g-trans)
 
+(add-to-list 'load-path "~/.emacs.d/my-packages/el-weather")
+(require 'el-weather)
+
 (put 'narrow-to-region 'disabled nil)
 (put 'dired-find-alternate-file 'disabled nil)
 (put 'upcase-region 'disabled nil)

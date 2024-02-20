@@ -7,3 +7,6 @@
 [submodule "thirdpart/surround"]
 	path = thirdpart/surround
 	url = git@codeberg.org:m3xan1k/surround.git
+[submodule "my-packages/el-weather"]
+	path = my-packages/el-weather
+	url = git@codeberg.org:m3xan1k/el-weather
