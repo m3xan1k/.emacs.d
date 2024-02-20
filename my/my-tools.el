@@ -132,18 +132,18 @@
 (define-key global-map (kbd "M-o") 'm3xan1k-jump-to-char)
 
 ;; reopen closed buffer(only if file exists)
-(defvar m3xan1k-killed-file-list nil)
+(setq m3xan1k-killed-file-list nil)
 
 (defun m3xan1k-add-file-to-killed-file-list ()
   (when buffer-file-name
-    (push buffer-file-name killed-file-list)))
+    (push buffer-file-name m3xan1k-killed-file-list)))
 
 (add-hook 'kill-buffer-hook #'m3xan1k-add-file-to-killed-file-list)
 
 (defun m3xan1k-reopen-killed-file ()
   (interactive)
-  (when killed-file-list
-    (find-file (pop killed-file-list))))
+  (when m3xan1k-killed-file-list
+    (find-file (pop m3xan1k-killed-file-list))))
 
 ;; keycast
 ;; (use-package keycast
