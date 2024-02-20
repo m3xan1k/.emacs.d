@@ -94,6 +94,9 @@
 ;; jump forward/backward
 (use-package jumplist)
 
+;; http
+(use-package request)
+
 ;; insert current file name
 (defun m3xan1k-get-file-name ()
   (interactive)
