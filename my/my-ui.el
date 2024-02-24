@@ -1,12 +1,14 @@
 ;; additional theme
 (use-package almost-mono-themes)
-(use-package spacemacs-theme)
-
-(load-theme 'spacemacs-light t)
+(load-theme 'tsdh-light)
 (load-theme 'almost-mono-cream t)
 
 ;; font @
-(set-face-attribute 'default nil :font "Ricty Diminished" :height 190)
+(set-face-attribute 'default nil
+		    :font "Ricty Diminished"
+		    :height 190
+		    :background "#FDF6E3"
+		    :foreground "#222222")
 (set-face-attribute 'fringe nil
 		    :background (face-background 'default)
 		    :foreground (face-foreground 'default))
@@ -15,6 +17,8 @@
 		    :foreground (face-foreground 'default))
 (set-face-attribute 'line-number nil
                     :background (face-background 'default nil t))
+(set-face-attribute 'cursor nil
+		    :background "red")
 
 (set-cursor-color "red")
 
