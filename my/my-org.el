@@ -1,4 +1,6 @@
 ;; org defaults
+(require 'org)
+
 (defun setup-org-defaults ()
   (setq-local word-wrap t)
   (setq-local fill-column 70)
@@ -54,6 +56,9 @@
    '("my"
      .
      "#+TITLE:\n#+TAGS: PHONE(o) COMPUTER(c) SHOPPING(s) URGENT(u)\n#+SEQ_TODO: NEXT(n) TODO(t) WAITING(w) SOMEDAY(s) PROJ(p) INPROGRESS(i) REPEAT(r) | DONE(d) CANCELLED(c)\n#+STARTUP: nologrepeat\n")))
+
+;; for timer
+(setq org-clock-sound "~/Nextcloud/music/bell.wav")
 
 (use-package denote)
 (setq denote-directory (expand-file-name "~/Nextcloud/denote/"))
