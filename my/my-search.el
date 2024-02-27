@@ -26,6 +26,6 @@
 
 (defun m3xan1k-consult-line-from-isearch ()
   (interactive)
-  (consult-line isearch-string))
+  (consult-line (thing-at-point 'symbol)))
 
 (provide 'my-search)

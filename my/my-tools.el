@@ -84,6 +84,13 @@
   (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-top)
   (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-bottom))
 
+(scroll-on-jump-advice-add forward-paragraph)
+(scroll-on-jump-advice-add backward-paragraph)
+(scroll-on-jump-advice-add beginning-of-buffer)
+(scroll-on-jump-advice-add end-of-buffer)
+(scroll-on-jump-with-scroll-advice-add scroll-down-command)
+(scroll-on-jump-with-scroll-advice-add scroll-up-command)
+
 (with-eval-after-load 'goto-chg
   (scroll-on-jump-advice-add goto-last-change)
   (scroll-on-jump-advice-add goto-last-change-reverse))
@@ -96,6 +103,9 @@
 
 ;; http
 (use-package request)
+
+;; multicursor
+(use-package multiple-cursors)
 
 ;; insert current file name
 (defun m3xan1k-get-file-name ()
@@ -131,8 +141,6 @@
 
     (search-forward (char-to-string ch) (line-end-position))
     (backward-char)))
-
-(define-key global-map (kbd "M-o") 'm3xan1k-jump-to-char)
 
 ;; reopen closed buffer(only if file exists)
 (setq m3xan1k-killed-file-list nil)

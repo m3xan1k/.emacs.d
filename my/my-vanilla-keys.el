@@ -170,14 +170,6 @@
 (global-unset-key (kbd "M-;"))
 (global-set-key (kbd "M-;") 'm3xan1k-comment)
 
-;; scroll vim-like
-(global-set-key (kbd "M-]") 'm3xan1k-scroll-10-lines-down)
-(global-set-key (kbd "M-[") 'm3xan1k-scroll-10-lines-up)
-
-;; isearch results selection
-(global-unset-key (kbd "C-s"))
-(global-set-key (kbd "C-s") 'm3xan1k-consult-line-from-isearch)
-
 ;; jump backward/forward
 (global-set-key (kbd "C-<") 'jumplist-previous)
 (global-set-key (kbd "C->") 'jumplist-next)
@@ -188,6 +180,29 @@
 
 ;; surround
 (define-key global-map (kbd "M-'") surround-keymap)
+
+;; navigation in Russian layout
+(cl-loop
+ for from across "йцукенгшщзхъфывапролджэячсмитьбюЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖ\ЭЯЧСМИТЬБЮ№"
+ for to   across "qwertyuiop[]asdfghjkl;'zxcvbnm,.QWERTYUIOP{}ASDFGHJKL:\"ZXCVBNM<>#"
+ do
+ (eval `(define-key key-translation-map (kbd ,(concat "C-" (string from))) (kbd ,(concat     "C-" (string to)))))
+ (eval `(define-key key-translation-map (kbd ,(concat "M-" (string from))) (kbd ,(concat     "M-" (string to))))))
+
+(global-set-key (kbd "C-z g h n") (scroll-on-jump-interactive 'git-gutter:next-hunk))
+(global-set-key (kbd "C-z g h p") (scroll-on-jump-interactive 'git-gutter:previous-hunk))
+
+;;;; attempt to replicate sublime
+
+;; fuzzy find file in project(git repo)
+(global-set-key (kbd "M-p") #'project-find-file)
+
+;; grep in project(git repo)
+(global-set-key (kbd "C-S-f") #'m3xan1k-consult-ripgrep-at-point)
+
+;; grep in buffer
+(global-unset-key (kbd "C-s"))
+(global-set-key (kbd "C-s") 'm3xan1k-consult-line-from-isearch)
 
 ;; New line tweaks
 (global-set-key (kbd "C-<return>") 'm3xan1k-new-line-down)
@@ -200,22 +215,14 @@
 ;; reopen closed tab
 (global-set-key (kbd "C-S-t") #'m3xan1k-reopen-killed-file)
 
-;; navigation in Russian layout
-(cl-loop
- for from across "йцукенгшщзхъфывапролджэячсмитьбюЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖ\ЭЯЧСМИТЬБЮ№"
- for to   across "qwertyuiop[]asdfghjkl;'zxcvbnm,.QWERTYUIOP{}ASDFGHJKL:\"ZXCVBNM<>#"
- do
- (eval `(define-key key-translation-map (kbd ,(concat "C-" (string from))) (kbd ,(concat     "C-" (string to)))))
- (eval `(define-key key-translation-map (kbd ,(concat "M-" (string from))) (kbd ,(concat     "M-" (string to))))))
+;; jump to char on current line
+(define-key global-map (kbd "M-o") 'm3xan1k-jump-to-char)
 
-(scroll-on-jump-advice-add forward-paragraph)
-(scroll-on-jump-advice-add backward-paragraph)
-(scroll-on-jump-advice-add beginning-of-buffer)
-(scroll-on-jump-advice-add end-of-buffer)
-(scroll-on-jump-with-scroll-advice-add scroll-down-command)
-(scroll-on-jump-with-scroll-advice-add scroll-up-command)
-
-(global-set-key (kbd "C-z g h n") (scroll-on-jump-interactive 'git-gutter:next-hunk))
-(global-set-key (kbd "C-z g h p") (scroll-on-jump-interactive 'git-gutter:previous-hunk))
+;; multiple cursors
+(define-key mc/keymap (kbd "<return>") nil)
+(global-set-key (kbd "M-]") 'mc/mark-next-like-this)
+(global-set-key (kbd "M-[") 'mc/unmark-next-like-this)
+(global-unset-key (kbd "M-<down-mouse-1>"))
+(global-set-key (kbd "M-<mouse-1>") 'mc/add-cursor-on-click)
 
 (provide 'my-vanilla-keys)
