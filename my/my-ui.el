@@ -1,11 +1,6 @@
 ;; Theme
-(load-theme 'tsdh-light)
-
-;; slight modifications
-(custom-theme-set-faces
- 'tsdh-light
- '(font-lock-keyword-face ((t (:foreground "black" :weight bold))))
- '(font-lock-variable-name-face ((t (:foreground "black")))))
+(use-package almost-mono-themes)
+(load-theme 'almost-mono-white t)
 
 ;; font @
 (set-face-attribute 'default nil
@@ -24,15 +19,21 @@
                     :background (face-background 'default nil t))
 (set-face-attribute 'cursor nil
 		    :background "red")
+(set-face-attribute 'font-lock-string-face nil
+		    :foreground "dark green")
+(set-face-attribute 'font-lock-type-face nil
+		    :foreground "dark orange"
+		    :slant 'normal
+		    :italic nil)
+(set-face-attribute 'font-lock-function-name-face nil
+		    :foreground "royal blue"
+		    :slant 'normal
+		    :weight 'normal)
 (set-face-attribute 'font-lock-constant-face nil
-		    :foreground "#black" :weight 'bold)
-
-(set-face-background 'git-gutter:modified "orange")
-(set-face-foreground 'git-gutter:modified "orange")
-(set-face-background 'git-gutter:added "green")
-(set-face-foreground 'git-gutter:added "green")
-(set-face-background 'git-gutter:deleted "red")
-(set-face-foreground 'git-gutter:deleted "red")
+		    :foreground "brown" :weight 'bold
+		    :slant 'normal)
+(set-face-attribute 'font-lock-comment-delimiter-face nil
+		    :weight 'bold)
 
 (set-cursor-color "red")
 
