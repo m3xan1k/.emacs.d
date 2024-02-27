@@ -1,12 +1,16 @@
-;; additional theme
-(use-package almost-mono-themes)
+;; Theme
 (load-theme 'tsdh-light)
-(load-theme 'almost-mono-cream t)
+
+;; slight modifications
+(custom-theme-set-faces
+ 'tsdh-light
+ '(font-lock-keyword-face ((t (:foreground "black" :weight bold))))
+ '(font-lock-variable-name-face ((t (:foreground "black")))))
 
 ;; font @
 (set-face-attribute 'default nil
-		    :font "Ricty Diminished"
-		    :height 190
+		    :font "Dejavu Sans Mono"
+		    :height 165
 		    :background "#FDF6E3"
 		    :foreground "#222222")
 (set-face-attribute 'fringe nil
@@ -14,15 +18,25 @@
 		    :foreground (face-foreground 'default))
 (set-face-attribute 'line-number-current-line nil
 		    :background (face-background 'default)
-		    :foreground (face-foreground 'default))
+		    :foreground (face-foreground 'default)
+		    :weight 'bold)
 (set-face-attribute 'line-number nil
                     :background (face-background 'default nil t))
 (set-face-attribute 'cursor nil
 		    :background "red")
+(set-face-attribute 'font-lock-constant-face nil
+		    :foreground "#black" :weight 'bold)
+
+(set-face-background 'git-gutter:modified "orange")
+(set-face-foreground 'git-gutter:modified "orange")
+(set-face-background 'git-gutter:added "green")
+(set-face-foreground 'git-gutter:added "green")
+(set-face-background 'git-gutter:deleted "red")
+(set-face-foreground 'git-gutter:deleted "red")
 
 (set-cursor-color "red")
 
-(setq-default line-spacing 2)
+(setq-default line-spacing 3)
 
 ;; typography
 (set-char-table-range char-width-table '(?— . ?—) 2)
