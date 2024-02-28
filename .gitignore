@@ -3,6 +3,8 @@
 
 !.gitignore
 !init.el
+!custom.el
+!helpers.el
 !early-init.el
 !after-init.org
 !my/
