@@ -12,6 +12,7 @@
 !my-packages/
 !my-packages/*
 # my-packages/*
+!old.init.el
 
 !thirdpart/*
 
