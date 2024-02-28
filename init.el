@@ -3,8 +3,7 @@
 ;; ====
 
 ;; load all custom helper functions
-(add-to-list 'load-path "~/.emacs.d/")
-(require 'helpers)
+(load "~/.emacs.d/helpers.el")
 
 ;; thirdparty code
 (add-to-list 'load-path "~/.emacs.d/thirdpart/")
@@ -445,36 +444,36 @@
 
 ;; font @
 (set-face-attribute 'default nil
-        :font "Dejavu Sans Mono"
-        :height 165
-        :background "#FDF6E3"
-        :foreground "#222222")
+		    :font "Dejavu Sans Mono"
+		    :height 165
+		    :background "#FDF6E3"
+		    :foreground "#222222")
 (set-face-attribute 'fringe nil
-        :background (face-background 'default)
-        :foreground (face-foreground 'default))
+		    :background (face-background 'default)
+		    :foreground (face-foreground 'default))
 (set-face-attribute 'line-number-current-line nil
-        :background (face-background 'default)
-        :foreground (face-foreground 'default)
-        :weight 'bold)
+		    :background (face-background 'default)
+		    :foreground (face-foreground 'default)
+		    :weight 'bold)
 (set-face-attribute 'line-number nil
                     :background (face-background 'default nil t))
 (set-face-attribute 'cursor nil
-        :background "red")
+		    :background "red")
 (set-face-attribute 'font-lock-string-face nil
-        :foreground "dark green")
+		    :foreground "dark green")
 (set-face-attribute 'font-lock-type-face nil
-        :foreground "dark orange"
-        :slant 'normal
-        :italic nil)
+		    :foreground "dark orange"
+		    :slant 'normal
+		    :italic nil)
 (set-face-attribute 'font-lock-function-name-face nil
-        :foreground "royal blue"
-        :slant 'normal
-        :weight 'normal)
+		    :foreground "royal blue"
+		    :slant 'normal
+		    :weight 'normal)
 (set-face-attribute 'font-lock-constant-face nil
-        :foreground "brown" :weight 'bold
-        :slant 'normal)
+		    :foreground "brown" :weight 'bold
+		    :slant 'normal)
 (set-face-attribute 'font-lock-comment-delimiter-face nil
-        :weight 'bold)
+		    :weight 'bold)
 
 (set-cursor-color "red")
 
