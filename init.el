@@ -6,6 +6,9 @@
 (add-to-list 'load-path "~/.emacs.d/")
 (require 'helpers)
 
+;; thirdparty code
+(add-to-list 'load-path "~/.emacs.d/thirdpart/")
+
 ;; load $PATH
 (when window-system (m3xan1k-set-exec-path-from-shell-PATH))
 
@@ -371,6 +374,9 @@
 
 ;; multicursor
 (use-package multiple-cursors)
+
+;; surround
+(require 'surround)
 
 ;; insert current file name
 (defun m3xan1k-get-file-name ()

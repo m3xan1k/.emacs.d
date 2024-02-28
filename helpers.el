@@ -8,4 +8,4 @@
     (setq eshell-path-env path-from-shell) ; for eshell users
     (setq exec-path (split-string path-from-shell path-separator))))
 
-(provide 'm3xan1k-helpers)
+(provide 'helpers)
