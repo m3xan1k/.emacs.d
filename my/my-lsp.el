@@ -37,9 +37,9 @@
 
 ;; activate virtual environment from .venv
 (add-hook 'python-mode-hook
-	  (lambda () (progn
-		       (pyvenv-activate (concat (projectile-project-root) ".venv/"))
-		       (eglot-ensure))))
+    (lambda () (progn
+                (pyvenv-activate (concat (projectile-project-root) ".venv/"))
+                (eglot-ensure))))
 
 ;; golang
 (defun dev/go-mode-hook ()
@@ -77,10 +77,10 @@
   (clojure-mode . cider-mode)
   :bind
   (:map cider-mode-map
-	("C-, s" . cider-connect)
-	("C-, d" . cider-eval-defun-at-point)
-	("C-, e" . cider-eval-last-sexp)
-	("C-, b" . cider-eval-buffer)))
+   ("C-, s" . cider-connect)
+   ("C-, d" . cider-eval-defun-at-point)
+   ("C-, e" . cider-eval-last-sexp)
+   ("C-, b" . cider-eval-buffer)))
 
 ;; common lisp
 (setq inferior-lisp-program "sbcl")
@@ -89,16 +89,23 @@
   (common-lisp-mode . sly-mode)
   :bind
   (:map lisp-mode-map
-	("C-, s" . sly)
-	("C-, d" . sly-eval-defun)
-	("C-, e" . sly-eval-last-expression)
-	("C-, r" . sly-eval-region)
-	("C-, b" . sly-eval-buffer)))
+   ("C-, s" . sly)
+   ("C-, d" . sly-eval-defun)
+   ("C-, e" . sly-eval-last-expression)
+   ("C-, r" . sly-eval-region)
+   ("C-, b" . sly-eval-buffer)))
 
 ;; c
 (add-hook 'c-mode-hook #'eglot-ensure)
 
 ;; ruby
+(use-package robe)
+(add-hook 'ruby-mode-hook 'robe-mode)
+(add-hook 'ruby-ts-mode-hook 'robe-mode)
+(eval-after-load 'company
+  '(push 'company-robe company-backends))
+(add-hook 'robe-mode-hook 'ac-robe-setup)
+
 ;; (setq lsp-solargraph-server-command '("/home/m3xan1k/.gem/bin/solargraph" "stdio"))
 ;; (setq lsp-solargraph-use-bundler t)
 ;; (add-hook 'ruby-mode-hook #'lsp-deferred)

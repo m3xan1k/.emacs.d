@@ -19,8 +19,6 @@
 
 ;; git gutter
 (use-package git-gutter)
-
-;; If you enable global minor mode
 (global-git-gutter-mode t)
 
 ;; parens
@@ -63,27 +61,6 @@
 	scroll-on-jump-curve-power 2.0
 	scroll-on-jump-curve 'linear))
 
-(with-eval-after-load 'evil
-  (scroll-on-jump-advice-add evil-undo)
-  (scroll-on-jump-advice-add evil-redo)
-  (scroll-on-jump-advice-add evil-jump-item)
-  (scroll-on-jump-advice-add evil-jump-forward)
-  (scroll-on-jump-advice-add evil-jump-backward)
-  (scroll-on-jump-advice-add evil-ex-search-next)
-  (scroll-on-jump-advice-add evil-ex-search-previous)
-  (scroll-on-jump-advice-add evil-forward-paragraph)
-  (scroll-on-jump-advice-add evil-backward-paragraph)
-  (scroll-on-jump-advice-add evil-goto-mark)
-
-  ;; Actions that themselves scroll.
-  (scroll-on-jump-with-scroll-advice-add evil-goto-line)
-  (scroll-on-jump-with-scroll-advice-add evil-goto-first-line)
-  (scroll-on-jump-with-scroll-advice-add evil-scroll-down)
-  (scroll-on-jump-with-scroll-advice-add evil-scroll-up)
-  (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-center)
-  (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-top)
-  (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-bottom))
-
 (scroll-on-jump-advice-add forward-paragraph)
 (scroll-on-jump-advice-add backward-paragraph)
 (scroll-on-jump-advice-add beginning-of-buffer)
@@ -101,18 +78,21 @@
 ;; jump forward/backward
 (use-package jumplist)
 
-;; http
+;; http for my packages
 (use-package request)
 
 ;; multicursor
 (use-package multiple-cursors)
 
+;; surround
+(require 'surround)
+
 ;; insert current file name
 (defun m3xan1k-get-file-name ()
   (interactive)
   (let ((filename (if (y-or-n-p "Absolute?")
-		      buffer-file-name
-		    (replace-regexp-in-string (projectile-project-root) "" buffer-file-name))))
+                      buffer-file-name
+                    (replace-regexp-in-string (projectile-project-root) "" buffer-file-name))))
     (kill-new filename)
     (message "Filename: %s is copied to clipboard." filename)))
 

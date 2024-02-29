@@ -50,7 +50,7 @@
 ;; recent files history
 (recentf-mode 1)
 
-;; change buffer when file changes on disk
+;; refresh buffer when file changes on disk
 (global-auto-revert-mode 1)
 (setq global-auto-revert-non-file-buffers t)
 
@@ -76,5 +76,14 @@
 ;; for my packages
 (setq g-trans-default-source-lang "en")
 (setq g-trans-default-target-lang "ru")
+
+;; move to trash on delete
+(setq-default delete-by-moving-to-trash t)
+
+;; scratch buffer empty
+(setq initial-scratch-message nil)
+
+;; delete selected region on typing
+(delete-selection-mode 1)
 
 (provide 'my-defaults)
