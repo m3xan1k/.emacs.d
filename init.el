@@ -241,6 +241,13 @@
 (add-hook 'c-mode-hook #'eglot-ensure)
 
 ;; ruby
+(use-package robe)
+(add-hook 'ruby-mode-hook 'robe-mode)
+(add-hook 'ruby-ts-mode-hook 'robe-mode)
+(eval-after-load 'company
+  '(push 'company-robe company-backends))
+(add-hook 'robe-mode-hook 'ac-robe-setup)
+
 ;; (setq lsp-solargraph-server-command '("/home/m3xan1k/.gem/bin/solargraph" "stdio"))
 ;; (setq lsp-solargraph-use-bundler t)
 ;; (add-hook 'ruby-mode-hook #'lsp-deferred)
