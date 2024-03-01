@@ -87,6 +87,18 @@
 ;; surround
 (require 'surround)
 
+;; linear undo and redo
+(use-package undo-fu)
+
+;; Show vi-like tilde in the fringe on empty lines.
+(use-package vi-tilde-fringe
+  :config
+  (global-vi-tilde-fringe-mode 1))
+
+;; don't kill to killring
+(use-package simpleclip)
+(simpleclip-mode 1)
+
 ;; insert current file name
 (defun m3xan1k-get-file-name ()
   (interactive)

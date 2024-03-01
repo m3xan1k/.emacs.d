@@ -13,6 +13,18 @@
       (kill-ring-save (region-beginning) (region-end))
     (kill-ring-save (line-beginning-position) (line-end-position))))
 
+;; (defun m3xan1k-copy ()
+;;   (interactive)
+;;   (if (use-region-p)
+;;       (progn
+;; 	(simpleclip-copy (region-beginning) (region-end))
+;; 	(keyboard-quit))
+;;     (progn
+;;       (set-mark (line-beginning-position))
+;;       (end-of-line)
+;;       (simpleclip-copy (region-beginning) (region-end))
+;;       (keyboard-quit))))
+
 ;; half page scroll
 (defun m3xan1k-scroll-10-lines-down ()
  "Scroll down 10 lines."
@@ -165,10 +177,12 @@
 
 ;; select from the inside
 (global-set-key (kbd "C-=") #'er/expand-region)
+(global-set-key (kbd "C--") #'er/contract-region)
 
 ;; smart comment
 (global-unset-key (kbd "M-;"))
-(global-set-key (kbd "M-;") 'm3xan1k-comment)
+(global-unset-key (kbd "C-/"))
+(global-set-key (kbd "C-/") 'm3xan1k-comment)
 
 ;; jump backward/forward
 (global-set-key (kbd "C-<") 'jumplist-previous)
@@ -224,5 +238,20 @@
 (global-set-key (kbd "M-[") 'mc/unmark-next-like-this)
 (global-unset-key (kbd "M-<down-mouse-1>"))
 (global-set-key (kbd "M-<mouse-1>") 'mc/add-cursor-on-click)
+
+;; undo-redo
+(global-unset-key (kbd "C-_"))
+(global-set-key (kbd "C-_") #'undo-fu-only-undo)
+(global-set-key (kbd "C-+") #'undo-fu-only-redo)
+
+;; file manager
+(global-set-key (kbd "C-S-b") #'neotree-toggle)
+
+;; copy/cut/paste
+;; (global-unset-key (kbd "C-w"))
+;; (global-set-key (kbd "C-w") #'simpleclip-cut)
+
+;; (global-unset-key (kbd "C-y"))
+;; (global-set-key (kbd "C-y") #'simpleclip-paste)
 
 (provide 'my-vanilla-keys)
