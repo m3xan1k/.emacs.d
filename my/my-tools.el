@@ -96,8 +96,8 @@
   (global-vi-tilde-fringe-mode 1))
 
 ;; don't kill to killring
-(use-package simpleclip)
-(simpleclip-mode 1)
+;; (use-package simpleclip)
+;; (simpleclip-mode 1)
 
 ;; insert current file name
 (defun m3xan1k-get-file-name ()
@@ -147,6 +147,11 @@
   (interactive)
   (when m3xan1k-killed-file-list
     (find-file (pop m3xan1k-killed-file-list))))
+
+(defun m3xan1k-diff-to-branch ()
+  (interactive)
+  (let ((branch (read-string "Diff to branch: ")))
+    (vc-root-version-diff (vc-root-dir) branch nil)))
 
 ;; keycast
 ;; (use-package keycast

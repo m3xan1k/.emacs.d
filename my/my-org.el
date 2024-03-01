@@ -14,6 +14,7 @@
   :hook
   (org-mode . org-bullets-mode))
 
+(setq org-return-follows-link t)
 (setq org-hide-emphasis-markers t)
 
 ;; for org-capture notes

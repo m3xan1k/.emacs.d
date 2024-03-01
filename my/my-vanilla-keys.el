@@ -254,4 +254,7 @@
 ;; (global-unset-key (kbd "C-y"))
 ;; (global-set-key (kbd "C-y") #'simpleclip-paste)
 
+;; git diff current changes to some branch
+(define-key vc-prefix-map (kbd "B") #'m3xan1k-diff-to-branch)
+
 (provide 'my-vanilla-keys)
