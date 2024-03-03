@@ -103,7 +103,6 @@
 (global-set-key (kbd "M-j") 'left-char)
 (global-set-key (kbd "M-l") 'right-char)
 
-(setq show-paren-style 'mixed)
 (setq kill-ring-max 50)
 
 (provide 'my-defaults)

@@ -55,15 +55,41 @@
   (add-hook 'before-save-hook #'eglot-format-buffer t t))
 (add-hook 'go-mode-hook #'go-install-save-hooks)
 
-;; w3
-(use-package emmet-mode)
-(use-package web-mode)
+;; markup languages
+(use-package yaml-mode)
+(use-package haml-mode)
+(use-package markdown-mode)
 
-(add-to-list 'auto-mode-alist '("\\.html$" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.css\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
+;; w3
+(use-package emmet-mode
+  :commands emmet-mode
+  :init
+  (setq emmet-indentation 2)
+  (setq emmet-move-cursor-between-quotes t)
+  :config
+  (add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
+  (add-hook 'css-mode-hook  'emmet-mode)) ;; enable Emmet's css abbreviation.
+
+(use-package web-mode
+  :config
+  (setq web-mode-markup-indent-offset 2)
+  (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.js?\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.css?\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.xml?\\'" . web-mode)))
+
+(defun my-web-mode-hook ()
+  (set (make-local-variable 'company-backends) '(company-css company-web-html company-yasnippet company-files)))
 
 (add-hook 'web-mode-hook 'emmet-mode)
+(add-hook 'web-mode-hook #'my-web-mode-hook)
 
 ;; elisp
 (add-hook 'elisp-mode-hook (lambda () (eglot-ensure)))
@@ -104,7 +130,16 @@
 (add-hook 'ruby-ts-mode-hook 'robe-mode)
 (eval-after-load 'company
   '(push 'company-robe company-backends))
-(add-hook 'robe-mode-hook 'ac-robe-setup)
+
+(use-package flymake-ruby)
+(add-hook 'ruby-mode-hook 'flymake-ruby-load)
+
+;; (with-eval-after-load 'eglot
+;;   (add-to-list 'eglot-server-programs
+;;                `(ruby-mode . ("bundle" "exec" "rubocop" "--lsp"))))
+
+;; (add-hook 'ruby-mode #'eglot-ensure)
+;; (add-hook 'ruby-ts-mode #'eglot-ensure)
 
 ;; (setq lsp-solargraph-server-command '("/home/m3xan1k/.gem/bin/solargraph" "stdio"))
 ;; (setq lsp-solargraph-use-bundler t)

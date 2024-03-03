@@ -31,6 +31,6 @@
 ;; grep on buffer
 (defun m3xan1k-consult-line-from-isearch ()
   (interactive)
-  (consult-line (thing-at-point 'symbol)))
+  (consult-line isearch-string))
 
 (provide 'my-search)
