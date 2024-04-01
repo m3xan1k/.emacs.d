@@ -2,9 +2,6 @@
 (use-package almost-mono-themes)
 (load-theme 'almost-mono-white t)
 
-(use-package github-modern-theme)
-(load-theme 'github-modern t)
-
 ;; font @
 (set-face-attribute 'default nil
 		    :font "Menlo"
@@ -28,13 +25,12 @@
 (set-face-attribute 'mode-line nil
 		    :foreground (face-background 'default)
 		    :background (face-foreground 'default))
-(set-face-attribute 'hl-line nil
-		    :background "gainsboro")
-(set-face-attribute 'highlight nil
-		    :background "gainsboro")
-(set-face-attribute 'font-lock-string-face nil
-		    :foreground "dark green"
-		    :background (face-background 'default))
+(set-face-attribute 'font-lock-comment-delimiter-face nil
+		    :weight 'bold)
+(set-face-attribute 'font-lock-type-face nil
+		    :underline t
+		    :slant 'normal
+		    :italic nil)
 ;; (set-face-attribute 'font-lock-type-face nil
 ;; 		    :foreground "dark orange"
 ;; 		    :slant 'normal
@@ -46,12 +42,10 @@
 ;; (set-face-attribute 'font-lock-constant-face nil
 ;; 		    :foreground "brown" :weight 'bold
 ;; 		    :slant 'normal)
-(set-face-attribute 'font-lock-comment-delimiter-face nil
-		    :weight 'bold)
 
 (set-cursor-color "red")
 
-(setq-default line-spacing 3)
+(setq-default line-spacing 2)
 
 ;; typography
 (set-char-table-range char-width-table '(?— . ?—) 2)

@@ -92,17 +92,6 @@
 ;; full path in title bar
 ;; (setq-default frame-title-format "%b (%f)")
 
-;; navigation
-(global-unset-key (kbd "M-i"))
-(global-unset-key (kbd "M-k"))
-(global-unset-key (kbd "M-j"))
-(global-unset-key (kbd "M-l"))
-
-(global-set-key (kbd "M-i") 'previous-line)
-(global-set-key (kbd "M-k") 'next-line)
-(global-set-key (kbd "M-j") 'left-char)
-(global-set-key (kbd "M-l") 'right-char)
-
 (setq kill-ring-max 50)
 
 (provide 'my-defaults)

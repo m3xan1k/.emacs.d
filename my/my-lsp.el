@@ -32,9 +32,9 @@
   (breadcrumb-mode t))
 
 ;; python
-(use-package flymake-python-pyflakes)
-(add-hook 'python-mode-hook 'flymake-python-pyflakes-load)
-;; (add-hook 'python-mode-hook #'python-ts-mode)
+(use-package flymake-ruff
+  :ensure t
+  :hook (eglot-managed-mode . flymake-ruff-load))
 
 (use-package pipenv
   :hook (python-mode . pipenv-mode))

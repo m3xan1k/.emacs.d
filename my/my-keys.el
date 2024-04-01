@@ -207,11 +207,11 @@
    ;; smart comment
    (general-define-key
     :states '(normal emacs)
-    "M-;" 'comment-line)
+    "g c" 'comment-line)
 
    (general-define-key
     :states '(visual)
-    "M-;" 'comment-dwim))
+    "g c" 'comment-dwim))
 
 (evil-global-set-key 'normal (kbd "SPC g h n") (scroll-on-jump-interactive 'git-gutter:next-hunk))
 (evil-global-set-key 'normal (kbd "SPC g h p") (scroll-on-jump-interactive 'git-gutter:previous-hunk))
