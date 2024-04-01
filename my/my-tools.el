@@ -100,32 +100,13 @@
   (scroll-on-jump-advice-add goto-last-change)
   (scroll-on-jump-advice-add goto-last-change-reverse))
 
-;; select from the inside
-(use-package expand-region)
-
-;; jump forward/backward
-(use-package jumplist)
-
 ;; http for my packages
 (use-package request)
-
-;; multicursor
-(use-package multiple-cursors)
-
-;; surround
-(require 'surround)
-
-;; linear undo and redo
-(use-package undo-fu)
 
 ;; Show vi-like tilde in the fringe on empty lines.
 (use-package vi-tilde-fringe
   :config
   (global-vi-tilde-fringe-mode 1))
-
-;; don't kill to killring
-;; (use-package simpleclip)
-;; (simpleclip-mode 1)
 
 ;; insert current file name
 (defun m3xan1k-get-file-name ()
