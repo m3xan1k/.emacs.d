@@ -7,6 +7,7 @@
 		    :font "Menlo"
 		    :height 165
 		    :background "#FDF6E3"
+
 		    :foreground "#222222")
 (set-face-attribute 'fringe nil
 		    :background (face-background 'default)
@@ -45,7 +46,7 @@
 
 (set-cursor-color "red")
 
-(setq-default line-spacing 2)
+(setq-default line-spacing 1)
 
 ;; typography
 (set-char-table-range char-width-table '(?— . ?—) 2)
