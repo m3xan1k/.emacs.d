@@ -18,16 +18,14 @@
 (setq which-key-add-column-padding 3)
 
 ;; git gutter
-(use-package git-gutter
-  :config
-  (set-face-background 'git-gutter:modified "orange")
-  (set-face-foreground 'git-gutter:modified "orange")
-  (set-face-background 'git-gutter:added "green")
-  (set-face-foreground 'git-gutter:added "green")
-  (set-face-background 'git-gutter:deleted "red")
-  (set-face-foreground 'git-gutter:deleted "red"))
+(use-package diff-hl)
 
-(global-git-gutter-mode t)
+(add-hook 'diff-hl-mode-on-hook
+          (lambda ()
+            (unless (window-system)
+              (diff-hl-margin-local-mode))))
+
+(global-diff-hl-mode)
 
 ;; parens
 (use-package smartparens
