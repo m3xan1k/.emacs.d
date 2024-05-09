@@ -92,8 +92,8 @@
   (my/leader
    "g" '(:ignore t :wk "git")
    "g h" '(:ignore t :wk "hunk")
-   "g h s" '(git-gutter:popup-hunk :wk "git-gutter:popup-hunk")
-   "g h r" '(git-gutter:revert-hunk :wk "git-gutter:revert-hunk"))
+   "g h s" '(diff-hl-show-hunk :wk "diff-hl-show-hunk")
+   "g h r" '(diff-hl-revert-hunk :wk "diff-hl-revert-hunk"))
 
   ;; help
   (my/leader
@@ -215,8 +215,8 @@
     :keymaps 'override
     "g c" 'comment-dwim))
 
-(evil-global-set-key 'normal (kbd "SPC g h n") (scroll-on-jump-interactive 'git-gutter:next-hunk))
-(evil-global-set-key 'normal (kbd "SPC g h p") (scroll-on-jump-interactive 'git-gutter:previous-hunk))
+(evil-global-set-key 'normal (kbd "SPC g h n") (scroll-on-jump-interactive 'diff-hl-next-hunk))
+(evil-global-set-key 'normal (kbd "SPC g h p") (scroll-on-jump-interactive 'diff-hl-previous-hunk))
 
 ;; neotree
 (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
