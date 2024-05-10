@@ -6,9 +6,9 @@
 	evil-want-Y-yank-to-eol t)
   :config
   (evil-mode 1)
-  (evil-set-undo-system 'undo-redo)
-  :bind
-  ((:map evil-normal-state-map ("/" . 'm3xan1k-consult-line-from-isearch))))
+  (evil-set-undo-system 'undo-redo))
+  ;; :bind
+  ;; ((:map evil-normal-state-map ("/" . 'm3xan1k-consult-line-from-isearch))))
 
 ;; same as vim-surround
 (use-package evil-surround
