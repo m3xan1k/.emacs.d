@@ -207,10 +207,12 @@
    ;; smart comment
    (general-define-key
     :states '(normal emacs)
+    :keymaps 'override
     "g c" 'comment-line)
 
    (general-define-key
     :states '(visual)
+    :keymaps 'override
     "g c" 'comment-dwim))
 
 (evil-global-set-key 'normal (kbd "SPC g h n") (scroll-on-jump-interactive 'diff-hl-next-hunk))
