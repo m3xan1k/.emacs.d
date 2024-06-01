@@ -12,6 +12,7 @@
  ("eldoc" . "7dd56ba328a126a237115c13f653e5f34fda8989")
  ("emacs-dashboard" . "9c8b0cce865e34340c6d435253f6a3aed3b3ace5")
  ("emacs-kv" . "721148475bce38a70e0b678ba8aa923652e8900e")
+ ("emacs-libvterm" . "df057b1af2bb89a1deb288086f13be296af42090")
  ("emacs-load-env-vars" . "3808520efaf9492033f6e11a9bffd68eabf02a0f")
  ("emacs-neotree" . "2b0cb8285352202c62b1e46a8aa265a5e4f9d966")
  ("emacs-request" . "01e338c335c07e4407239619e57361944a82cb8a")

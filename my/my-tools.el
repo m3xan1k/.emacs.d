@@ -106,7 +106,10 @@
   :config
   (global-vi-tilde-fringe-mode 1))
 
-;; insert current file name
+;; terminal
+(use-package vterm)
+
+;; copy to clipboard current file name
 (defun m3xan1k-get-file-name ()
   (interactive)
   (let ((filename (if (y-or-n-p "Absolute?")
@@ -130,6 +133,7 @@
   (interactive)
   (eshell-command (format "firefox %s" (thing-at-point 'url))))
 
+;; search for char in line(for vanilla emacs keys)
 (defun m3xan1k-jump-to-char ()
   (interactive)
   (let ((ch (read-char "Jump to char: ")))
@@ -155,10 +159,20 @@
   (when m3xan1k-killed-file-list
     (find-file (pop m3xan1k-killed-file-list))))
 
+;; diff to specific branch(include uncommitted changes)
 (defun m3xan1k-diff-to-branch ()
   (interactive)
   (let ((branch (read-string "Diff to branch: ")))
     (vc-root-version-diff (vc-root-dir) branch nil)))
+
+;; django tests
+(defun m3xan1k-run-current-django-test-file ()
+  (interactive)
+  (let* ((filepath (replace-regexp-in-string (projectile-project-root) "" buffer-file-name))
+	 (dotted-filepath (replace-regexp-in-string "/" "." filepath))
+	 (modulename (replace-regexp-in-string "\\.py$" "" dotted-filepath))
+	 (keepdb (if (y-or-n-p "keepdb?") "--keepdb" "")))
+    (eshell-command (format "%s/manage.py test -v 2 %s %s" (projectile-project-root) keepdb modulename))))
 
 ;; keycast
 ;; (use-package keycast

@@ -18,7 +18,12 @@
 ;; emacs for some modes
 (setq m3xan1k-emacs-state-modes '(telega-root-mode
 				  telega-chat-mode
-				  eww-mode))
+				  eww-mode
+				  org-mode
+				  vterm-mode
+				  vc-mode
+				  magit-mode
+				  dired-mode))
 
 (defun m3xan1k-apply-emacs-state (modes)
   (while (> (length modes) 0)
