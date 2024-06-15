@@ -91,9 +91,9 @@
   ;; error diagnostics
   (my/leader
    "e" '(:ignore t :wk "error")
-   "e n" '(flymake-goto-next-error :wk "goto-next-error")
-   "e p" '(flymake-goto-prev-error :wk "goto-prev-error"))
-
+   "g h s" '(diff-hl-show-hunk :wk "diff-hl-show-hunk")
+   "g h r" '(diff-hl-revert-hunk :wk "diff-hl-revert-hunk"))
+  
   (my/leader
    "g" '(:ignore t :wk "git")
    "g h" '(:ignore t :wk "hunk")
