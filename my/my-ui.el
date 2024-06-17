@@ -1,4 +1,7 @@
 ;; Theme
+(use-package doom-themes)
+(load-theme 'doom-earl-grey t)
+
 (use-package almost-mono-themes)
 (load-theme 'almost-mono-white t)
 
