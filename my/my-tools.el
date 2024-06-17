@@ -18,14 +18,16 @@
 (setq which-key-add-column-padding 3)
 
 ;; git gutter
-(use-package diff-hl)
+(use-package git-gutter
+  :config
+  (set-face-background 'git-gutter:modified "orange")
+  (set-face-foreground 'git-gutter:modified "orange")
+  (set-face-background 'git-gutter:added "green")
+  (set-face-foreground 'git-gutter:added "green")
+  (set-face-background 'git-gutter:deleted "red")
+  (set-face-foreground 'git-gutter:deleted "red"))
 
-(add-hook 'diff-hl-mode-on-hook
-          (lambda ()
-            (unless (window-system)
-              (diff-hl-margin-local-mode))))
-
-(global-diff-hl-mode)
+(global-git-gutter-mode t)
 
 ;; parens
 (use-package smartparens
@@ -179,6 +181,18 @@
   (interactive)
   (let ((html (shell-command-to-string (format "pandoc %s" (shell-quote-argument buffer-file-name)))))
     (eshell-command (format "firefox \"data:text/html;base64,%s\"" (base64-encode-string html)))))
+
+;; markdown to html in firefox
+;; (defun m3xan1k-md-preview ()
+;;   (interactive)
+;;   (let* ((html (shell-command-to-string (format "pandoc -s -f markdown -t html %s" buffer-file-name)))
+;; 	 (utf-8-html (decode-coding-string html 'utf-8))
+;; 	 (encoded-html (base64-encode-string (encode-coding-string utf-8-html 'utf-8))))
+;;     (eshell-command (concat
+;; 		     "firefox \"data:text/html;base64,"
+;; 		     encoded-html
+;; 		     "\""))))
+
 
 ;; keycast
 ;; (use-package keycast
