@@ -106,6 +106,13 @@
   :config
   (global-vi-tilde-fringe-mode 1))
 
+;; pdf settings
+(use-package pdf-tools
+  :mode
+  (("\\.pdf$" . pdf-view-mode)))
+
+(setq pdf-view-use-scaling t)
+
 ;; insert current file name
 (defun m3xan1k-get-file-name ()
   (interactive)
