@@ -113,8 +113,8 @@
 (defvar-keymap m3xan1k-git-prefix
   ;; "h n" #'git-gutter:next-hunk
   ;; "h p" #'git-gutter:previous-hunk
-  "h s" #'diff-hl-show-hunk
-  "h r" #'diff-hl-revert-hunk)
+  "h s" #'git-gutter:popup-hunk
+  "h r" #'git-gutter:revert-hunk)
 
 ;; help
 (defvar-keymap m3xan1k-help-prefix
@@ -206,8 +206,7 @@
 
 ;; smart comment
 (global-unset-key (kbd "M-;"))
-(global-unset-key (kbd "C-/"))
-(global-set-key (kbd "C-/") 'm3xan1k-comment)
+(global-set-key (kbd "M-;") 'm3xan1k-comment)
 
 ;; jump backward/forward
 (global-set-key (kbd "C-<") 'jumplist-previous)
@@ -228,8 +227,8 @@
  (eval `(define-key key-translation-map (kbd ,(concat "C-" (string from))) (kbd ,(concat     "C-" (string to)))))
  (eval `(define-key key-translation-map (kbd ,(concat "M-" (string from))) (kbd ,(concat     "M-" (string to))))))
 
-(global-set-key (kbd "C-z g h n") (scroll-on-jump-interactive 'diff-hl-next-hunk))
-(global-set-key (kbd "C-z g h p") (scroll-on-jump-interactive 'diff-hl-previous-hunk))
+(global-set-key (kbd "C-z g h n") (scroll-on-jump-interactive 'git-gutter:next-hunk))
+(global-set-key (kbd "C-z g h p") (scroll-on-jump-interactive 'git-gutter:previous-hunk))
 
 ;;;; attempt to replicate sublime
 

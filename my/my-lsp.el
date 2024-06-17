@@ -31,6 +31,10 @@
   :config
   (breadcrumb-mode t))
 
+;; for expanding snippets
+(use-package yasnippet
+  :hook ((prog-mode) . yas-minor-mode-on))
+
 ;; python
 (use-package flymake-ruff
   :ensure t
@@ -98,6 +102,21 @@
 ;; elisp
 (add-hook 'elisp-mode-hook (lambda () (eglot-ensure)))
 
+
+;; rust
+(use-package rust-mode)
+(add-hook 'rust-mode-hook 'eglot-ensure)
+
+(add-hook 'rust-mode-hook
+          (lambda () (setq indent-tabs-mode nil)))
+
+;; elixir
+(use-package elixir-mode)
+(add-hook 'elixir-mode-hook 'eglot-ensure)
+(with-eval-after-load 'eglot
+  (add-to-list 'eglot-server-programs '(elixir-mode "~/soft/lexical/bin/start_lexical.sh")))
+
+
 ;; clojure
 ;; (use-package clojure-mode)
 ;; (add-hook 'clojure-mode-hook 'eglot-ensure)
@@ -126,17 +145,17 @@
 ;;    ("C-, b" . sly-eval-buffer)))
 
 ;; c
-(add-hook 'c-mode-hook #'eglot-ensure)
+;; (add-hook 'c-mode-hook #'eglot-ensure)
 
 ;; ruby
-(use-package robe)
-(add-hook 'ruby-mode-hook 'robe-mode)
-(add-hook 'ruby-ts-mode-hook 'robe-mode)
-(eval-after-load 'company
-  '(push 'company-robe company-backends))
+;; (use-package robe)
+;; (add-hook 'ruby-mode-hook 'robe-mode)
+;; (add-hook 'ruby-ts-mode-hook 'robe-mode)
+;; (eval-after-load 'company
+;;   '(push 'company-robe company-backends))
 
-(use-package flymake-ruby)
-(add-hook 'ruby-mode-hook 'flymake-ruby-load)
+;; (use-package flymake-ruby)
+;; (add-hook 'ruby-mode-hook 'flymake-ruby-load)
 
 ;; (with-eval-after-load 'eglot
 ;;   (add-to-list 'eglot-server-programs

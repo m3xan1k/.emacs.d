@@ -18,7 +18,12 @@
 ;; emacs for some modes
 (setq m3xan1k-emacs-state-modes '(telega-root-mode
 				  telega-chat-mode
-				  eww-mode))
+				  eww-mode
+				  ;; org-mode
+				  ;; markdown-mode
+				  vterm-mode
+				  vc-mode
+				  magit-mode))
 
 (defun m3xan1k-apply-emacs-state (modes)
   (while (> (length modes) 0)
@@ -86,9 +91,9 @@
   ;; error diagnostics
   (my/leader
    "e" '(:ignore t :wk "error")
-   "e n" '(flymake-goto-next-error :wk "goto-next-error")
-   "e p" '(flymake-goto-prev-error :wk "goto-prev-error"))
-
+   "g h s" '(diff-hl-show-hunk :wk "diff-hl-show-hunk")
+   "g h r" '(diff-hl-revert-hunk :wk "diff-hl-revert-hunk"))
+  
   (my/leader
    "g" '(:ignore t :wk "git")
    "g h" '(:ignore t :wk "hunk")
@@ -229,5 +234,13 @@
 (evil-define-key 'normal neotree-mode-map (kbd "p") 'neotree-copy-filepath-to-yank-ring)
 (evil-define-key 'normal neotree-mode-map (kbd "c") 'neotree-copy-node)
 (evil-define-key 'normal neotree-mode-map (kbd "H") 'neotree-hidden-file-toggle)
+
+;; navigation in Russian layout
+(cl-loop
+ for from across "йцукенгшщзхъфывапролджэячсмитьбюЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖ\ЭЯЧСМИТЬБЮ№"
+ for to   across "qwertyuiop[]asdfghjkl;'zxcvbnm,.QWERTYUIOP{}ASDFGHJKL:\"ZXCVBNM<>#"
+ do
+ (eval `(define-key key-translation-map (kbd ,(concat "C-" (string from))) (kbd ,(concat     "C-" (string to)))))
+ (eval `(define-key key-translation-map (kbd ,(concat "M-" (string from))) (kbd ,(concat     "M-" (string to))))))
 
 (provide 'my-keys)

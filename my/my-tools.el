@@ -18,14 +18,16 @@
 (setq which-key-add-column-padding 3)
 
 ;; git gutter
-(use-package diff-hl)
+(use-package git-gutter
+  :config
+  (set-face-background 'git-gutter:modified "orange")
+  (set-face-foreground 'git-gutter:modified "orange")
+  (set-face-background 'git-gutter:added "green")
+  (set-face-foreground 'git-gutter:added "green")
+  (set-face-background 'git-gutter:deleted "red")
+  (set-face-foreground 'git-gutter:deleted "red"))
 
-(add-hook 'diff-hl-mode-on-hook
-          (lambda ()
-            (unless (window-system)
-              (diff-hl-margin-local-mode))))
-
-(global-diff-hl-mode)
+(global-git-gutter-mode t)
 
 ;; parens
 (use-package smartparens
@@ -93,6 +95,7 @@
 (scroll-on-jump-advice-add end-of-buffer)
 (scroll-on-jump-with-scroll-advice-add scroll-down-command)
 (scroll-on-jump-with-scroll-advice-add scroll-up-command)
+(scroll-on-jump-with-scroll-advice-add recenter-top-bottom)
 
 (with-eval-after-load 'goto-chg
   (scroll-on-jump-advice-add goto-last-change)
@@ -113,7 +116,10 @@
 
 (setq pdf-view-use-scaling t)
 
-;; insert current file name
+;; terminal
+(use-package vterm)
+
+;; copy to clipboard current file name
 (defun m3xan1k-get-file-name ()
   (interactive)
   (let ((filename (if (y-or-n-p "Absolute?")
@@ -137,6 +143,7 @@
   (interactive)
   (eshell-command (format "firefox %s" (thing-at-point 'url))))
 
+;; search for char in line(for vanilla emacs keys)
 (defun m3xan1k-jump-to-char ()
   (interactive)
   (let ((ch (read-char "Jump to char: ")))
@@ -162,10 +169,37 @@
   (when m3xan1k-killed-file-list
     (find-file (pop m3xan1k-killed-file-list))))
 
+;; diff to specific branch(include uncommitted changes)
 (defun m3xan1k-diff-to-branch ()
   (interactive)
   (let ((branch (read-string "Diff to branch: ")))
     (vc-root-version-diff (vc-root-dir) branch nil)))
+
+;; django tests
+(defun m3xan1k-run-current-django-test-file ()
+  (interactive)
+  (let* ((filepath (replace-regexp-in-string (projectile-project-root) "" buffer-file-name))
+	 (dotted-filepath (replace-regexp-in-string "/" "." filepath))
+	 (modulename (replace-regexp-in-string "\\.py$" "" dotted-filepath))
+	 (keepdb (if (y-or-n-p "keepdb?") "--keepdb" "")))
+    (eshell-command (format "%s/manage.py test -v 2 %s %s" (projectile-project-root) keepdb modulename))))
+
+(defun m3xan1k-md-preview-in-firefox ()
+  (interactive)
+  (let ((html (shell-command-to-string (format "pandoc %s" (shell-quote-argument buffer-file-name)))))
+    (eshell-command (format "firefox \"data:text/html;base64,%s\"" (base64-encode-string html)))))
+
+;; markdown to html in firefox
+;; (defun m3xan1k-md-preview ()
+;;   (interactive)
+;;   (let* ((html (shell-command-to-string (format "pandoc -s -f markdown -t html %s" buffer-file-name)))
+;; 	 (utf-8-html (decode-coding-string html 'utf-8))
+;; 	 (encoded-html (base64-encode-string (encode-coding-string utf-8-html 'utf-8))))
+;;     (eshell-command (concat
+;; 		     "firefox \"data:text/html;base64,"
+;; 		     encoded-html
+;; 		     "\""))))
+
 
 ;; keycast
 ;; (use-package keycast
