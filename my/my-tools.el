@@ -93,6 +93,7 @@
 (scroll-on-jump-advice-add end-of-buffer)
 (scroll-on-jump-with-scroll-advice-add scroll-down-command)
 (scroll-on-jump-with-scroll-advice-add scroll-up-command)
+(scroll-on-jump-with-scroll-advice-add recenter-top-bottom)
 
 (with-eval-after-load 'goto-chg
   (scroll-on-jump-advice-add goto-last-change)
@@ -173,6 +174,11 @@
 	 (modulename (replace-regexp-in-string "\\.py$" "" dotted-filepath))
 	 (keepdb (if (y-or-n-p "keepdb?") "--keepdb" "")))
     (eshell-command (format "%s/manage.py test -v 2 %s %s" (projectile-project-root) keepdb modulename))))
+
+(defun m3xan1k-md-preview-in-firefox ()
+  (interactive)
+  (let ((html (shell-command-to-string (format "pandoc %s" (shell-quote-argument buffer-file-name)))))
+    (eshell-command (format "firefox \"data:text/html;base64,%s\"" (base64-encode-string html)))))
 
 ;; keycast
 ;; (use-package keycast

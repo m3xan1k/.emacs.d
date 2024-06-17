@@ -98,6 +98,13 @@
 ;; elisp
 (add-hook 'elisp-mode-hook (lambda () (eglot-ensure)))
 
+;; rust
+(use-package rust-mode)
+(add-hook 'rust-mode-hook 'eglot-ensure)
+
+(add-hook 'rust-mode-hook
+          (lambda () (setq indent-tabs-mode nil)))
+
 ;; clojure
 ;; (use-package clojure-mode)
 ;; (add-hook 'clojure-mode-hook 'eglot-ensure)
@@ -126,17 +133,17 @@
 ;;    ("C-, b" . sly-eval-buffer)))
 
 ;; c
-(add-hook 'c-mode-hook #'eglot-ensure)
+;; (add-hook 'c-mode-hook #'eglot-ensure)
 
 ;; ruby
-(use-package robe)
-(add-hook 'ruby-mode-hook 'robe-mode)
-(add-hook 'ruby-ts-mode-hook 'robe-mode)
-(eval-after-load 'company
-  '(push 'company-robe company-backends))
+;; (use-package robe)
+;; (add-hook 'ruby-mode-hook 'robe-mode)
+;; (add-hook 'ruby-ts-mode-hook 'robe-mode)
+;; (eval-after-load 'company
+;;   '(push 'company-robe company-backends))
 
-(use-package flymake-ruby)
-(add-hook 'ruby-mode-hook 'flymake-ruby-load)
+;; (use-package flymake-ruby)
+;; (add-hook 'ruby-mode-hook 'flymake-ruby-load)
 
 ;; (with-eval-after-load 'eglot
 ;;   (add-to-list 'eglot-server-programs
