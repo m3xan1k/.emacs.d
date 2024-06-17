@@ -166,6 +166,11 @@
   "'" #'split-window-below
   "r" m3xan1k-window-resize-prefix)
 
+(defvar-keymap m3xan1k-tab-prefix
+  "n" #'awesome-tab-forward-tab
+  "p" #'awesome-tab-backward-tab
+  "t" #'m3xan1k-reopen-killed-file)
+
 ;; keymap
 (defvar-keymap m3xan1k-prefix
   :doc "m3xan1k-prefix-map"
@@ -200,17 +205,23 @@
 (global-unset-key (kbd "C-x C-z"))
 (keymap-set global-map "C-z" m3xan1k-prefix)
 
+(global-unset-key (kbd "C-t"))
+(keymap-set global-map "C-t" m3xan1k-tab-prefix)
+
 ;; select from the inside
-(global-set-key (kbd "C-=") #'er/expand-region)
-(global-set-key (kbd "C--") #'er/contract-region)
+(global-set-key (kbd "M-=") #'er/expand-region)
+(global-set-key (kbd "M--") #'er/contract-region)
 
 ;; smart comment
 (global-unset-key (kbd "M-;"))
 (global-set-key (kbd "M-;") 'm3xan1k-comment)
 
 ;; jump backward/forward
-(global-set-key (kbd "C-<") 'jumplist-previous)
-(global-set-key (kbd "C->") 'jumplist-next)
+(global-unset-key (kbd "C-M-]"))
+(global-unset-key (kbd "C-M-["))
+
+(global-set-key (kbd "C-M-[") 'jumplist-previous)
+(global-set-key (kbd "C-M-]") 'jumplist-next)
 
 ;; smart copy
 (global-unset-key (kbd "M-w"))
@@ -245,10 +256,6 @@
 ;; New line tweaks
 (global-set-key (kbd "C-<return>") 'm3xan1k-new-line-down)
 (global-set-key (kbd "C-S-<return>") 'm3xan1k-new-line-up)
-
-;; Tabs shortcuts
-(global-set-key (kbd "C-<tab>") #'awesome-tab-forward-tab)
-(global-set-key (kbd "C-<iso-lefttab>") #'awesome-tab-backward-tab)
 
 ;; reopen closed tab
 (global-set-key (kbd "C-S-t") #'m3xan1k-reopen-killed-file)

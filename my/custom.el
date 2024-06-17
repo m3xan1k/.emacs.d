@@ -14,6 +14,7 @@
  '(jumplist-ex-mode t)
  '(jumplist-hook-commands
    '(dired-jump helm-for-files isearch-forward end-of-buffer beginning-of-buffer find-file))
+ '(normal-erase-is-backspace nil)
  '(org-link-frame-setup
    '((vm . vm-visit-folder-other-frame)
      (vm-imap . vm-visit-imap-folder-other-frame)
