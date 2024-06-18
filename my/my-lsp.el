@@ -102,6 +102,14 @@
 ;; elisp
 (add-hook 'elisp-mode-hook (lambda () (eglot-ensure)))
 
+
+;; rust
+(use-package rust-mode)
+(add-hook 'rust-mode-hook 'eglot-ensure)
+
+(add-hook 'rust-mode-hook
+          (lambda () (setq indent-tabs-mode nil)))
+
 ;; elixir
 (use-package elixir-mode)
 (add-hook 'elixir-mode-hook 'eglot-ensure)
@@ -110,7 +118,6 @@
 
 ;; (with-eval-after-load 'eglot
 ;;   (add-to-list 'eglot-server-programs '(elixir-mode "~/soft/elixir-ls/language_server.sh")))
-
 
 ;; clojure
 ;; (use-package clojure-mode)
