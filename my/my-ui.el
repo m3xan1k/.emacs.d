@@ -1,4 +1,7 @@
 ;; Theme
+(use-package sublime-themes)
+(load-theme 'mccarthy t)
+
 (use-package almost-mono-themes)
 (load-theme 'almost-mono-white t)
 
@@ -7,7 +10,6 @@
 		    :font "Menlo"
 		    :height 165
 		    :background "#FDF6E3"
-
 		    :foreground "#222222")
 (set-face-attribute 'fringe nil
 		    :background (face-background 'default)
@@ -32,6 +34,9 @@
 		    :underline t
 		    :slant 'normal
 		    :italic nil)
+(set-face-attribute 'highlight nil
+		    :foreground (face-background 'default)
+		    :background (face-foreground 'default))
 ;; (set-face-attribute 'font-lock-type-face nil
 ;; 		    :foreground "dark orange"
 ;; 		    :slant 'normal

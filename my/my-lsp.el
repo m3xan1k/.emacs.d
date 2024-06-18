@@ -116,6 +116,8 @@
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs '(elixir-mode "~/soft/lexical/bin/start_lexical.sh")))
 
+;; (with-eval-after-load 'eglot
+;;   (add-to-list 'eglot-server-programs '(elixir-mode "~/soft/elixir-ls/language_server.sh")))
 
 ;; clojure
 ;; (use-package clojure-mode)
