@@ -18,6 +18,8 @@
   (consult-customize
    consult-async-min-input 1))
 
+(add-to-list 'consult-buffer-filter "^\\*" 'append)
+
 ;; inline description
 (use-package marginalia
   :init

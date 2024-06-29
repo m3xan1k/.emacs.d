@@ -5,8 +5,6 @@
  ;; If there is more than one, they won't work right.
  '(consult-async-input-throttle 0.2)
  '(consult-async-min-input 1)
- '(consult-buffer-filter
-   '("\\` " "\\`\\*Completions\\*\\'" "\\`\\*Flymake log\\*\\'" "\\`\\*Semantic SymRef\\*\\'" "\\`\\*tramp/.*\\*\\'" "\\`\\*Messages\\*\\'" "\\`\\*scratch\\*\\'" "\\`\\*dashboard\\*\\'" "\\`\\*straight-process\\*\\'" "\\`\\*lsp-log\\*\\'" "\\`\\*Warnings\\*\\'" "\\`\\*Backtrace\\*\\'" "\\`\\*Flymake log\\*\\'" "\\`\\*Pipenv\\*\\'" "\\`\\*vc-dir*\\*\\'" "\\`\\*vc-diff\\*\\'" "\\`\\*straight-/.*\\*\\'"))
  '(consult-preview-key '(:debounce 0.4 any))
  '(eglot-connect-timeout 500)
  '(fill-column 80)
