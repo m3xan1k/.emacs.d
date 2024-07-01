@@ -209,6 +209,8 @@
 (keymap-set global-map "C-t" m3xan1k-tab-prefix)
 
 ;; select from the inside
+;; (global-set-key (kbd "C-=") #'er/expand-region)
+;; (global-set-key (kbd "C--") #'er/contract-region)
 (global-set-key (kbd "M-=") #'er/expand-region)
 (global-set-key (kbd "M--") #'er/contract-region)
 
@@ -222,6 +224,12 @@
 
 (global-set-key (kbd "C-M-[") 'jumplist-previous)
 (global-set-key (kbd "C-M-]") 'jumplist-next)
+
+;; (global-set-key (kbd "C-<") 'jumplist-previous)
+;; (global-set-key (kbd "C->") 'jumplist-next)
+;; (global-set-key (kbd "C-i") 'jumplist-previous)
+;; (global-set-key (kbd "C-o") 'jumplist-next)
+
 
 ;; smart copy
 (global-unset-key (kbd "M-w"))

@@ -13,7 +13,16 @@
  '(git-gutter:update-interval 1)
  '(jumplist-ex-mode t)
  '(jumplist-hook-commands
-   '(dired-jump helm-for-files isearch-forward end-of-buffer beginning-of-buffer find-file))
+   '(dired-jump
+     end-of-buffer
+     beginning-of-buffer
+     find-file
+     consult-line
+     xref-find-definitions
+     consult-ripgrep
+     consult-project-buffer
+     consult-buffer
+     project-find-file))
  '(org-link-frame-setup
    '((vm . vm-visit-folder-other-frame)
      (vm-imap . vm-visit-imap-folder-other-frame)

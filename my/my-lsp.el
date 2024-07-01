@@ -116,6 +116,9 @@
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs '(elixir-mode "~/soft/lexical/bin/start_lexical.sh")))
 
+;; racket
+(use-package racket-mode)
+
 ;; (with-eval-after-load 'eglot
 ;;   (add-to-list 'eglot-server-programs '(elixir-mode "~/soft/elixir-ls/language_server.sh")))
 
