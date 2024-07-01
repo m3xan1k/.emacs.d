@@ -201,16 +201,20 @@
 (keymap-set global-map "C-z" m3xan1k-prefix)
 
 ;; select from the inside
-(global-set-key (kbd "C-=") #'er/expand-region)
-(global-set-key (kbd "C--") #'er/contract-region)
+;; (global-set-key (kbd "C-=") #'er/expand-region)
+;; (global-set-key (kbd "C--") #'er/contract-region)
+(global-set-key (kbd "M-=") #'er/expand-region)
+(global-set-key (kbd "M--") #'er/contract-region)
 
 ;; smart comment
 (global-unset-key (kbd "M-;"))
 (global-set-key (kbd "M-;") 'm3xan1k-comment)
 
 ;; jump backward/forward
-(global-set-key (kbd "C-<") 'jumplist-previous)
-(global-set-key (kbd "C->") 'jumplist-next)
+;; (global-set-key (kbd "C-<") 'jumplist-previous)
+;; (global-set-key (kbd "C->") 'jumplist-next)
+(global-set-key (kbd "C-i") 'jumplist-previous)
+(global-set-key (kbd "C-o") 'jumplist-next)
 
 ;; smart copy
 (global-unset-key (kbd "M-w"))
