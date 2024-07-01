@@ -1,16 +1,15 @@
 ;; Theme
-(use-package sublime-themes)
-(load-theme 'mccarthy t)
-
 (use-package almost-mono-themes)
 (load-theme 'almost-mono-white t)
 
 ;; font @
 (set-face-attribute 'default nil
 		    :font "Menlo"
-		    :height 165
+		    :height 180
 		    :background "#FDF6E3"
 		    :foreground "#222222")
+
+;; interface
 (set-face-attribute 'fringe nil
 		    :background (face-background 'default)
 		    :foreground (face-foreground 'default))
@@ -28,19 +27,43 @@
 (set-face-attribute 'mode-line nil
 		    :foreground (face-background 'default)
 		    :background (face-foreground 'default))
+(set-face-attribute 'breadcrumb-project-crumbs-face nil
+		    :background (face-background 'default)
+		    :foreground (face-foreground 'default))
+(set-face-attribute 'breadcrumb-project-leaf-face nil
+		    :background (face-background 'default)
+		    :foreground (face-foreground 'default))
+
+;; comments
 (set-face-attribute 'font-lock-comment-delimiter-face nil
 		    :weight 'bold)
+
+;; variables
+(set-face-attribute 'font-lock-variable-name-face nil
+		    :background (face-background 'default)
+		    :foreground (face-foreground 'default))
+
+;; type/class names
 (set-face-attribute 'font-lock-type-face nil
+		    :foreground (face-foreground 'default)
+		    ;; :foreground "dark orange"
 		    :underline t
 		    :slant 'normal
 		    :italic nil)
-(set-face-attribute 'highlight nil
-		    :foreground (face-background 'default)
-		    :background (face-foreground 'default))
-;; (set-face-attribute 'font-lock-type-face nil
-;; 		    :foreground "dark orange"
-;; 		    :slant 'normal
-;; 		    :italic nil)
+
+;; strings
+(set-face-attribute 'font-lock-string-face nil
+		    :foreground "green4"
+		    :background (face-background 'default))
+
+;; keywords
+(set-face-attribute 'font-lock-keyword-face nil
+		    :foreground "mediumblue")
+
+;; (set-face-attribute 'highlight nil
+;; 		    :foreground (face-background 'default)
+;; 		    :background (face-foreground 'default))
+
 ;; (set-face-attribute 'font-lock-function-name-face nil
 ;; 		    :foreground "royal blue"
 ;; 		    :slant 'normal
@@ -99,10 +122,10 @@
   (mood-line-mode))
 
 ;; tabs
-(require 'awesome-tab)
-(awesome-tab-mode t)
+;; (require 'awesome-tab)
+;; (awesome-tab-mode t)
 
-(setq awesome-tab-height 120)
-(setq awesome-tab-cycle-scope 'tabs)
+;; (setq awesome-tab-height 120)
+;; (setq awesome-tab-cycle-scope 'tabs)
 
 (provide 'my-ui)
