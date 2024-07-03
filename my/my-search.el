@@ -33,6 +33,10 @@
 ;; grep on buffer
 (defun m3xan1k-consult-line-from-isearch ()
   (interactive)
-  (consult-line isearch-string))
+  (if (region-active-p)
+      (progn
+	(deactivate-mark)
+	(consult-line (buffer-substring (region-beginning) (region-end))))
+    (consult-line isearch-string)))
 
 (provide 'my-search)
