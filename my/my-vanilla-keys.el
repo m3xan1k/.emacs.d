@@ -32,7 +32,9 @@
   (interactive)
   (if (use-region-p)
       (kill-ring-save (region-beginning) (region-end))
-    (kill-ring-save (line-beginning-position) (line-end-position))))
+    (progn
+      (kill-ring-save (line-beginning-position) (line-end-position))
+      (kill-append "\n" nil))))
 
 ;; (defun m3xan1k-copy ()
 ;;   (interactive)
