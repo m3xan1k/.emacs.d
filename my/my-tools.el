@@ -62,6 +62,17 @@
   :config
   (setq neo-theme 'arrows))
 
+(use-package hl-todo
+  :init
+  (global-hl-todo-mode)
+  :config
+  (setq hl-todo-keyword-faces
+	'(("TODO"   . "#FF0000")
+          ("FIXME"  . "#FF0000")
+          ("DEBUG"  . "#A020F0")
+          ("GOTCHA" . "#FF4500")
+          ("STUB"   . "#1E90FF"))))
+
 ;; scroll
 (use-package scroll-on-jump
   :config

@@ -210,6 +210,11 @@
 (global-unset-key (kbd "C-t"))
 (keymap-set global-map "C-t" m3xan1k-tab-prefix)
 
+(keymap-set hl-todo-mode-map "C-t p" #'hl-todo-previous)
+(keymap-set hl-todo-mode-map "C-t n" #'hl-todo-next)
+(keymap-set hl-todo-mode-map "C-t o" #'hl-todo-occur)
+(keymap-set hl-todo-mode-map "C-t i" #'hl-todo-insert)
+
 ;; select from the inside
 ;; (global-set-key (kbd "C-=") #'er/expand-region)
 ;; (global-set-key (kbd "C--") #'er/contract-region)

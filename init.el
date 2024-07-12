@@ -48,8 +48,8 @@
 ;; (require 'my-telega)
 (require 'my-org)
 ;; (require 'my-mail)
-(require 'my-vanilla-keys)
-;; (require 'my-keys)
+;; (require 'my-vanilla-keys)
+(require 'my-keys)
 
 ;; my packages
 (add-to-list 'load-path "~/.emacs.d/my-packages/cbr")

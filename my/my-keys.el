@@ -91,19 +91,19 @@
   ;; error diagnostics
   (my/leader
    "e" '(:ignore t :wk "error")
-   "g h s" '(diff-hl-show-hunk :wk "diff-hl-show-hunk")
-   "g h r" '(diff-hl-revert-hunk :wk "diff-hl-revert-hunk"))
-  
+   "e n" '(flymake-goto-next-error :wk "flymake-goto-next-error")
+   "e p" '(flymake-goto-prev-error :wk "flymake-goto-prev-error"))
+
   (my/leader
    "g" '(:ignore t :wk "git")
    "g h" '(:ignore t :wk "hunk")
-   "g h s" '(diff-hl-show-hunk :wk "diff-hl-show-hunk")
-   "g h r" '(diff-hl-revert-hunk :wk "diff-hl-revert-hunk"))
+   "g h s" '(git-gutter:popup-hunk :wk "diff-hl-show-hunk")
+   "g h r" '(git-gutter:revert-hunk :wk "diff-hl-revert-hunk"))
 
   ;; help
   (my/leader
-    "h" '(:ignore t :wk "help")
-    "h h" '(help-command :wk "help-command"))
+    "h" '(help-command :wk "help-command")
+    "h h" '(eldoc :wk "signature help"))
 
   ;; project
   (my/leader
@@ -188,12 +188,6 @@
     :keymaps 'sql-mode-map
     "e" '(lsp-sql-execute-query :wk "lsp-sql-execute-query"))
 
-  ;; lsp stuff
-  (general-define-key
-   :states '(normal)
-   :keymaps 'override
-   "g h" '(eldoc :wk "signature help"))
-
    ;; quit
    (my/leader
      "q" '(:ignore t :wk "quit")
@@ -213,15 +207,15 @@
    (general-define-key
     :states '(normal emacs)
     :keymaps 'override
-    "g c" 'comment-line)
+    "M-;" 'comment-line)
 
    (general-define-key
     :states '(visual)
     :keymaps 'override
-    "g c" 'comment-dwim))
+    "M-;" 'comment-dwim))
 
-(evil-global-set-key 'normal (kbd "SPC g h n") (scroll-on-jump-interactive 'diff-hl-next-hunk))
-(evil-global-set-key 'normal (kbd "SPC g h p") (scroll-on-jump-interactive 'diff-hl-previous-hunk))
+(evil-global-set-key 'normal (kbd "SPC g h n") (scroll-on-jump-interactive 'git-gutter:next-hunk))
+(evil-global-set-key 'normal (kbd "SPC g h p") (scroll-on-jump-interactive 'git-gutter:previous-hunk))
 
 ;; neotree
 (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
