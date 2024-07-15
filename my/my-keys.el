@@ -126,7 +126,7 @@
     "f S" '(save-buffers :wk "save all files")
     "f f" '(find-file :wk "find file")
     "f n" '(m3xan1k-get-file-name :wk "file name")
-    "f e" '(neotree-toggle :wk "neotree-toggle"))
+    "f e" '(neotree-project-dir :wk "neotree-toggle"))
 
   ;; search
   (my/leader
