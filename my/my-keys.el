@@ -48,6 +48,17 @@
   (interactive)
   (shrink-window 5))
 
+(defun m3x-set-mark-before-command (orig-fun &rest args)
+  (evil-set-jump)
+  (apply orig-fun args))
+
+(defun m3x-set-mark-before-commands ()
+  (dolist (command '(flymake-goto-next-error
+		     flymake-goto-prev-error))
+    (advice-add command :around #'m3x-set-mark-before-command)))
+
+(m3x-set-mark-before-commands)
+
 ;; general
 (use-package general
   :config
@@ -228,6 +239,7 @@
 (evil-define-key 'normal neotree-mode-map (kbd "p") 'neotree-copy-filepath-to-yank-ring)
 (evil-define-key 'normal neotree-mode-map (kbd "c") 'neotree-copy-node)
 (evil-define-key 'normal neotree-mode-map (kbd "H") 'neotree-hidden-file-toggle)
+(evil-define-key 'normal neotree-mode-map (kbd "A") 'neotree-stretch-toggle)
 
 ;; navigation in Russian layout
 (cl-loop
