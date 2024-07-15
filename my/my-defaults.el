@@ -87,7 +87,7 @@
 (delete-selection-mode 1)
 
 ;; always wrap lines
-(global-visual-line-mode 1)
+;; (global-visual-line-mode 1)
 
 ;; full path in title bar
 ;; (setq-default frame-title-format "%b (%f)")

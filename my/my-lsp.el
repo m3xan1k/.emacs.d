@@ -65,8 +65,8 @@
 
 ;; markup languages
 (use-package yaml-mode)
-(use-package haml-mode)
 (use-package markdown-mode)
+;; (use-package haml-mode)
 
 ;; w3
 (use-package emmet-mode
@@ -102,7 +102,6 @@
 ;; elisp
 (add-hook 'elisp-mode-hook (lambda () (eglot-ensure)))
 
-
 ;; rust
 (use-package rust-mode)
 (add-hook 'rust-mode-hook 'eglot-ensure)
@@ -118,6 +117,9 @@
 
 ;; racket
 (use-package racket-mode)
+
+;; standard ml
+(use-package sml-mode)
 
 ;; (with-eval-after-load 'eglot
 ;;   (add-to-list 'eglot-server-programs '(elixir-mode "~/soft/elixir-ls/language_server.sh")))
