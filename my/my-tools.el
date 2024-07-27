@@ -142,7 +142,19 @@
 ;; (setq pdf-view-use-scaling t)
 
 ;; terminal
-(use-package vterm)
+(use-package vterm
+  :bind (:map project-prefix-map
+	      ("t" . m3x-project-vterm)))
+
+;; project-root-terminal
+(defun m3x-project-vterm ()
+  (interactive)
+  (let* ((default-directory (project-root (project-current t)))
+	 (vterm-buffer-name (project-prefixed-buffer-name "vterm"))
+         (vterm-buffer (get-buffer vterm-buffer-name)))
+    (if (and vterm-buffer (not current-prefix-arg))
+	(pop-to-buffer vterm-buffer (bound-and-true-p display-comint-buffer-action))
+      (vterm))))
 
 ;; copy to clipboard current file name
 (defun m3xan1k-get-file-name ()
