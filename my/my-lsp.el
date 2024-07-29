@@ -117,6 +117,9 @@
 
 ;; racket
 (use-package racket-mode)
+(add-hook 'racket-mode-hook 'eglot-ensure)
+(with-eval-after-load 'eglot
+  (add-to-list 'eglot-server-programs '(racket-mode . ("/usr/bin/racket" "-l" "racket-langserver"))))
 
 ;; standard ml
 (use-package sml-mode)

@@ -16,6 +16,7 @@
 (use-package consult
   :config
   (consult-customize
+   consult-fd :preview-key '(:debounce 0.4 any)
    consult-async-min-input 1))
 
 (add-to-list 'consult-buffer-filter "^\\*" 'append)
@@ -38,5 +39,18 @@
 	(deactivate-mark)
 	(consult-line (buffer-substring (region-beginning) (region-end))))
     (consult-line isearch-string)))
+
+;; preview on find-file
+(setq read-file-name-function #'consult-find-file-with-preview)
+
+(defun consult-find-file-with-preview (prompt &optional dir default mustmatch initial pred)
+  (interactive)
+  (let ((default-directory (or dir default-directory))
+        (minibuffer-completing-file-name t))
+    (consult--read #'read-file-name-internal :state (consult--file-preview)
+                   :prompt prompt
+                   :initial initial
+                   :require-match mustmatch
+                   :predicate pred)))
 
 (provide 'my-search)
