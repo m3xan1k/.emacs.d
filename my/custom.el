@@ -11,7 +11,18 @@
  '(git-gutter:update-interval 1)
  '(jumplist-ex-mode t)
  '(jumplist-hook-commands
-   '(dired-jump helm-for-files isearch-forward end-of-buffer beginning-of-buffer find-file))
+   '(dired-jump
+     isearch-forward
+     end-of-buffer
+     beginning-of-buffer
+     find-file
+     consult-line
+     goto-line
+     flymake-goto-next-error
+     flymake-goto-prev-error
+     git-gutter:next-hunk
+     git-gutter:previous-hunk
+     xref-find-definitions))
  '(normal-erase-is-backspace nil)
  '(org-link-frame-setup
    '((vm . vm-visit-folder-other-frame)
