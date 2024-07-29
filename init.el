@@ -45,6 +45,7 @@
 (require 'my-search)
 (require 'my-tools)
 (require 'my-ui)
+(require 'my-ai)
 ;; (require 'my-telega)
 (require 'my-org)
 ;; (require 'my-mail)

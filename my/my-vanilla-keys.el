@@ -103,8 +103,8 @@
   "d" #'kill-this-buffer
   "D" #'kill-buffer
   "b" #'consult-buffer
-  "r" #'revert-buffer
-  "l" #'evil-switch-to-window-last-buffer)
+  "B" #'list-buffers
+  "r" #'revert-buffer)
 
 ;; diagnostics
 (defvar-keymap m3xan1k-diagnostics-prefix
@@ -115,27 +115,8 @@
 (defvar-keymap m3xan1k-git-prefix
   ;; "h n" #'git-gutter:next-hunk
   ;; "h p" #'git-gutter:previous-hunk
-  "h s" #'git-gutter:popup-hunk
-  "h r" #'git-gutter:revert-hunk)
-
-;; help
-(defvar-keymap m3xan1k-help-prefix
-  "h" #'help-command
-  "s" #'eldoc)
-
-;; project
-(defvar-keymap m3xan1k-project-prefix
-  "p" #'projectile-switch-project
-  "b" #'consult-project-buffer
-  "f" #'project-find-file
-  "v" #'project-vc-dir)
-
-;; widely used
-(defvar-keymap m3xan1k-prefix
-  "/" #'consult-ripgrep
-  "SPC" #'execute-extended-command
-  ";" #'comment-line
-  "q q" #'save-buffers-kill-emacs)
+  "s" #'git-gutter:popup-hunk
+  "r" #'git-gutter:revert-hunk)
 
 ;; file
 (defvar-keymap m3xan1k-file-prefix
@@ -154,58 +135,32 @@
 
 ;; window resize
 (defvar-keymap m3xan1k-window-resize-prefix
-  "l" #'m3xan1k-enlarge-window-horizontally
-  "h" #'m3xan1k-shrink-window-horizontally
-  "j" #'m3xan1k-enlarge-window
-  "k" #'m3xan1k-shrink-window)
-
-;; window management
-(defvar-keymap m3xan1k-window-prefix
-  "d" #'delete-window
-  "D" #'delete-other-windows
-  "o" #'other-window
-  ";" #'split-window-right
-  "'" #'split-window-below
-  "r" m3xan1k-window-resize-prefix)
+  "f" #'m3xan1k-enlarge-window-horizontally
+  "b" #'m3xan1k-shrink-window-horizontally
+  "n" #'m3xan1k-enlarge-window
+  "p" #'m3xan1k-shrink-window)
 
 (defvar-keymap m3xan1k-tab-prefix
   "n" #'awesome-tab-forward-tab
   "p" #'awesome-tab-backward-tab
   "t" #'m3xan1k-reopen-killed-file)
 
-;; keymap
-(defvar-keymap m3xan1k-prefix
-  :doc "m3xan1k-prefix-map"
-  "b" m3xan1k-buffer-prefix
-  "e" m3xan1k-diagnostics-prefix
-  "f" m3xan1k-file-prefix
-  "g" m3xan1k-git-prefix
-  "h" m3xan1k-help-prefix
-  "p" m3xan1k-project-prefix
-  "s" m3xan1k-search-prefix
-  "w" m3xan1k-window-prefix
-  "/" #'consult-ripgrep
-  "SPC" #'execute-extended-command
-  ";" #'comment-line
-  "q q" #'save-buffers-kill-emacs)
-
-(which-key-add-keymap-based-replacements m3xan1k-prefix
-  "b" `("Buffer" . ,m3xan1k-buffer-prefix)
-  "e" `("Error" . ,m3xan1k-diagnostics-prefix)
-  "f" `("File" . ,m3xan1k-file-prefix)
-  "g" `("Git" . ,m3xan1k-git-prefix)
-  "h" `("Help" . ,m3xan1k-help-prefix)
-  "p" `("Project" . ,m3xan1k-project-prefix)
-  "s" `("Search" . ,m3xan1k-search-prefix)
-  "w" `("Window" . ,m3xan1k-window-prefix))
-
-(which-key-add-keymap-based-replacements m3xan1k-window-prefix
+(which-key-add-keymap-based-replacements window-prefix-map
   "r" `("Resize" . ,m3xan1k-window-resize-prefix))
 
+(which-key-add-keymap-based-replacements vc-prefix-map
+  "h" `("Hunks" . ,m3xan1k-git-prefix))
+
+(which-key-add-keymap-based-replacements global-map
+  "C-x b" `("Buffer" . ,m3xan1k-buffer-prefix)
+  "C-x e" `("Error" . ,m3xan1k-diagnostics-prefix)
+  "C-x f" `("File" . ,m3xan1k-file-prefix)
+  "C-x s" `("Search" . ,m3xan1k-search-prefix))
+
 ;; main prefix/leader
-(global-unset-key (kbd "C-z"))
-(global-unset-key (kbd "C-x C-z"))
-(keymap-set global-map "C-z" m3xan1k-prefix)
+;; (global-unset-key (kbd "C-z"))
+;; (global-unset-key (kbd "C-x C-z"))
+;; (keymap-set global-map "C-z" m3xan1k-prefix)
 
 (global-unset-key (kbd "C-t"))
 (keymap-set global-map "C-t" m3xan1k-tab-prefix)
@@ -253,9 +208,6 @@
  (eval `(define-key key-translation-map (kbd ,(concat "C-" (string from))) (kbd ,(concat     "C-" (string to)))))
  (eval `(define-key key-translation-map (kbd ,(concat "M-" (string from))) (kbd ,(concat     "M-" (string to))))))
 
-(global-set-key (kbd "C-z g h n") (scroll-on-jump-interactive 'git-gutter:next-hunk))
-(global-set-key (kbd "C-z g h p") (scroll-on-jump-interactive 'git-gutter:previous-hunk))
-
 ;;;; attempt to replicate sublime
 
 ;; fuzzy find file in project(git repo)
@@ -290,9 +242,6 @@
 (global-set-key (kbd "C-_") #'undo-fu-only-undo)
 (global-set-key (kbd "C-+") #'undo-fu-only-redo)
 
-;; file manager
-(global-set-key (kbd "C-S-b") #'neotree-toggle)
-
 ;; copy/cut/paste
 ;; (global-unset-key (kbd "C-w"))
 ;; (global-set-key (kbd "C-w") #'simpleclip-cut)
@@ -302,5 +251,34 @@
 
 ;; git diff current changes to some branch
 (define-key vc-prefix-map (kbd "B") #'m3xan1k-diff-to-branch)
+
+;; consult-project-buffer instead project-buffer
+(advice-add #'project-switch-to-buffer :override #'consult-project-buffer)
+(advice-add #'project-find-regexp :override #'consult-ripgrep)
+;; (advice-add #'project-find-file :override #'consult-find)
+
+;; map to C-x
+(global-unset-key (kbd "C-x b"))
+(global-unset-key (kbd "C-x f"))
+(global-unset-key (kbd "C-x s"))
+(global-unset-key (kbd "C-x e"))
+(keymap-set global-map "C-x b" m3xan1k-buffer-prefix)
+(keymap-set global-map "C-x f" m3xan1k-file-prefix)
+(keymap-set global-map "C-x s" m3xan1k-search-prefix)
+(keymap-set global-map "C-x e" m3xan1k-diagnostics-prefix)
+
+;; VC
+(global-unset-key (kbd "C-x v h"))
+(keymap-set vc-prefix-map "h" m3xan1k-git-prefix)
+(global-set-key (kbd "C-x v h n") (scroll-on-jump-interactive 'git-gutter:next-hunk))
+(global-set-key (kbd "C-x v h p") (scroll-on-jump-interactive 'git-gutter:previous-hunk))
+
+;; window
+(keymap-set window-prefix-map (kbd "r") m3xan1k-window-resize-prefix)
+(keymap-set window-prefix-map (kbd ";") 'split-window-right)
+(keymap-set window-prefix-map (kbd "'") 'split-window-below)
+
+;; (define-key project-prefix-map (kbd "b") 'consult-project-buffer)
+;; (define-key project-prefix-map (kbd "g") 'consult-ripgrep)
 
 (provide 'my-vanilla-keys)
