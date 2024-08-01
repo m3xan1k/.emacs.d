@@ -5,7 +5,7 @@
 ;; font @
 (set-face-attribute 'default nil
 		    :font "Menlo"
-		    :height 165
+		    :height 160
 		    :background "#FDF6E3"
 		    :foreground "#222222")
 

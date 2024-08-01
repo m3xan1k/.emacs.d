@@ -11,18 +11,7 @@
  '(git-gutter:update-interval 1)
  '(jumplist-ex-mode t)
  '(jumplist-hook-commands
-   '(dired-jump
-     isearch-forward
-     end-of-buffer
-     beginning-of-buffer
-     find-file
-     consult-line
-     goto-line
-     flymake-goto-next-error
-     flymake-goto-prev-error
-     git-gutter:next-hunk
-     git-gutter:previous-hunk
-     xref-find-definitions))
+   '(dired-jump isearch-forward end-of-buffer beginning-of-buffer find-file consult-line goto-line flymake-goto-next-error flymake-goto-prev-error git-gutter:next-hunk git-gutter:previous-hunk xref-find-definitions))
  '(normal-erase-is-backspace nil)
  '(org-link-frame-setup
    '((vm . vm-visit-folder-other-frame)
@@ -39,6 +28,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(awesome-tab-selected-face ((t (:foreground unspecified :distant-foreground unspecified))))
+ '(gptel-context-highlight-face ((t nil)))
  '(mode-line ((t (:family "Menlo" :height 0.8 :background "gray80" :box nil))))
  '(mode-line-inactive ((t (:family "Menlo" :height 0.8 :background "gray90" :box nil))))
  '(org-block ((t (:background "#fdf6e3" :family "FreeMono" :height 175))))

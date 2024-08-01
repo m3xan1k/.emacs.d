@@ -9,6 +9,7 @@
 
 ;; which key
 (use-package which-key
+  :defer 5
   :config
   (which-key-mode))
 
@@ -19,6 +20,7 @@
 
 ;; git gutter
 (use-package git-gutter
+  :defer 5
   :config
   (set-face-background 'git-gutter:modified "orange")
   (set-face-foreground 'git-gutter:modified "orange")
@@ -52,13 +54,16 @@
   (xclip-mode))
 
 ;; magit
-(use-package magit)
+(use-package magit
+  :commands magit)
 
 ;; for my packages
-(use-package esxml)
+(use-package esxml
+  :defer 5)
 
 ;; file management
 (use-package neotree
+  :commands neotree-toggle
   :config
   (setq neo-theme 'arrows))
 
@@ -77,6 +82,7 @@
 
 ;; highlight todos in source code
 (use-package hl-todo
+  :defer 5
   :init
   (global-hl-todo-mode)
   :config
@@ -127,10 +133,12 @@
   (scroll-on-jump-advice-add goto-last-change-reverse))
 
 ;; http for my packages
-(use-package request)
+(use-package request
+  :defer 5)
 
 ;; Show vi-like tilde in the fringe on empty lines.
 (use-package vi-tilde-fringe
+  :defer 5
   :config
   (global-vi-tilde-fringe-mode 1))
 
@@ -143,6 +151,7 @@
 
 ;; terminal
 (use-package vterm
+  :commands vterm
   :bind (:map project-prefix-map
 	      ("t" . m3x-project-vterm)))
 
