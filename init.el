@@ -49,6 +49,7 @@
 ;; (require 'my-telega)
 (require 'my-org)
 ;; (require 'my-mail)
+(require 'my-helpers)
 (require 'my-vanilla-keys)
 ;; (require 'my-keys)
 
