@@ -257,6 +257,9 @@
 (advice-add #'project-find-regexp :override #'consult-ripgrep)
 ;; (advice-add #'project-find-file :override #'consult-find)
 
+;; same for bookmarks
+(advice-add #'bookmark-jump :override #'consult-bookmark)
+
 ;; map to C-x
 (global-unset-key (kbd "C-x b"))
 (global-unset-key (kbd "C-x f"))
