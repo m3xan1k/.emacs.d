@@ -252,10 +252,12 @@
 ;; git diff current changes to some branch
 (define-key vc-prefix-map (kbd "B") #'m3xan1k-diff-to-branch)
 
+;; PROJECT
 ;; consult-project-buffer instead project-buffer
 (advice-add #'project-switch-to-buffer :override #'consult-project-buffer)
 (advice-add #'project-find-regexp :override #'consult-ripgrep)
 ;; (advice-add #'project-find-file :override #'consult-find)
+(keymap-set project-prefix-map (kbd "t") #'m3x-project-vterm)
 
 ;; same for bookmarks
 (advice-add #'bookmark-jump :override #'consult-bookmark)

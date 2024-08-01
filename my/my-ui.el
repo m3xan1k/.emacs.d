@@ -4,8 +4,8 @@
 
 ;; font @
 (set-face-attribute 'default nil
-		    :font "Menlo"
-		    :height 160
+		    :font "Ricty Diminished"
+		    :height 210
 		    :background "#FDF6E3"
 		    :foreground "#222222")
 
