@@ -29,7 +29,7 @@
 ;; grep on project(git repo)
 (defun m3xan1k-consult-ripgrep-at-point ()
   (interactive)
-  (consult-ripgrep (projectile-project-root) (thing-at-point 'symbol)))
+  (consult-ripgrep (project-root (project-current)) (thing-at-point 'symbol)))
 
 ;; grep on buffer
 (defun m3xan1k-consult-line-from-isearch ()

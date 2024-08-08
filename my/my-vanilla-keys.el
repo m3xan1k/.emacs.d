@@ -247,7 +247,7 @@
 (keymap-set project-prefix-map (kbd "t") #'m3x-project-vterm)
 
 ;; same for bookmarks
-(advice-add #'bookmark-jump :override #'consult-bookmark)
+;; (advice-add #'bookmark-jump :override #'consult-bookmark)
 
 ;; map to C-x
 (global-unset-key (kbd "C-x b"))

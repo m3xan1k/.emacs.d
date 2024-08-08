@@ -6,6 +6,7 @@
 
 ;; company mode for completion
 (use-package company
+  :commands company-mode
   :config
   (setq company-idle-delay 0.2)
   (setq company-minimum-prefix-length 1)
@@ -37,7 +38,6 @@
 
 ;; python
 (use-package flymake-ruff
-  :ensure t
   :hook (eglot-managed-mode . flymake-ruff-load))
 
 (use-package pipenv
@@ -46,7 +46,7 @@
 ;; activate virtual environment from .venv
 (add-hook 'python-mode-hook
     (lambda () (progn
-                (pyvenv-activate (concat (projectile-project-root) ".venv/"))
+                (pyvenv-activate (concat (project-root (project-current)) ".venv/"))
                 (eglot-ensure))))
 
 ;; golang
@@ -54,6 +54,7 @@
   (setq tab-width 4))
 
 (use-package go-mode
+  :commands go-mode
   :hook
   ((go-mode . eglot-ensure)
    (go-mode . dev/go-mode-hook)))
@@ -64,8 +65,10 @@
 (add-hook 'go-mode-hook #'go-install-save-hooks)
 
 ;; markup languages
-(use-package yaml-mode)
-(use-package markdown-mode)
+(use-package yaml-mode
+  :commands yaml-mode)
+(use-package markdown-mode
+  :commands markdown-mode)
 ;; (use-package haml-mode)
 
 ;; w3
@@ -79,6 +82,7 @@
   (add-hook 'css-mode-hook  'emmet-mode)) ;; enable Emmet's css abbreviation.
 
 (use-package web-mode
+  :commands web-mode
   :config
   (setq web-mode-markup-indent-offset 2)
   (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
@@ -103,26 +107,30 @@
 (add-hook 'elisp-mode-hook (lambda () (eglot-ensure)))
 
 ;; rust
-(use-package rust-mode)
+(use-package rust-mode
+  :commands rust-mode)
 (add-hook 'rust-mode-hook 'eglot-ensure)
 
 (add-hook 'rust-mode-hook
           (lambda () (setq indent-tabs-mode nil)))
 
 ;; elixir
-(use-package elixir-mode)
+(use-package elixir-mode
+  :commands elixir-mode)
 (add-hook 'elixir-mode-hook 'eglot-ensure)
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs '(elixir-mode "~/soft/lexical/bin/start_lexical.sh")))
 
 ;; racket
-(use-package racket-mode)
+(use-package racket-mode
+  :commands racket-mode)
 (add-hook 'racket-mode-hook 'eglot-ensure)
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs '(racket-mode . ("/usr/bin/racket" "-l" "racket-langserver"))))
 
 ;; standard ml
-(use-package sml-mode)
+(use-package sml-mode
+  :commands sml-mode)
 
 ;; (with-eval-after-load 'eglot
 ;;   (add-to-list 'eglot-server-programs '(elixir-mode "~/soft/elixir-ls/language_server.sh")))

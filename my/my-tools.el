@@ -1,12 +1,3 @@
-;; projectile for projects discovery
-(use-package projectile
-  :init
-  (projectile-mode t))
-
-;; projectile will list projects from these paths
-(setq projectile-project-search-path
-      '(("~/Documents/projects/" . 1) ("~/Documents/SPELL/" . 1) ("~/.emacs.d/" . 1)))
-
 ;; which key
 (use-package which-key
   :defer 5
@@ -33,6 +24,7 @@
 
 ;; parens
 (use-package smartparens
+  :commands smartparens-mode
   :config
   (require 'smartparens-config))
 
@@ -54,8 +46,8 @@
   (xclip-mode))
 
 ;; magit
-(use-package magit
-  :commands magit)
+;; (use-package magit
+;;   :commands magit)
 
 ;; for my packages
 (use-package esxml
@@ -70,7 +62,7 @@
 (defun neotree-project-dir ()
   "Open NeoTree using the git root."
   (interactive)
-  (let ((project-dir (projectile-project-root))
+  (let ((project-dir (project-root (project-current)))
         (file-name (buffer-file-name)))
     (neotree-toggle)
     (if project-dir
@@ -95,6 +87,7 @@
 
 ;; scroll
 (use-package scroll-on-jump
+  :defer 5
   :config
   (setq scroll-on-jump-duration 0.6
 	scroll-on-jump-curve-power 2.0
