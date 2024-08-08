@@ -21,7 +21,7 @@
   (interactive)
   (let ((filename (if (y-or-n-p "Absolute?")
                       buffer-file-name
-                    (replace-regexp-in-string (projectile-project-root) "" buffer-file-name))))
+                    (replace-regexp-in-string (project-root (project-current)) "" buffer-file-name))))
     (kill-new filename)
     (message "Filename: %s is copied to clipboard." filename)))
 
@@ -76,11 +76,11 @@
 ;; django tests
 (defun m3xan1k-run-current-django-test-file ()
   (interactive)
-  (let* ((filepath (replace-regexp-in-string (projectile-project-root) "" buffer-file-name))
+  (let* ((filepath (replace-regexp-in-string (project-root (project-current)) "" buffer-file-name))
 	 (dotted-filepath (replace-regexp-in-string "/" "." filepath))
 	 (modulename (replace-regexp-in-string "\\.py$" "" dotted-filepath))
 	 (keepdb (if (y-or-n-p "keepdb?") "--keepdb" "")))
-    (eshell-command (format "%s/manage.py test -v 2 %s %s" (projectile-project-root) keepdb modulename))))
+    (eshell-command (format "%s/manage.py test -v 2 %s %s" (project-root (project-current)) keepdb modulename))))
 
 (defun m3xan1k-md-preview-in-firefox ()
   (interactive)

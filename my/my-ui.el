@@ -4,8 +4,8 @@
 
 ;; font @
 (set-face-attribute 'default nil
-		    :font "Ricty Diminished"
-		    :height 210
+		    :font "CommitMono"
+		    :height 150
 		    :background "#FDF6E3"
 		    :foreground "#222222")
 
@@ -20,7 +20,7 @@
 (set-face-attribute 'line-number nil
                     :background (face-background 'default nil t))
 (set-face-attribute 'cursor nil
-		    :background "red")
+		    :background "red3")
 (set-face-attribute 'header-line nil
 		    :foreground (face-background 'default)
 		    :background (face-foreground 'default))
@@ -36,6 +36,10 @@
 
 ;; comments
 (set-face-attribute 'font-lock-comment-delimiter-face nil
+		    :weight 'bold)
+
+
+(set-face-attribute 'font-lock-delimiter-face nil
 		    :weight 'bold)
 
 ;; variables

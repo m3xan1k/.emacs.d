@@ -1,12 +1,3 @@
-;; projectile for projects discovery
-(use-package projectile
-  :init
-  (projectile-mode t))
-
-;; projectile will list projects from these paths
-(setq projectile-project-search-path
-      '(("~/Documents/projects/" . 1) ("~/Documents/SPELL/" . 1) ("~/.emacs.d/" . 1)))
-
 ;; which key
 (use-package which-key
   :defer 5
@@ -33,6 +24,7 @@
 
 ;; parens
 (use-package smartparens
+  :commands smartparens-mode
   :config
   (require 'smartparens-config))
 
@@ -54,8 +46,8 @@
   (xclip-mode))
 
 ;; magit
-(use-package magit
-  :commands magit)
+;; (use-package magit
+;;   :commands magit)
 
 ;; for my packages
 (use-package esxml
@@ -70,7 +62,7 @@
 (defun neotree-project-dir ()
   "Open NeoTree using the git root."
   (interactive)
-  (let ((project-dir (projectile-project-root))
+  (let ((project-dir (project-root (project-current)))
         (file-name (buffer-file-name)))
     (neotree-toggle)
     (if project-dir
@@ -95,30 +87,11 @@
 
 ;; scroll
 (use-package scroll-on-jump
+  :defer 5
   :config
   (setq scroll-on-jump-duration 0.6
 	scroll-on-jump-curve-power 2.0
 	scroll-on-jump-curve 'linear))
-
-(with-eval-after-load 'evil
-  (scroll-on-jump-advice-add evil-undo)
-  (scroll-on-jump-advice-add evil-redo)
-  (scroll-on-jump-advice-add evil-jump-item)
-  (scroll-on-jump-advice-add evil-jump-forward)
-  (scroll-on-jump-advice-add evil-jump-backward)
-  (scroll-on-jump-advice-add evil-ex-search-next)
-  (scroll-on-jump-advice-add evil-ex-search-previous)
-  (scroll-on-jump-advice-add evil-forward-paragraph)
-  (scroll-on-jump-advice-add evil-backward-paragraph)
-  (scroll-on-jump-advice-add evil-goto-mark)
-
-  ;; Actions that themselves scroll.
-  (scroll-on-jump-with-scroll-advice-add evil-goto-line)
-  (scroll-on-jump-with-scroll-advice-add evil-scroll-down)
-  (scroll-on-jump-with-scroll-advice-add evil-scroll-up)
-  (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-center)
-  (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-top)
-  (scroll-on-jump-with-scroll-advice-add evil-scroll-line-to-bottom))
 
 (scroll-on-jump-advice-add forward-paragraph)
 (scroll-on-jump-advice-add backward-paragraph)
@@ -127,10 +100,6 @@
 (scroll-on-jump-with-scroll-advice-add scroll-down-command)
 (scroll-on-jump-with-scroll-advice-add scroll-up-command)
 (scroll-on-jump-with-scroll-advice-add recenter-top-bottom)
-
-(with-eval-after-load 'goto-chg
-  (scroll-on-jump-advice-add goto-last-change)
-  (scroll-on-jump-advice-add goto-last-change-reverse))
 
 ;; http for my packages
 (use-package request

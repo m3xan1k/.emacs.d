@@ -29,9 +29,9 @@
  ;; If there is more than one, they won't work right.
  '(awesome-tab-selected-face ((t (:foreground unspecified :distant-foreground unspecified))))
  '(gptel-context-highlight-face ((t nil)))
- '(mode-line ((t (:family "Menlo" :height 0.8 :background "gray80" :box nil))))
- '(mode-line-inactive ((t (:family "Menlo" :height 0.8 :background "gray90" :box nil))))
+ '(mode-line ((t (:family "CommitMono" :height 0.8 :background "gray80" :box nil))))
+ '(mode-line-inactive ((t (:family "CommitMono" :height 0.8 :background "gray90" :box nil))))
  '(org-block ((t (:background "#fdf6e3" :family "FreeMono" :height 175))))
  '(org-block-begin-line ((t (:background "gray75"))))
  '(org-indent ((t (:background "gray75" :foreground "gray78"))))
- '(trailing-whitespace ((t (:background "red1")))))
+ '(trailing-whitespace ((t (:background "red1"))))) 
