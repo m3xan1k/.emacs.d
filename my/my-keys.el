@@ -32,19 +32,19 @@
 (m3xan1k-apply-emacs-state m3xan1k-emacs-state-modes)
 
 ;; custom resize
-(defun my/enlarge-window-horizontally ()
+(defun m3x-enlarge-window-horizontally ()
   (interactive)
   (enlarge-window-horizontally 5))
 
-(defun my/enlarge-window ()
+(defun m3x-enlarge-window ()
   (interactive)
   (enlarge-window 5))
 
-(defun my/shrink-window-horizontally ()
+(defun m3x-shrink-window-horizontally ()
   (interactive)
   (shrink-window-horizontally 5))
 
-(defun my/shrink-window ()
+(defun m3x-shrink-window ()
   (interactive)
   (shrink-window 5))
 
@@ -58,6 +58,82 @@
     (advice-add command :around #'m3x-set-mark-before-command)))
 
 (m3x-set-mark-before-commands)
+
+;; keymaps
+
+;; vc
+(define-key vc-prefix-map (kbd "B") #'m3xan1k-diff-to-branch)
+
+;; PROJECT
+(advice-add #'project-switch-to-buffer :override #'consult-project-buffer)
+(advice-add #'project-find-regexp :override #'consult-ripgrep)
+;; (advice-add #'project-find-file :override #'consult-find)
+(keymap-set project-prefix-map (kbd "t") #'m3x-project-vterm)
+
+(defvar-keymap m3xan1k-buffer-prefix
+  :doc "buffer"
+  "d" #'kill-this-buffer
+  "k" #'kill-buffer
+  "s" #'consult-buffer
+  "l" #'list-buffers
+  "r" #'revert-buffer)
+
+;; diagnostics
+(defvar-keymap m3xan1k-diagnostics-prefix
+  "n" #'flymake-goto-next-error
+  "p" #'flymake-goto-prev-error
+  "s" #'consult-flymake)
+
+;; git hunks
+(defvar-keymap m3xan1k-git-prefix
+  ;; "h n" #'git-gutter:next-hunk
+  ;; "h p" #'git-gutter:previous-hunk
+  "s" #'git-gutter:popup-hunk
+  "r" #'git-gutter:revert-hunk)
+
+;; file
+(defvar-keymap m3xan1k-file-prefix
+  "s" #'save-buffer
+  "S" #'save-buffers
+  "f" #'find-file
+  "e" #'neotree-toggle
+  "n" #'m3xan1k-get-file-name)
+
+;; search
+(defvar-keymap m3xan1k-search-prefix
+  "r" #'vertico-repeat
+  "f" #'project-find-file
+  "/" #'consult-ripgrep
+  "c" #'m3xan1k-consult-ripgrep-at-point)
+
+;; window resize
+(defvar-keymap m3xan1k-window-resize-prefix
+  "f" #'m3x-enlarge-window-horizontally
+  "b" #'m3x-shrink-window-horizontally
+  "n" #'m3x-enlarge-window
+  "p" #'m3x-shrink-window)
+
+(defvar-keymap m3xan1k-tab-prefix
+  "n" #'awesome-tab-forward-tab
+  "p" #'awesome-tab-backward-tab
+  "t" #'m3xan1k-reopen-killed-file)
+
+(which-key-add-keymap-based-replacements window-prefix-map
+  "r" `("Resize" . ,m3xan1k-window-resize-prefix))
+
+(which-key-add-keymap-based-replacements vc-prefix-map
+  "h" `("Hunks" . ,m3xan1k-git-prefix))
+
+;; vc
+(global-unset-key (kbd "C-x v h"))
+(keymap-set vc-prefix-map "h" m3xan1k-git-prefix)
+(global-set-key (kbd "C-x v h n") (scroll-on-jump-interactive 'git-gutter:next-hunk))
+(global-set-key (kbd "C-x v h p") (scroll-on-jump-interactive 'git-gutter:previous-hunk))
+
+;; window
+(keymap-set window-prefix-map (kbd "r") m3xan1k-window-resize-prefix)
+(keymap-set window-prefix-map (kbd ";") 'split-window-right)
+(keymap-set window-prefix-map (kbd "'") 'split-window-below)
 
 ;; general
 (use-package general
@@ -80,101 +156,28 @@
   ;; unbind some annoying default bindings
   (general-unbind
     "M-;"
-    "M-j"
-    "M-k"
-    "C-x C-r"   ;; unbind find file read only
     "C-x C-z"   ;; unbind suspend frame
     "C-x C-d"   ;; unbind list directory
    "<mouse-2>") ;; pasting with mouse wheel click
 
   ;; leader
-  (general-create-definer my/leader
-    :states '(normal visual)
-    :keymaps 'override
-    :prefix "SPC")
+  (general-define-key
+    :prefix "SPC"
+    :keymaps 'normal
+    "" '(nil :which-key "my lieutenant general prefix")
+    "p" '(:keymap project-prefix-map :wk "project")
+    "v" '(:keymap vc-prefix-map :wk "vc")
+    "b" '(:keymap m3xan1k-buffer-prefix :wk "buffer")
+    "f" '(:keymap m3xan1k-file-prefix :wk "file")
+    "s" '(:keymap m3xan1k-search-prefix :wk "search")
+    "w" '(:keymap window-prefix-map :wk "window")
+    "e" '(:keymap m3xan1k-diagnostics-prefix :wk "errors"))
 
   ;; local-leader
   (general-create-definer my/local-leader
     :states '(normal visual)
     :keymaps 'override
     :prefix ",")
-
-  ;; error diagnostics
-  (my/leader
-   "e" '(:ignore t :wk "error")
-   "e n" '(flymake-goto-next-error :wk "flymake-goto-next-error")
-   "e p" '(flymake-goto-prev-error :wk "flymake-goto-prev-error"))
-
-  (my/leader
-   "g" '(:ignore t :wk "git")
-   "g h" '(:ignore t :wk "hunk")
-   "g h s" '(git-gutter:popup-hunk :wk "diff-hl-show-hunk")
-   "g h r" '(git-gutter:revert-hunk :wk "diff-hl-revert-hunk"))
-
-  ;; help
-  (my/leader
-    "h" '(help-command :wk "help-command")
-    "h h" '(eldoc :wk "signature help"))
-
-  ;; project
-  (my/leader
-    "p" '(:ignore t :wk "project")
-    "p p" '(projectile-switch-project :wk "projectile-switch-project")
-    "p b" '(consult-project-buffer :wk "project buffers")
-    "p f" '(project-find-file :wk "project-find-file")
-    "p v" '(project-vc-dir :wk "project-vc-dir"))
-
-  ;; widely used
-  (my/leader
-    "/" '(consult-ripgrep :wk "search in project")
-    "SPC" '(execute-extended-command :wk "execute command")
-    ";" '(comment-line :wk "comment line"))
-
-  ;; file
-  (my/leader
-    "f" '(:ignore t :wk "file")
-    "f s" '(save-buffer :wk "save file")
-    "f S" '(save-buffers :wk "save all files")
-    "f f" '(find-file :wk "find file")
-    "f n" '(m3xan1k-get-file-name :wk "file name")
-    "f e" '(neotree-project-dir :wk "neotree-toggle"))
-
-  ;; search
-  (my/leader
-    "s" '(:ignore t :wk "search")
-    "s r" '(vertico-repeat :wk "resume search")
-    "s f" '(project-find-file :wk "find file in project")
-    "s /" '(consult-ripgrep :wk "search in project")
-    "s c" '(m3xan1k-consult-ripgrep-at-point :wk "m3xan1k-consult-ripgrep-at-point"))
-
-  ;; buffer management
-  (my/leader
-    "b" '(:ignore t :wk "buffers")
-    "b n" '(awesome-tab-forward :wk "next tab")
-    "b p" '(awesome-tab-backward :wk "previous tab")
-    "b d" '(kill-this-buffer :wk "close current buffer")
-    "b D" '(kill-buffer :wk "close buffer interactively")
-    "b b" '(consult-buffer :wk "search buffers")
-    "b r" '(reload-buffer :wk "reload buffer")
-    "b l" '(evil-switch-to-window-last-buffer :wk "last buffer"))
-
-  ;; window management
-  (my/leader
-    "w" '(:ignore t :wk "windows")
-    "w d" '(delete-window :wk "close window")
-    "w D" '(delete-other-windows :wk "close all other windows")
-    "w o" '(other-window :wk "switch to other window")
-    "w '" '(evil-window-split :wk "evil-window-spit")
-    "w ;" '(evil-window-vsplit :wk "evil-window-spit")
-    "w h" '(evil-window-left :wk "evil-window-left")
-    "w l" '(evil-window-right :wk "evil-window-right")
-    "w j" '(evil-window-down :wk "evil-window-down")
-    "w k" '(evil-window-up :wk "evil-window-up")
-    "w r" '(:ignore t :wk "resize")
-    "w r l" '(my/enlarge-window-horizontally :wk "enlarge-window-horizontally")
-    "w r h" '(my/shrink-window-horizontally :wk "shrink-window-horizontally")
-    "w r j" '(my/enlarge-window :wk "enlarge-window")
-    "w r k" '(my/shrink-window :wk "shrink-window"))
 
   ;; lisp evaluation
   (my/local-leader
@@ -198,21 +201,6 @@
   (my/local-leader
     :keymaps 'sql-mode-map
     "e" '(lsp-sql-execute-query :wk "lsp-sql-execute-query"))
-
-   ;; quit
-   (my/leader
-     "q" '(:ignore t :wk "quit")
-     "q q" '(save-buffers-kill-terminal :wk "quit emacs")
-     "q w" '(quit-window :wk "quit window"))
-
-   ;; tabs shortcuts
-   (general-define-key
-    :states 'normal
-    "C-h" 'awesome-tab-backward-tab)
-
-   (general-define-key
-    :states 'normal
-    "C-l" 'awesome-tab-forward-tab)
 
    ;; smart comment
    (general-define-key
@@ -240,6 +228,10 @@
 (evil-define-key 'normal neotree-mode-map (kbd "c") 'neotree-copy-node)
 (evil-define-key 'normal neotree-mode-map (kbd "H") 'neotree-hidden-file-toggle)
 (evil-define-key 'normal neotree-mode-map (kbd "A") 'neotree-stretch-toggle)
+
+;; grep in buffer
+(global-unset-key (kbd "C-s"))
+(global-set-key (kbd "C-s") 'm3xan1k-consult-line-from-isearch)
 
 ;; navigation in Russian layout
 (cl-loop
