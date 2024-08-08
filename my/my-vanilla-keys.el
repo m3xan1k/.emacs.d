@@ -96,7 +96,8 @@
 ;; diagnostics
 (defvar-keymap m3xan1k-diagnostics-prefix
   "n" #'flymake-goto-next-error
-  "p" #'flymake-goto-prev-error)
+  "p" #'flymake-goto-prev-error
+  "s" #'consult-flymake)
 
 ;; git hunks
 (defvar-keymap m3xan1k-git-prefix
@@ -240,7 +241,6 @@
 (define-key vc-prefix-map (kbd "B") #'m3xan1k-diff-to-branch)
 
 ;; PROJECT
-;; consult-project-buffer instead project-buffer
 (advice-add #'project-switch-to-buffer :override #'consult-project-buffer)
 (advice-add #'project-find-regexp :override #'consult-ripgrep)
 ;; (advice-add #'project-find-file :override #'consult-find)
@@ -270,6 +270,8 @@
 (keymap-set window-prefix-map (kbd ";") 'split-window-right)
 (keymap-set window-prefix-map (kbd "'") 'split-window-below)
 
+;; eldoc
+(global-set-key (kbd "C-c .") 'eldoc)
 ;; (define-key project-prefix-map (kbd "b") 'consult-project-buffer)
 ;; (define-key project-prefix-map (kbd "g") 'consult-ripgrep)
 
