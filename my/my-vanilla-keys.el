@@ -248,6 +248,8 @@
 
 ;; same for bookmarks
 ;; (advice-add #'bookmark-jump :override #'consult-bookmark)
+(global-unset-key (kbd "C-x r b"))
+(keymap-set ctl-x-r-map (kbd "b") #'consult-bookmark)
 
 ;; map to C-x
 (global-unset-key (kbd "C-x b"))
