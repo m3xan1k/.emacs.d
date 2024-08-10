@@ -98,4 +98,51 @@
 ;; 		     encoded-html
 ;; 		     "\""))))
 
+;; smart comment
+(defun m3xan1k-comment ()
+  "Comment or uncomment line or region."
+  (interactive)
+  (if (use-region-p)
+      (comment-or-uncomment-region (region-beginning) (region-end))
+    (comment-or-uncomment-region (line-beginning-position) (line-end-position))))
+
+;; smart copy
+(defun m3xan1k-copy ()
+  (interactive)
+  (if (use-region-p)
+      (kill-ring-save (region-beginning) (region-end))
+    (progn
+      (kill-ring-save (line-beginning-position) (line-end-position))
+      (kill-append "\n" nil))))
+
+;; custom resize
+(defun m3xan1k-enlarge-window-horizontally ()
+  (interactive)
+  (enlarge-window-horizontally 5))
+
+(defun m3xan1k-enlarge-window ()
+  (interactive)
+  (enlarge-window 5))
+
+(defun m3xan1k-shrink-window-horizontally ()
+  (interactive)
+  (shrink-window-horizontally 5))
+
+(defun m3xan1k-shrink-window ()
+  (interactive)
+  (shrink-window 5))
+
+(defun m3xan1k-new-line-down ()
+  "New line without break."
+  (interactive)
+  (end-of-line)
+  (newline))
+
+(defun m3xan1k-new-line-up ()
+  "New line on top without break."
+  (interactive)
+  (beginning-of-line)
+  (newline)
+  (previous-line))
+
 (provide 'my-helpers)

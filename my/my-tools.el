@@ -115,12 +115,20 @@
 (use-package vterm
   :commands vterm)
 
-;; pdf settings
-;; (use-package pdf-tools
-;;   :mode
-;;   (("\\.pdf$" . pdf-view-mode)))
+;; select from the inside
+(use-package expand-region)
 
-;; (setq pdf-view-use-scaling t)
+;; jump forward/backward
+(use-package jumplist)
+
+;; multicursor
+(use-package multiple-cursors)
+
+;; surround
+(use-package surround)
+
+;; linear undo and redo
+(use-package undo-fu)
 
 ;; keycast
 ;; (use-package keycast
