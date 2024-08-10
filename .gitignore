@@ -13,6 +13,8 @@
 !my-packages/*
 # my-packages/*
 !old.init.el
+!myelpa/
+!myelpa/*
 
 !thirdpart/*
 
